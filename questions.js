@@ -1084,9 +1084,9 @@ const quizData = [
                 id: 91,
                 question: "Chiết khấu thanh toán được hưởng khi mua hàng được ghi:",
                 options: [
-                    "a.Tăng giá trị tài sản mua",
-                    "b.Tăng doanh thu hoạt động tài chính và Không ảnh hưởng giá trị tài sản mua",
-                    "c.Không ảnh hưởng giá trị tài sản mua.",
+                    "Tăng giá trị tài sản mua",
+                    "Tăng doanh thu hoạt động tài chính và Không ảnh hưởng giá trị tài sản mua",
+                    "Không ảnh hưởng giá trị tài sản mua.",
                     "Câu b và c đúng."
                 ],
                 correct: 3,
