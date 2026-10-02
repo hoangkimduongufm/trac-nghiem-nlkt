@@ -1226,7 +1226,7 @@ const quizData = [
     },
     {
         id: 103,
-        question: "Doanh nghiệp kê khai thường xuyên, có tài liệu liên quan đến vật liệu:Tồn đầu tháng: 2.000kg  (Giá 20.000 đ/kg);Nhập lần 1: 3.000kg  (Giá 22.000đ/kg, chi phí vận chuyển 500 đ/kg.;Xuất lần 1: 4.000kg.;Nhập lần 2: 5.000kg (Giá 22.500đ/kg, chi phí vận chuyển 400 đ/kg, được giảm giá 100đ/kg.); Xuất lần 2: 2.000kg.;trị giá vật liệu xuất kho theo phương pháp thực tế đích danh, cho biết: Xuất lần 1: 1.500 kg thuộc tồn đầu kỳ, số còn lại thuộc nhập lần 1;Xuất lần 2: 500 kg thuộc tồn đầu kỳ, 500 kg thuộc nhập lần 1, số còn lại thuộc lô nhập lần 2",
+        question: "Doanh nghiệp kê khai thường xuyên, có tài liệu liên quan đến vật liệu:\n-Tồn đầu tháng: 2.000kg  (Giá 20.000 đ/kg);Nhập lần 1: 3.000kg  (Giá 22.000đ/kg, chi phí vận chuyển 500 đ/kg.;Xuất lần 1: 4.000kg.;Nhập lần 2: 5.000kg (Giá 22.500đ/kg, chi phí vận chuyển 400 đ/kg, được giảm giá 100đ/kg.); Xuất lần 2: 2.000kg.;trị giá vật liệu xuất kho theo phương pháp thực tế đích danh, cho biết: Xuất lần 1: 1.500 kg thuộc tồn đầu kỳ, số còn lại thuộc nhập lần 1;Xuất lần 2: 500 kg thuộc tồn đầu kỳ, 500 kg thuộc nhập lần 1, số còn lại thuộc lô nhập lần 2",
         options: [
             "85.000.000 đồng và 43.400.000 đồng",
             "84.000.000 đồng và 44.400.000 đồng",
