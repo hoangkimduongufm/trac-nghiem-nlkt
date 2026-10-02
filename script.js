@@ -1315,7 +1315,7 @@ function renderQuestion() {
             <span class="text-xs font-semibold px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full uppercase tracking-wider">Câu hỏi ${currentIndex + 1} / ${quizData.length}</span>
             ${hasAnswered ? `<span class="text-xs font-bold px-3 py-1 rounded-full ${selectedOpt === q.correct ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">${selectedOpt === q.correct ? '✓ Chính xác' : '✕ Sai'}</span>` : ''}
         </div>
-        <h2 class="text-lg md:text-xl font-semibold text-slate-800 mb-6 leading-relaxed white-space: pre-line">${q.question}</h2>
+        <h2 class="text-lg md:text-xl font-semibold text-slate-800 mb-6 leading-relaxed">${q.question}</h2>
         <div class="space-y-3">
     `;
 
