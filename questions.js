@@ -1294,6 +1294,6 @@ const quizData = [
                     "Luồng tiền chi ra từ hoạt động tài chính"
                 ],
                 correct: 0,
-                explanation: "Đối ứng tài khoản phản ánh mối quan hệ vận động khách quan giữa các đối tượng kế toán khi có nghiệp vụ phát sinh."
+                explanation: "Vì giá trị khấu hao tài sản cố định kinh doanh trong kỳ là khoản thu hồi từ việc đầu tư mua sắm tài sản cố định trong quá khứ... và được thu hồi từ tiền bán hàng và cung cấp dịch vụ, nên số tiền khấu hao này được thể hiện trên biểu Lưu chuyển tiền tệ là luồng tiền thu vào từ hoạt động kinh doanh"
             }
 ];
