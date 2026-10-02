@@ -1319,31 +1319,40 @@ function renderQuestion() {
         <div class="space-y-3">
     `;
 
+    const optionLetters = ['a', 'b', 'c', 'd'];
+
     q.options.forEach((opt, idx) => {
+        const letter = optionLetters[idx];
         let borderClass = 'border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/40';
         let bgClass = 'bg-white';
         let textClass = 'text-slate-700';
+        let badgeClass = 'bg-slate-100 text-slate-600 border border-slate-200';
 
         if (hasAnswered) {
             if (idx === q.correct) {
                 borderClass = 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500';
                 textClass = 'text-emerald-900 font-semibold';
+                badgeClass = 'bg-emerald-600 text-white';
             } else if (selectedOpt === idx && idx !== q.correct) {
                 borderClass = 'border-rose-500 bg-rose-50 ring-1 ring-rose-500';
                 textClass = 'text-rose-900 font-semibold';
+                badgeClass = 'bg-rose-600 text-white';
             }
         } else {
             if (selectedOpt === idx) {
                 borderClass = 'border-indigo-600 bg-indigo-50/70 ring-2 ring-indigo-500/20';
                 textClass = 'text-indigo-900 font-semibold';
+                badgeClass = 'bg-indigo-600 text-white';
             }
         }
 
         html += `
-            <label class="flex items-start p-4 rounded-xl border ${borderClass} ${bgClass} cursor-pointer transition shadow-sm">
-                <input type="radio" name="question-opt" value="${idx}" ${selectedOpt === idx ? 'checked' : ''} ${hasAnswered ? 'disabled' : ''} onchange="selectAnswer(${idx})" class="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300">
-                <span class="ml-3 text-sm md:text-base ${textClass}">${opt}</span>
-            </label>
+            <div onclick="${hasAnswered ? '' : `selectAnswer(${idx})`}" class="flex items-start p-4 rounded-xl border ${borderClass} ${bgClass} ${hasAnswered ? 'cursor-default' : 'cursor-pointer'} transition shadow-sm">
+                <div class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold uppercase mr-3 transition ${badgeClass}">
+                    ${letter}
+                </div>
+                <span class="text-sm md:text-base ${textClass} self-center">${opt}</span>
+            </div>
         `;
     });
 
@@ -1355,7 +1364,7 @@ function renderQuestion() {
         html += `
             <div class="mt-6 p-4 rounded-xl ${isCorrect ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-rose-50 border border-rose-200 text-rose-900'}">
                 <div class="font-semibold mb-1 flex items-center gap-2">
-                    <span>${isCorrect ? '🎉 Tuyệt vời, bạn đã chọn đúng!' : '💡 Đáp án chính xác là: ' + q.options[q.correct]}</span>
+                    <span>${isCorrect ? '🎉 Tuyệt vời, bạn đã chọn đúng!' : '💡 Đáp án chính xác là: ' + optionLetters[q.correct].toUpperCase() + '. ' + q.options[q.correct]}</span>
                 </div>
                 <p class="text-sm mt-2 leading-relaxed opacity-90"><strong class="font-medium">Giải thích chi tiết:</strong> ${q.explanation}</p>
             </div>
