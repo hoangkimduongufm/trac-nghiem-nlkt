@@ -1295,5 +1295,41 @@ const quizData = [
                 ],
                 correct: 0,
                 explanation: "Vì giá trị khấu hao tài sản cố định kinh doanh trong kỳ là khoản thu hồi từ việc đầu tư mua sắm tài sản cố định trong quá khứ... và được thu hồi từ tiền bán hàng và cung cấp dịch vụ, nên số tiền khấu hao này được thể hiện trên biểu Lưu chuyển tiền tệ là luồng tiền thu vào từ hoạt động kinh doanh"
+            },
+            {
+                id: 109,
+                question: "Số tiền chia cổ tức từ lợi nhuận sau thuế chưa phân phối nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ ",
+                options: [
+                    "Luồng tiền chi ra từ hoạt động kinh doanh",
+                    "Luồng tiền chi ra từ hoạt động đầu tư",
+                    "Luồng tiền chi ra từ hoạt động tài chính",
+                    "Tất cả đều sai"
+                ],
+                correct: 2,
+                explanation: "Theo chuẩn mực kế toán và nguyên lý kế toán, các giao dịch liên quan đến việc thay đổi quy mô và kết cấu vốn chủ sở hữu (như nhận vốn góp, trả lại vốn góp, mua lại cổ phiếu quỹ, và chi trả cổ tức/lợi nhuận cho các chủ sở hữu) đều được phân loại vào phần luồng tiền từ hoạt động tài chính. Do đó, việc chi tiền trả cổ tức từ lợi nhuận sau thuế chưa phân phối là một khoản chi ra thuộc hoạt động tài chính."
+            },
+            {
+                id: 110,
+                question: "Số tiền lãi được chia từ công ty liên doanh nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ ",
+                options: [
+                    "Luồng tiền chi ra từ hoạt động kinh doanh",
+                    "Luồng tiền chi ra từ hoạt động đầu tư",
+                    "Luồng tiền chi ra từ hoạt động tài chính",
+                    "Tất cả đều sai"
+                ],
+                correct: 1,
+                explanation: "Vì tài sản mà doanh nghiệp đưa đi góp vốn liên doanh được ghi nhận vào tài sản đầu tư dài hạn, nên số tiền lãi được chia từ công ty liên doanh này được thể hiện trên biểu Lưu chuyển tiền tệ là luồng tiền thu vào từ hoạt động đầu tư."
+            },
+             {
+                id: 111,
+                question: "Số tiền vay vốn để hoạt động sản xuất kinh doanh phát sinh trong năm nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ",
+                options: [
+                    "Luồng tiền chi ra từ hoạt động kinh doanh",
+                    "Luồng tiền chi ra từ hoạt động đầu tư",
+                    "Luồng tiền chi ra từ hoạt động tài chính",
+                    "Tất cả đều sai"
+                ],
+                correct: 2,
+                explanation: "Theo tài liệu môn Nguyên lý kế toán, vì số tiền vay vốn trong kỳ để phục vụ sản xuất kinh doanh tạo thành nguồn tài chính thường xuyên trong doanh nghiệp, nên số tiền vay này được thể hiện trên biểu Lưu chuyển tiền tệ là luồng tiền thu vào từ hoạt động tài chính."
             }
 ];
