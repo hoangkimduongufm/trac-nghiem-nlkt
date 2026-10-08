@@ -1331,5 +1331,901 @@ const quizData = [
                 ],
                 correct: 2,
                 explanation: "Theo tài liệu môn Nguyên lý kế toán, vì số tiền vay vốn trong kỳ để phục vụ sản xuất kinh doanh tạo thành nguồn tài chính thường xuyên trong doanh nghiệp, nên số tiền vay này được thể hiện trên biểu Lưu chuyển tiền tệ là luồng tiền thu vào từ hoạt động tài chính."
+            },
+            {
+                id: 112,
+                question: "Nguyên vật liệu có đặc điểm là:",
+                options: [
+                    "Đối tượng lao động",
+                    "Tham gia vào nhiều chu kỳ sản xuất kinh doanh",
+                    "Chiếm tỷ trọng cao trong giá thành.",
+                    "Tất cả các câu đều đúng"
+                ],
+                correct: 0,
+                explanation: "Trong quá trình sản xuất, nguyên vật liệu là đối tượng lao động (bị tiêu hao toàn bộ hoặc thay đổi hình thái vật chất sau một chu kỳ), chỉ tham gia vào một chu kỳ sản xuất kinh doanh và không phải lúc nào cũng chiếm tỷ trọng cao nhất."
+            },
+
+            {
+                id: 113,
+                question: "Nguyên vật liệu xuất kho phục vụ quản lý phân xưởng sản xuất phẩm được ghi nhận vào:",
+                options: [
+                    "Chi phí nguyên vật liệu trực tiếp.",
+                    "Chi phí nhân công trực tiếp",
+                    "Chi phí sản xuất chung.",
+                    "Chi phí bán hàng."
+                ],
+                correct: 2,
+                explanation: "Nguyên vật liệu dùng cho mục đích quản lý, phục vụ chung tại phân xưởng sản xuất (không cấu thành trực tiếp sản phẩm) sẽ được hạch toán vào Chi phí sản xuất chung (TK 627)."
+            },
+
+            {
+                id: 114,
+                question: "Nghiệp vụ: “Nhượng bán một TSCĐ hữu hình có nguyên giá 100tr, đã hao mòn 60%, thu bằng tiền gửi ngân hàng 44tr đã gồm thuế GTGT 10%”, doanh nghiệp nộp thuế theo phương pháp khấu trừ, kế toán định khoản:",
+                options: [
+                    "Nợ TK 811: 40tr; Nợ TK 214: 60tr; Có TK 211: 100tr",
+                    "Nợ TK 112: 44tr; Có TK 511: 40tr; Có TK 333: 4tr",
+                    "Nợ TK 112: 44tr; Có TK 711: 40tr; Có TK 333: 4tr",
+                    "Cả a và c."
+                ],
+                correct: 3,
+                explanation: "Khi nhượng bán TSCĐ, kế toán phản ánh đồng thời 2 bút toán: (1) Xóa sổ TSCĐ (Nợ TK 214: 60tr, Nợ TK 811: 40tr / Có TK 211: 100tr) và (2) Ghi nhận thu nhập khác và thuế GTGT đầu ra phải nộp (Nợ TK 112: 44tr / Có TK 711: 40tr [giá chưa thuế], Có TK 3331: 4tr). Do đó đáp án a và c đều đúng."
+            },
+
+            {
+                id: 115,
+                question: "Nguyên vật liệu (xăng, dầu) xuất kho sử dụng cho máy sản xuất sản phẩm được ghi nhận vào: ",
+                options: [
+                    "Chi phí nguyên vật liệu trực tiếp.",
+                    "Chi phí nhân công trực tiếp. ",
+                    "Chi phí sản xuất chung",
+                    "Chi phí bán hàng"
+                ],
+                correct: 2,
+                explanation: "Xăng, dầu dùng làm nhiên liệu vận hành máy móc trong phân xưởng không cấu thành trực tiếp vào thực thể sản phẩm nên được ghi nhận vào Chi phí sản xuất chung (TK 627)."
+            },
+            
+            {
+                id: 116,
+                question: "Chi phí vận chuyển vật liệu mua về nhập kho, được hạch toán vào: ",
+                options: [
+                    "TK 152.",
+                    "TK 641.",
+                    "TK 642.",
+                    "Tất cả các câu trên đều sai."
+                ],
+                correct: 0,
+                explanation: "Chi phí vận chuyển vật liệu mua về nhập kho tính vào trị giá vốn hàng mua, làm tăng giá trị nguyên vật liệu nhập kho (ghi Nợ TK 152)."
+            },
+            {
+                id: 117,
+                question: "Khi xuất nguyên vật liệu dùng cho sản xuất sản phẩm, giá trị xuất kho của nguyên vật liệu được hạch toán: ",
+                options: [
+                    "Nợ TK 621/Có TK 152.",
+                    "Nợ TK 627/Có TK 152.",
+                    "Nợ TK 641/Có TK 152.",
+                    "Nợ TK 642/Có TK 152."
+                ],
+                correct: 0,
+                explanation: "Nguyên vật liệu xuất dùng trực tiếp cho sản xuất sản phẩm cấu thành nên sản phẩm được hạch toán vào chi phí nguyên vật liệu trực tiếp (TK 621)."
+            },
+            {
+                id: 118,
+                question: "Tiền lương phải trả cho công nhân trực tiếp sản xuất sản phẩm, được hạch toán: ",
+                options: [
+                    "Nợ TK 622/Có TK 334.",
+                    "Nợ TK 627/Có TK 334.",
+                    "Nợ TK 334/Có TK 622.",
+                    "Nợ TK 334/Có TK 627."
+                ],
+                correct: 0,
+                explanation: "Tiền lương của công nhân trực tiếp sản xuất thuộc chi phí nhân công trực tiếp (TK 622), làm tăng khoản phải trả người lao động (TK 334)."
+            },
+            {
+                id: 119,
+                question: "Tiền lương phải trả cho nhân viên phục vụ phân xưởng sản xuất, được hạch toán: ",
+                options: [
+                    "Nợ TK 622/Có TK 334.",
+                    "Nợ TK 627/Có TK 334.",
+                    "Nợ TK 641/Có TK 334.",
+                    "Nợ TK 642/Có TK 334."
+                ],
+                correct: 1,
+                explanation: "Lương nhân viên phục vụ phân xưởng là chi phí chung của phân xưởng, hạch toán vào Chi phí sản xuất chung (TK 627)."
+            },
+            {
+                id: 120,
+                question: "Chi phí sản xuất là: ",
+                options: [
+                    "Toàn bộ các khoản hao phí vật chất mà doanh nghiệp bỏ ra để thực hiện quá trình sản xuất kinh doanh của doanh nghiệp.",
+                    "Toàn bộ các khoản hao phí vật chất mà doanh nghiệp bỏ ra để thực hiện quá trình tiêu thụ sản phẩm của doanh nghiệp.",
+                    "Toàn bộ các khoản hao phí vật chất mà doanh nghiệp bỏ ra để thực hiện quá trình sản xuất sản phẩm của doanh nghiệp.",
+                    "Tất cả các câu trên đều đúng."
+                ],
+                correct: 2,
+                explanation: "Chi phí sản xuất là toàn bộ các khoản hao phí về lao động sống, lao động vật hóa và các chi phí khác mà doanh nghiệp chi ra trong một thời kỳ nhất định gắn liền với quá trình sản xuất sản phẩm."
+            },
+            {
+                id: 121,
+                question: "Giá thành sản phẩm là: ",
+                options: [
+                    "Chi phí sản xuất gắn liền với một kỳ kế toán.",
+                    "Chi phí sản xuất chung gắn liền với một kết quả sản xuất nhất định.",
+                    "Chi phí sản xuất gắn liền với một kết quả sản xuất nhất định.",
+                    "Chi phí sản xuất gắn liền với một phân xưởng sản xuất."
+                ],
+                correct: 2,
+                explanation: "Giá thành sản phẩm biểu hiện bằng tiền toàn bộ các hao phí sản xuất tính cho một khối lượng sản phẩm, công việc, dịch vụ đã hoàn thành nhất định."
+            },
+            {
+                id: 122,
+                question: "Chi phí nguyên vật liệu trực tiếp là: ",
+                options: [
+                    "Các khoản chi phí về nguyên liệu, vật liệu chính, vật liệu phụ được sử dụng cho quá trình sản xuất ở phân xưởng.",
+                    "Các khoản chi phí về nguyên liệu, vật liệu chính, vật liệu phụ được sử dụng cho quá trình quản lý doanh nghiệp.",
+                    "Các khoản chi phí về nguyên liệu, vật liệu chính, vật liệu phụ được sử dụng trực tiếp để sản xuất sản phẩm.",
+                    "Các khoản chi phí về nguyên liệu, vật liệu chính, vật liệu phụ được sử dụng cho quá trình hoạt động sản xuất, kinh doanh của doanh nghiệp."
+                ],
+                correct: 2,
+                explanation: "Chi phí nguyên vật liệu trực tiếp là những chi phí vật liệu tham gia trực tiếp vào việc cấu thành nên thực thể sản phẩm."
+            },
+            {
+                id: 123,
+                question: "Chi phí nhân công trực tiếp là: ",
+                options: [
+                    "Tiền lương phải trả cho công nhân trực tiếp sản xuất sản phẩm.",
+                    "Các khoản BHXH, BHYT, BHTN, KPCĐ được trích theo tỷ lệ quy định của công nhân trực tiếp sản xuất sản phẩm.",
+                    "Các khoản BHXH, BHYT, BHTN, KPCĐ được trích theo tỷ lệ quy định được tính vào chi phí của công nhân trực tiếp sản xuất sản phẩm.",
+                    "Cả a và c."
+                ],
+                correct: 3,
+                explanation: "Chi phí nhân công trực tiếp bao gồm tiền lương, tiền công và các khoản trích theo lương (BHXH, BHYT, BHTN, KPCĐ tính vào chi phí) của công nhân trực tiếp sản xuất."
+            },
+            {
+                id: 124,
+                question: "Chi phí sản xuất chung là: ",
+                options: [
+                    "Chi phí quản lý, điều hành doanh nghiệp.",
+                    "Chi phí quản lý, điều hành sản xuất gắn liền với từng phân xưởng sản xuất.",
+                    "Chi phí sản xuất phát sinh tại phân xưởng sản xuất ngoại trừ chi phí nguyên vật liệu trực tiếp và chi phí nhân công trực tiếp.",
+                    "Cả b và c."
+                ],
+                correct: 3,
+                explanation: "Chi phí sản xuất chung là các chi phí phục vụ cho hoạt động sản xuất chung tại phân xưởng (ngoài chi phí NVL trực tiếp và nhân công trực tiếp)."
+            },
+            {
+                id: 125,
+                question: "Chi phí sản xuất dở dang đầu kỳ là 1.000.000đ; Chi phí phát sinh trong kỳ gồm: Chi phí nguyên vật liệu trực tiếp 25.000.000đ, chi phí tiền lương công nhân trực tiếp sản xuất 10.000.000đ, các khoản trích theo lương của công nhân trực tiếp sản xuất được tính vào chi phí 2.400.000đ, Chi phí sản xuất chung 7.000.000đ, Chi phí bán hàng phát sinh 12.000.000đ, chi phí quản lý doanh nghiệp 20.000.000đ; Chi phí sản xuất dở dang cuối kỳ 5.500.000đ. Vậy giá thành sản xuất của sản phẩm là: ",
+                options: [
+                    "45.400.000đ.",
+                    "39.900.000đ.",
+                    "71.900.000đ.",
+                    "Tất cả các câu trên đều sai."
+                ],
+                correct: 1,
+                explanation: "Giá thành sản xuất = CPSX dở dang đầu kỳ + Tổng CPSX phát sinh trong kỳ (NVL trực tiếp + NCNCT + Trích theo lương NCNC + SXC) - CPSX dở dang cuối kỳ = 1.000.000 + (25.000.000 + 10.000.000 + 2.400.000 + 7.000.000) - 5.500.000 = 1.000.000 + 44.400.000 - 5.500.000 = 39.900.000đ (Đáp án b)."
+            },
+            {
+                id: 126,
+                question: "Doanh thu bán hàng là: ",
+                options: [
+                    "Số tiền khách hàng trả cho doanh nghiệp.",
+                    "Số tiền doanh nghiệp nhận được hoặc sẽ nhận được từ việc bán hàng hóa, thành phẩm hay cung cấp dịch vụ.",
+                    "Giá xuất kho của hàng bán.",
+                    "Tất cả các câu trên đều sai."
+                ],
+                correct: 1,
+                explanation: "Doanh thu là tổng giá trị các lợi ích kinh tế doanh nghiệp thu được trong kỳ kế toán, phát sinh từ các hoạt động sản xuất, kinh doanh thông thường của doanh nghiệp."
+            },
+            {
+                id: 127,
+                question: "Trường hợp doanh nghiệp kê khai và tính thuế giá trị gia tăng theo phương pháp khấu trừ, doanh thu bán hàng được ghi nhận là: ",
+                options: [
+                    "Giá trị xuất kho của hàng hóa.",
+                    "Giá bán bao gồm cả thuế GTGT.",
+                    "Giá thanh toán ghi trên hóa đơn.",
+                    "Giá bán chưa thuế GTGT."
+                ],
+                correct: 3,
+                explanation: "Đối với doanh nghiệp nộp thuế GTGT theo phương pháp khấu trừ, doanh thu bán hàng chỉ ghi nhận theo giá bán chưa có thuế GTGT."
+            },
+            {
+                id: 128,
+                question: "Giá vốn hàng bán là: ",
+                options: [
+                    "Chi phí sản sản xuất sản phẩm phát sinh trong kỳ.",
+                    "Giá thực tế hàng hóa mua vào hoặc giá thành thực tế sản phẩm nhập kho.",
+                    "Giá thực tế xuất kho của số sản phẩm, hàng hóa bán ra.",
+                    "Tất cả các câu trên đều đúng."
+                ],
+                correct: 2,
+                explanation: "Giá vốn hàng bán phản ánh giá trị thực tế xuất kho của sản phẩm, hàng hóa, dịch vụ đã tiêu thụ trong kỳ."
+            },
+            {
+                id: 129,
+                question: "Mua nguyên vật liệu sử dụng ngay cho quản lý phân xưởng được ghi nhận vào: ",
+                options: [
+                    "TK 152.",
+                    "TK 621.",
+                    "TK 627.",
+                    "TK 642."
+                ],
+                correct: 2,
+                explanation: "NVL mua về sử dụng ngay cho phân xưởng (quản lý, vận hành phân xưởng) không qua kho, được tính thẳng vào chi phí sản xuất chung (TK 627)."
+            },
+
+            {
+                id: 130,
+                question: "Nội dung không được tính vào giá thành sản phẩm: ",
+                options: [
+                    "Tiền lương của quản đốc phân xưởng.",
+                    "Tiền lương của giám đốc doanh nghiệp.",
+                    "Tiền lương của nhân viên kỹ thuật ở phân xưởng.",
+                    "Tiền lương của công nhân sản xuất."
+                ],
+                correct: 1,
+                explanation: "Tiền lương của giám đốc doanh nghiệp thuộc chi phí quản lý doanh nghiệp (TK 642), không phải là chi phí sản xuất tại phân xưởng nên không được tính vào giá thành sản phẩm."
+            },
+            {
+                id: 131,
+                question: "Nhập lại kho thành phẩm chưa bán được ghi: ",
+                options: [
+                    "Nợ TK 157/ Có TK 155.",
+                    "Nợ TK 155/ Có TK 157.",
+                    "Nợ TK 632/ Có TK 157.",
+                    "Nợ TK 157/ Có TK 632."
+                ],
+                correct: 1,
+                explanation: "Khi hàng gửi đi bán (TK 157) không được tiêu thụ và được đưa trở lại kho, kế toán ghi nhận giảm hàng gửi đi bán và tăng thành phẩm nhập kho (Nợ TK 155 / Có TK 157)."
+            },
+            {
+                id: 132,
+                question: "Trích khấu hao máy móc thiết bị phục vụ cho sản xuất sản phẩm ghi: ",
+                options: [
+                    "Nợ TK 621/ Có TK 214.",
+                    "Nợ TK 627/ Có TK 214.",
+                    "Nợ TK 214/ Có TK 627.",
+                    "Nợ TK 214/ Có TK 621."
+                ],
+                correct: 1,
+                explanation: "Khấu hao máy móc thiết bị dùng chung cho phân xưởng sản xuất là chi phí sản xuất chung, được hạch toán vào Nợ TK 627 / Có TK 214."
+            },
+
+            {
+                id: 133,
+                question: "Những yếu tố cơ bản của một chứng từ kế toán là: ",
+                options: [
+                    "Tên chứng từ, số hiệu của chứng từ, nội dung nghiệp vụ phát sinh",
+                    "Tên chứng từ, số hiệu của chứng từ, nội dung nghiệp vụ phát sinh, Ngày tháng năm lập chứng từ",
+                    "Tên chứng từ, số hiệu của chứng từ, nội dung nghiệp vụ phát sinh, Ngày tháng năm lập chứng từ, Chỉ tiêu về số lượng và giá trị.",
+                    "Tên chứng từ, số hiệu của chứng từ, nội dung nghiệp vụ phát sinh, Ngày tháng năm lập chứng từ, Chỉ tiêu về số lượng và giá trị, Chữ ký và con dấu của các cá nhân, tổ chức có liên quan."
+                ],
+                correct: 3,
+                explanation: "Theo Luật Kế toán, một chứng từ kế toán hợp lệ phải có đầy đủ các yếu tố cơ bản như: tên chứng từ, số hiệu, ngày tháng năm lập, thông tin các bên, nội dung kinh tế, chỉ tiêu số lượng/giá trị, và chữ ký của người lập/phải có liên quan."
+            },
+            {
+                id: 134,
+                question: "Chứng từ kế toán: ",
+                options: [
+                    "Chỉ được phép lập một lần cho mỗi nghiệp vụ phát sinh",
+                    "Được lập khi có yêu cầu của các bên có liên quan trong nghiệp vụ",
+                    "Có thể được lập lại nếu bị mất hoặc thất lạc",
+                    "Được lập khi cần thiết"
+                ],
+                correct: 0,
+                explanation: "Mỗi nghiệp vụ kinh tế, tài chính phát sinh chỉ được phép lập chứng từ kế toán 1 lần nhằm đảm bảo tính chính xác và tránh trùng lặp số liệu."
+            },
+            {
+                id: 135,
+                question: "Trình tự luân chuyển chứng từ bao gồm các bước: ",
+                options: [
+                    "Lập hoặc nhận chứng từ; Kiểm tra phê duyệt nội dung; Sử dụng; bảo quản và lưu trữ.",
+                    "Lập hoặc nhận chứng từ; Kiểm tra phê duyệt nội dung; bảo quản và lưu trữ",
+                    "Nhận chứng từ; Kiểm tra phê duyệt nội dung; Sử dụng; bảo quản và lưu trữ",
+                    "Đáp án khác"
+                ],
+                correct: 0,
+                explanation: "Trình tự luân chuyển chứng từ chuẩn bao gồm: Lập/nhận chứng từ -> Kiểm tra và phê duyệt -> Dùng để ghi sổ/thanh toán (sử dụng) -> Bảo quản và lưu trữ."
+            },
+            {
+                id: 136,
+                question: "Để sao chụp nghiệp vụ thu tiền, kế toán cần sử dụng: ",
+                options: [
+                    "Phiếu thu",
+                    "Biên lai thu tiền",
+                    "Hoá đơn thu tiền",
+                    "Các phương án trên đều đúng"
+                ],
+                correct: 3,
+                explanation: "Các chứng từ như Phiếu thu, Biên lai, hoặc Hóa đơn thu tiền đều là các chứng từ gốc phản ánh nghiệp vụ thu tiền tùy theo quy mô và đối tượng giao dịch."
+            },
+            {
+                id: 137,
+                question: "Chứng từ gốc nào sau đây chứng minh được tiền của doanh nghiệp chi ra để mua hàng hoá, dịch vụ: ",
+                options: [
+                    "Hoá đơn GTGT",
+                    "Hoá đơn bán hàng",
+                    "Phiếu nhập kho",
+                    "a và b đều đúng"
+                ],
+                correct: 3,
+                explanation: "Hóa đơn GTGT và Hóa đơn bán hàng là các hóa đơn thương mại hợp pháp chứng minh giao dịch mua bán hàng hóa, dịch vụ và số tiền đã chi ra."
+            },
+            {
+                id: 138,
+                question: "Theo quy định hiện hành của Bộ Tài chính Việt Nam hiện hành, Chứng từ kế toán ở một doanh nghiệp bao gồm: ",
+                options: [
+                    "Chứng từ về tiền lương, chứng từ về tiền, chứng từ về hàng tồn kho",
+                    "Chứng từ về tiền lương, chứng từ về tiền, chứng từ về hàng tồn kho, chứng từ về TSCĐ",
+                    "Chứng từ về tiền lương, chứng từ về tiền, chứng từ về hàng tồn kho, chứng từ về TSCĐ, Chứng từ về bán hàng",
+                    "Tất cả các câu trên đều đúng."
+                ],
+                correct: 2,
+                explanation: "Theo hệ thống biểu mẫu chứng từ kế toán của Bộ Tài chính, các loại chứng từ bắt buộc và hướng dẫn được phân loại theo các phần hành kinh tế chủ yếu bao gồm: Lao động tiền lương, Tiền tệ, Hàng tồn kho, Tài sản cố định (TSCĐ) và Tiêu thụ (Bán hàng)."
+            },
+            {
+                id: 139,
+                question: "Theo công dụng, chứng từ kế toán được chia thành các loại: ",
+                options: [
+                    "Chứng từ mệnh lệnh, chứng từ chấp hành",
+                    "Chứng từ thủ tục, chứng từ liên hợp",
+                    "Chứng từ mệnh lệnh, chứng từ chấp hành, Chứng từ thủ tục",
+                    "Chứng từ mệnh lệnh, chứng từ chấp hành, Chứng từ thủ tục, chứng từ liên hợp"
+                ],
+                correct: 3,
+                explanation: "Theo công dụng và thủ tục ghi sổ, chứng từ được chia thành: chứng từ mệnh lệnh, chứng từ chấp hành (thực hiện), chứng từ thủ tục và chứng từ liên hợp."
+            },
+            {
+                id: 140,
+                question: "Theo địa điểm lập, chứng từ kế toán được chia thành các loại: ",
+                options: [
+                    "Chứng từ gốc, chứng từ bên trong",
+                    "Chứng từ bên trong, chứng từ bên ngoài",
+                    "Chứng từ ban đầu, chứng từ tổng hợp",
+                    "Tất cả các câu trên đều đúng"
+                ],
+                correct: 1,
+                explanation: "Theo địa điểm lập, chứng từ kế toán chia thành chứng từ bên trong (lập tại đơn vị) và chứng từ bên ngoài (lập từ đối tác, cơ quan bên ngoài)."
+            },
+            {
+                id: 141,
+                question: "Đơn vị sản xuất kinh doanh mặt hàng chịu thuế GTGT theo phương pháp khấu trừ, khi bán hàng sẽ lập chứng từ: ",
+                options: [
+                    "Hoá đơn GTGT",
+                    "Hoá đơn bán hàng thông thường",
+                    "Hoá đơn bán lẻ",
+                    "Tất cả các câu trên đều đúng"
+                ],
+                correct: 0,
+                explanation: "Doanh nghiệp tính thuế GTGT theo phương pháp khấu trừ khi bán hàng hóa, dịch vụ chịu thuế GTGT phải sử dụng Hóa đơn GTGT."
+            },
+            {
+                id: 142,
+                question: "Khi bán thành phẩm, hàng hoá, giá ghi trên phiếu xuất kho là: ",
+                options: [
+                    "Giá bán",
+                    "Giá xuất kho",
+                    "Giá vốn",
+                    "b và c đều đúng"
+                ],
+                correct: 3,
+                explanation: "Phiếu xuất kho phản ánh lượng vật tư, hàng hóa thực tế xuất kho theo đơn giá xuất kho, đây cũng chính là cơ sở xác định giá vốn hàng bán."
+            },
+            {
+                id: 143,
+                question: "Chứng từ kế toán: ",
+                options: [
+                    "Chỉ được lập nhiều lần cho một nghiệp vụ phát sinh",
+                    "Được lập khi có yêu cầu của các bên có liên quan",
+                    "Có thể lập lại nếu bị mất hoặc thất lạc",
+                    "Tất cả các câu trên đều sai."
+                ],
+                correct: 3,
+                explanation: "Mỗi nghiệp vụ chỉ lập 1 lần, không được tự ý lập lại khi mất mà phải theo quy định xử lý chứng từ mất mát riêng. Do đó các đáp án trên đều sai."
+            },
+            {
+                id: 144,
+                question: "Hoá đơn khống là: ",
+                options: [
+                    "Hoá đơn được ký trước khi hoàn thành nghiệp vụ",
+                    "Hoá đơn có số tiền khác với số tiền thực tế",
+                    "Hoá đơn đã lập nhưng nội dung là không có thực",
+                    "Tất cả các câu trên đều sai."
+                ],
+                correct: 2,
+                explanation: "Hóa đơn khống là hóa đơn đã được lập nhưng trên thực tế không có nghiệp vụ kinh tế phát sinh."
+            },
+            {
+                id: 145,
+                question: "Doanh nghiệp sản xuất kinh doanh loại hàng chịu thuế GTGT theo phương pháp khấu trừ, khi mua hàng trường hợp nào sẽ được khấu trừ thuế GTGT đầu vào: ",
+                options: [
+                    "Nhận được Hoá đơn GTGT",
+                    "Nhận được Hoá đơn bán hàng thông thường",
+                    "Không có đáp án nào đúng",
+                    "a và b đều sai"
+                ],
+                correct: 0,
+                explanation: "Để được khấu trừ thuế GTGT đầu vào, doanh nghiệp phương pháp khấu trừ phải có Hóa đơn GTGT hợp pháp khi mua hàng."
+            },
+            {
+                id: 146,
+                question: "Để sao chụp nghiệp vụ xuất kho, kế toán có thể sử dụng: ",
+                options: [
+                    "Phiếu xuất kho",
+                    "Phiếu xuất kho kiêm vận chuyển nội bộ",
+                    "Phiếu xuất kho hàng gửi bán đại lý",
+                    "Tất cả các đáp án trên đều đúng"
+                ],
+                correct: 3,
+                explanation: "Đây đều là các loại chứng từ hợp lệ dùng trong các trường hợp xuất kho khác nhau của doanh nghiệp."
+            },
+            {
+                id: 147,
+                question: "Để sao chụp nghiệp vụ giao nhận TSCĐ, kế toán sử dụng: ",
+                options: [
+                    "Biên bản bàn giao TSCĐ",
+                    "Biên bản giao nhận TSCĐ",
+                    "Thẻ TSCĐ",
+                    "Tất cả các đáp án trên đều đúng"
+                ],
+                correct: 3,
+                explanation: "Biên bản giao nhận/bàn giao tài sản cố định và Thẻ TSCĐ là các chứng từ, sổ chuyên dùng để quản lý quá trình tăng, giảm, giao nhận TSCĐ."
+            },
+            {
+                id: 148,
+                question: "Để sao chụp thời gian lao động của người lao động, kế toán sử dụng: ",
+                options: [
+                    "Bảng chấm công",
+                    "Bảng chấm công làm thêm giờ",
+                    "a và b đều đúng",
+                    "a và b đều sai"
+                ],
+                correct: 2,
+                explanation: "Bảng chấm công và bảng chấm công làm thêm giờ là chứng từ lao động tiền lương phản ánh chính xác thời gian làm việc của nhân viên."
+            },
+            {
+                id: 149,
+                question: "Để ghi chép số lượng sản phẩm do mỗi công nhân sản xuất ra, kế toán có thể sử dụng: ",
+                options: [
+                    "Hợp đồng giao khoán",
+                    "Phiếu xác nhận sản phẩm hoàn thành",
+                    "Bảng chấm công làm thêm giờ",
+                    "Bảng chấm công"
+                ],
+                correct: 1,
+                explanation: "Phiếu xác nhận sản phẩm hoàn thành (hoặc biên bản nghiệm thu sản phẩm) là chứng từ gốc để tính lương sản phẩm cho công nhân."
+            },
+            {
+                id: 150,
+                question: "Khi mua Hóa đơn lần đầu (đối với doanh nghiệp không tự in hóa đơn), doanh nghiệp xuất trình đầy đủ các giấy tờ: ",
+                options: [
+                    "Giấy giới thiệu kèm công văn mua Hóa đơn",
+                    "Bản sao Giấy chứng nhận đăng ký thuế và Giấy phép đăng ký kinh doanh",
+                    "Chứng minh thư của người trực tiếp đi mua Hóa đơn.",
+                    "Tất cả các giấy tờ trên."
+                ],
+                correct: 3,
+                explanation: "Theo các quy định hành chính quản lý hóa đơn, khi mua hóa đơn tại cơ quan thuế, doanh nghiệp cần xuất trình đầy đủ giấy tờ định danh, giấy giới thiệu và đăng ký kinh doanh."
+            },
+            {
+                id: 151,
+                question: "Tài khoản tổng hợp biểu hiện thực tế là: ",
+                options: [
+                    "Sổ chi tiết",
+                    "Bảng kê chứng từ",
+                    "Sổ cái",
+                    "Bảng tổng hợp chi tiết"
+                ],
+                correct: 2,
+                explanation: "Sổ Cái là sổ kế toán tổng hợp dùng để ghi chép các nghiệp vụ kinh tế theo từng tài khoản tổng hợp."
+            },
+            {
+                id: 152,
+                question: "Tài khoản chi tiết biểu hiện trong thực tế là: ",
+                options: [
+                    "Sổ chi tiết",
+                    "Bảng kê chứng từ",
+                    "Sổ cái",
+                    "Bảng tổng hợp chi tiết"
+                ],
+                correct: 0,
+                explanation: "Sổ chi tiết dùng để phản ánh chi tiết các đối tượng cần theo dõi cụ thể (như từng khách hàng, từng mặt hàng...)."
+            },
+            {
+                id: 153,
+                question: "Kế toán tổng hợp và kế toán chi tiết có mối quan hệ thể hiện: ",
+                options: [
+                    "Được tiến hành đồng thời",
+                    "Có quan hệ về mặt số liệu",
+                    "Không có quan hệ đối ứng",
+                    "Cả a, b và c"
+                ],
+                correct: 1,
+                explanation: "Mối quan hệ cốt lõi và đặc trưng nhất giữa kế toán tổng hợp và kế toán chi tiết trong hệ thống kiểm tra số liệu chính là quan hệ về mặt số liệu (số liệu tổng hợp phải khớp đúng với tổng số liệu chi tiết)."
+            },
+            {
+                id: 154,
+                question: "Công dụng của “Bảng cân đối tài khoản”: ",
+                options: [
+                    "Kiểm tra tính cân đối của tài sản và nguồn vốn",
+                    "Kiểm tra việc ghi chép trên TK chi tiết",
+                    "Kiểm tra việc ghi chép trên TK tổng hợp",
+                    "Cả a, b và c"
+                ],
+                correct: 0,
+                explanation: "Bảng cân đối tài khoản tổng hợp số dư và số phát sinh của tất cả các tài khoản tổng hợp, qua đó phản ánh và kiểm tra tính cân đối tổng quát giữa tổng tài sản và tổng nguồn vốn (cũng như sự cân đối giữa tổng số phát sinh Nợ và tổng số phát sinh Có trong kỳ của toàn bộ hệ thống tài khoản)."
+            },
+            {
+                id: 155,
+                question: "Công dụng của “Bảng tổng hợp chi tiết”: ",
+                options: [
+                    "Kiểm tra việc ghi chép trên TK chi tiết",
+                    "Kiểm tra việc ghi chép trên TK tổng hợp",
+                    "Kiểm tra số liệu giữa kế toán tổng hợp và kế toán chi tiết",
+                    "Không câu nào đúng."
+                ],
+                correct: 2,
+                explanation: "Bảng tổng hợp chi tiết tổng hợp số liệu từ các sổ chi tiết của từng đối tượng cùng loại để đối chiếu, so sánh và kiểm tra tính khớp đúng về số liệu giữa kế toán chi tiết với số liệu trên tài khoản tổng hợp tương ứng trong sổ Cái."
+            },
+            {
+                id: 156,
+                question: "Chứng từ nào sau đây không thể làm căn cứ để ghi sổ: ",
+                options: [
+                    "Hóa đơn bán hàng",
+                    "Phiếu xuất kho",
+                    "Lệnh chi tiền",
+                    "Phiếu chi"
+                ],
+                correct: 2,
+                explanation: "Lệnh chi tiền thường là văn bản mang tính chất mệnh lệnh, thủ tục nội bộ hoặc yêu cầu ngân hàng chưa phải là chứng từ gốc hoàn thành giao dịch thực tế để ghi sổ kế toán trực tiếp nếu chưa có chứng từ thực chi kèm theo."
+            },
+            {
+                id: 157,
+                question: "Chứng từ nào sau đây không phải là chứng từ gốc: ",
+                options: [
+                    "Hóa đơn bán hàng",
+                    "Phiếu xuất vật tư theo hạn mức",
+                    "Bảng kê chi tiền",
+                    "Phiếu thu"
+                ],
+                correct: 2,
+                explanation: "Bảng kê chi tiền là chứng từ tổng hợp (hoặc chứng từ thủ tục) dùng để tập hợp lại số liệu từ các chứng từ gốc đã phát sinh (như phiếu chi, biên lai...), do đó bản thân bảng kê không phải là chứng từ gốc ban đầu."
+            },
+            {
+                id: 158,
+                question: "Yếu tố nào sau đây dẫn tới chứng từ không đảm bảo về hình thức khi kiểm tra: ",
+                options: [
+                    "Tẩy xóa",
+                    "Ghi bằng bút chì",
+                    "Không ghi ngày tháng",
+                    "Cả a, b và c"
+                ],
+                correct: 3,
+                explanation: "Tẩy xóa, dùng bút chì hay thiếu ngày tháng đều vi phạm nghiêm trọng quy định về thể thức và hình thức lập chứng từ kế toán."
+            },
+            {
+                id: 159,
+                question: "Khi kiểm tra nội dung chứng từ cần kiểm tra: ",
+                options: [
+                    "Việc tính toán số liệu trên chứng từ",
+                    "Quy mô nghiệp vụ có đúng mức phê chuẩn không",
+                    "Nghiệp vụ kinh tế phản ánh trên chứng từ có hợp pháp không",
+                    "Cả a, b và c"
+                ],
+                correct: 3,
+                explanation: "Kiểm tra nội dung chứng từ bao gồm kiểm tra tính chính xác của số liệu, thẩm quyền phê chuẩn và tính pháp lý của nghiệp vụ kinh tế."
+            },
+            {
+                id: 160,
+                question: "Trong hóa đơn giá trị gia tăng, yếu tố nào là bắt buộc: ",
+                options: [
+                    "Số lượng, thành tiền hàng mua",
+                    "Số tiền thanh toán bằng chữ",
+                    "Ngày, tháng, năm",
+                    "Cả a, b và c"
+                ],
+                correct: 3,
+                explanation: "Tất cả các thông tin trên đều là các chỉ tiêu bắt buộc trên hóa đơn GTGT theo quy định pháp luật về hóa đơn."
+            },
+
+            // --- PHẦN SỔ KẾ TOÁN & HÌNH THỨC SỔ KẾ TOÁN ---
+            {
+                id: 161,
+                question: "Sổ kế toán là: ",
+                options: [
+                    "Một tờ rời có chức năng ghi chép độc lập hoặc là quyển sổ gồm nhiều tờ sổ thực hiện chức năng ghi chép về những nội dung nhất định theo quy định của hệ thống kế toán.",
+                    "Phương tiện vật chất để hệ thống hóa thông tin chứng từ nhằm đáp ứng các nhu cầu khác nhau của công tác quản lý.",
+                    "Những tờ sổ được xây dựng theo mẫu nhất định dựa vào yêu cầu của phương pháp tài khoản và ghi sổ kép hoặc yêu cầu về thông tin trong những trường hợp cụ thể của quản lý.",
+                    "Tất cả đều đúng."
+                ],
+                correct: 0,
+                explanation: "Theo định nghĩa chuẩn trong giáo trình lý thuyết kế toán, sổ kế toán dùng để ghi chép, hệ thống hóa và lưu giữ toàn bộ các nghiệp vụ kinh tế tài chính đã phát sinh, bao gồm các hình thức vật lý cụ thể là tờ rời hoặc quyển sổ theo đúng quy định pháp luật về kế toán."
+            },
+            {
+                id: 162,
+                question: "Nếu phân loại sổ kế toán theo phương pháp ghi chép thì sổ kế toán được phân thành: ",
+                options: [
+                    "Sổ kế toán tổng hợp, sổ kế toán chi tiết.",
+                    "Sổ ghi theo trình tự thời gian, sổ ghi theo đối tượng và sổ kết hợp.",
+                    "Sổ đối chiếu kiểu 2 bên, sổ kiểu 1 bên, sổ kiểu nhiều cột, sổ kiểu bàn cờ.",
+                    "Sổ tờ rời, sổ đóng thành quyển."
+                ],
+                correct: 1,
+                explanation: "Theo phương pháp ghi chép, sổ kế toán phân loại thành: Sổ ghi theo trình tự thời gian, sổ ghi theo đối tượng (hệ thống) và sổ kết hợp."
+            },
+            {
+                id: 163,
+                question: "Theo mức độ khái quát của số liệu phản ánh trên sổ, sổ kế toán được chia thành các loại: ",
+                options: [
+                    "Sổ ghi theo trình tự thời gian, sổ ghi theo loại đối tượng, sổ liên hợp.",
+                    "Sổ chi tiết, sổ tổng hợp.",
+                    "Sổ quyển, sổ tờ rời.",
+                    "Tất cả các đáp án trên đều đúng"
+                ],
+                correct: 1,
+                explanation: "Theo mức độ khái quát số liệu, sổ chia thành sổ kế toán tổng hợp và sổ kế toán chi tiết."
+            },
+            {
+                id: 164,
+                question: "Nếu dựa vào hình thức tổ chức sổ thì sổ kế toán được phân thành: ",
+                options: [
+                    "Sổ tờ rời và sổ đóng thành quyển.",
+                    "Sổ đối chiếu kiểu 2 bên và sổ kiểu 1 bên.",
+                    "Sổ kiểu nhiều cột và sổ kiểu bàn cờ.",
+                    "Cả b và c đều đúng."
+                ],
+                correct: 0,
+                explanation: "Dựa vào hình thức kết cấu vật lý/tổ chức bên ngoài, sổ phân thành sổ tờ rời hoặc sổ đóng thành quyển."
+            },
+            {
+                id: 165,
+                question: "Sổ kết hợp: ",
+                options: [
+                    "Là sổ kết hợp giữa ghi theo trình tự thời gian và ghi theo đối tượng.",
+                    "Là sổ kế toán ghi chép về một đối tượng kế toán cụ thể.",
+                    "Là sổ ghi chép số liệu chi tiết về một đối tượng tổng hợp nào đó.",
+                    "Là sổ kết hợp kế toán tổng hợp với kế toán chi tiết trên cùng một trang sổ."
+                ],
+                correct: 0,
+                explanation: "Sổ kết hợp là loại sổ ghi chép đồng thời theo trình tự thời gian và theo đối tượng (ví dụ: Sổ Nhật ký - Sổ cái)."
+            },
+            {
+                id: 166,
+                question: "Hiện nay theo quy định của Bộ Tài chính có mấy hình thức sổ kế toán: ",
+                options: [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                correct: 3,
+                explanation: "Theo chế độ kế toán doanh nghiệp hiện hành, có 5 hình thức sổ kế toán chính."
+            },
+            {
+                id: 167,
+                question: "Theo quy định của chế độ kế toán Việt Nam hiện hành, có các hình thức sổ kế toán: ",
+                options: [
+                    "Hình thức Nhật ký- sổ cái, Hình thức Nhật ký chung, Hình thức Nhật ký chứng từ.",
+                    "Hình thức Nhật ký chung, Hình thức chứng từ ghi sổ, Hình thức kế toán máy.",
+                    "Hình thức Nhật ký- sổ cái, Hình thức Nhật ký chung, Hình thức Nhật ký chứng từ, Hình thức chứng từ ghi sổ, Hình thức kế toán máy.",
+                    "Hình thức Nhật ký chứng từ, Hình thức chứng từ ghi sổ, Hình thức Nhật ký chung, Hình thức Nhật ký – sổ cái."
+                ],
+                correct: 2,
+                explanation: "5 hình thức sổ kế toán bao gồm: Nhật ký chung, Nhật ký - Sổ cái, Nhật ký chứng từ, Chứng từ ghi sổ, và Hình thức kế toán trên máy vi tính."
+            },
+            {
+                id: 168,
+                question: "Để phân biệt các hình thức sổ kế toán khác nhau, cần dựa vào: ",
+                options: [
+                    "Số lượng và loại sổ kế toán cần dùng, cách thức thiết kế sổ.",
+                    "Căn cứ để ghi sổ, Trình tự kế toán trên các sổ.",
+                    "Trình tự kế toán trên các sổ, đặc trưng của mỗi hình thức.",
+                    "a và c đúng."
+                ],
+                correct: 3,
+                explanation: "Các hình thức sổ kế toán khác nhau được phân biệt căn cứ vào số lượng, loại sổ, cách thức thiết kế mẫu sổ cũng như trình tự và đặc trưng ghi chép trên các loại sổ đó."
+            },
+            {
+                id: 169,
+                question: "Việc lựa chọn hình thức kế toán cho một đơn vị phụ thuộc vào: ",
+                options: [
+                    "Quy mô của đơn vị.",
+                    "Đặc điểm hoạt động và sử dụng vốn.",
+                    "Cả hai điều kiện trên.",
+                    "Không phụ thuộc vào điều kiện nào."
+                ],
+                correct: 2,
+                explanation: "Doanh nghiệp lựa chọn hình thức kế toán phù hợp dựa vào quy mô hoạt động, đặc điểm sản xuất kinh doanh và trình độ quản lý."
+            },
+            {
+                id: 170,
+                question: "Phát biểu nào sau đây sai về phương pháp ghi sổ kế toán: ",
+                options: [
+                    "Mọi số liệu ghi trên sổ kế toán không bắt buộc phải có chứng từ kế toán hợp pháp, hợp lý chứng minh.",
+                    "Phương pháp ghi sổ kế toán bao gồm: mở sổ, ghi sổ và khóa sổ.",
+                    "Việc ghi sổ kế toán nhất thiết phải căn cứ vào chứng từ kế toán đã được kiểm tra đảm bảo các quy định về chứng từ kế toán.",
+                    "Cuối kỳ, phải khóa sổ kế toán trước khi lập báo cáo tài chính."
+                ],
+                correct: 0,
+                explanation: "Mọi số liệu ghi trên sổ kế toán BẮT BUỘC phải có chứng từ kế toán hợp pháp chứng minh. Do đó phát biểu 'không bắt buộc' là sai."
+            },
+            {
+                id: 171,
+                question: "Thông tin, số liệu trên sổ kế toán không được: ",
+                options: [
+                    "Ghi bằng bút chì.",
+                    "Ghi xen thêm phía trên hoặc phía dưới.",
+                    "Dùng bút xóa.",
+                    "Tất cả các phương án trên."
+                ],
+                correct: 3,
+                explanation: "Sổ kế toán cấm tuyệt đối việc dùng bút chì, ghi xen kẽ hoặc dùng bút xóa để sửa chữa trực tiếp."
+            },
+            {
+                id: 172,
+                question: "Để sửa chữa sổ kế toán có thể sử dụng các phương pháp: ",
+                options: [
+                    "Phương pháp ghi bổ sung, phương pháp ghi số âm.",
+                    "Phương pháp loại bỏ, phương pháp đính chính.",
+                    "Phương pháp ghi số âm, phương pháp ghi bổ sung, phương pháp cải chính.",
+                    "Tất cả các phương án trên đều sai."
+                ],
+                correct: 2,
+                explanation: "Ba phương pháp sửa chữa sổ kế toán hợp pháp gồm: Phương pháp cải chính (đính chính), Phương pháp ghi bổ sung, và Phương pháp ghi số âm (ghi đỏ)."
+            },
+            {
+                id: 173,
+                question: "Phương pháp cải chính là: ",
+                options: [
+                    "Dùng để đính chính những sai sót bằng cách gạch một đường thẳng xóa bỏ chỗ ghi sai và ghi lại cho đúng bằng mực thường ở phía trên.",
+                    "Dùng để điều chỉnh những sai sót bằng cách ghi lại bằng mực đỏ bút toán đã ghi sai và ghi lại bút toán đúng bằng mực thường.",
+                    "Dùng để điều chỉnh những sai sót bằng cách ghi trong ngoặc đơn bút toán đã ghi sai và ghi lại bút toán đúng bằng mực thường.",
+                    "Dùng để điều chỉnh bằng cách ghi thêm một bút toán bằng mực thường với số tiền chênh lệch còn thiếu so với chứng từ."
+                ],
+                correct: 0,
+                explanation: "Phương pháp cải chính dùng khi sai sót bằng chữ viết hoặc con số sai đơn thuần không liên quan đến quan hệ đối ứng tài khoản bằng cách gạch bỏ và ghi lại bằng mực chuẩn."
+            },
+            {
+                id: 174,
+                question: "Khi sửa chữa sổ kế toán bằng máy tính thì thực hiện theo: ",
+                options: [
+                    "Phương pháp ghi số âm và phương pháp cải chính.",
+                    "Phương pháp ghi bổ sung và phương pháp cải chính.",
+                    "Phương pháp ghi đỏ và phương pháp cải chính.",
+                    "Đáp án khác."
+                ],
+                correct: 3,
+                explanation: "Trên hệ thống phần mềm kế toán máy, việc sửa chữa sai sót sổ sách được thực hiện theo quy định riêng của phần mềm dựa trên chứng từ điều chỉnh hoặc ghi số âm theo quy định của pháp luật về kế toán máy (Đáp án khác)."
+            },
+            {
+                id: 175,
+                question: "Cuối kỳ, kế toán một doanh nghiệp phát hiện mình bỏ sót 1 chứng từ không ghi vào sổ. Để sửa chữa sổ kế toán trong trường hợp này, kế toán sẽ sử dụng phương pháp nào trong các phương pháp sau đây: ",
+                options: [
+                    "Phương pháp cải chính.",
+                    "Phương pháp ghi bổ sung.",
+                    "Phương pháp ghi số âm.",
+                    "Không có phương pháp nào."
+                ],
+                correct: 1,
+                explanation: "Khi bỏ sót chứng từ (ghi thiếu số tiền), kế toán sử dụng phương pháp ghi bổ sung để lập thêm bút toán ghi bổ sung phần chênh lệch thiếu."
+            },
+            {
+                id: 176,
+                question: "Nếu phân loại sổ kế toán theo phương pháp ghi chép thì sổ nhật ký chung thuộc loại: ",
+                options: [
+                    "Sổ ghi theo trình tự thời gian.",
+                    "Sổ ghi theo hệ thống.",
+                    "Sổ chi tiết.",
+                    "Sổ kết hợp."
+                ],
+                correct: 0,
+                explanation: "Sổ nhật ký chung ghi chép các nghiệp vụ theo trình tự phát sinh thời gian."
+            },
+            {
+                id: 177,
+                question: "Nếu phân loại theo mức độ khái quát của số liệu phản ánh trên sổ thì sổ cái thuộc loại: ",
+                options: [
+                    "Sổ kiểu 1 bên.",
+                    "Sổ kiểu 2 bên.",
+                    "Sổ kế toán tổng hợp.",
+                    "Sổ kế toán chi tiết."
+                ],
+                correct: 2,
+                explanation: "Sổ Cái là sổ kế toán tổng hợp dùng để phản ánh tổng quát tình hình biến động tài sản, nguồn vốn của doanh nghiệp."
+            },
+            {
+                id: 178,
+                question: "Sổ nhật ký chung nếu phân loại theo kiểu bố trí mẫu sổ thì thuộc loại: ",
+                options: [
+                    "Sổ kiểu một bên.",
+                    "Sổ kiểu hai bên.",
+                    "Sổ kiểu nhiều cột.",
+                    "Sổ kiểu bàn cờ."
+                ],
+                correct: 0,
+                explanation: "Theo kết cấu thiết kế mẫu sổ truyền thống trong lý thuyết kế toán tài chính, Sổ Nhật ký chung được bố trí theo kiểu một bên (các cột ngày tháng, số hiệu, diễn giải, tài khoản đối ứng, số tiền nằm trên cùng một phía/trang liên tục)."
+            },
+            {
+                id: 179,
+                question: "Trong mỗi hình thức sổ kế toán có quy định cụ thể về: ",
+                options: [
+                    "Số lượng, kết cấu, mẫu sổ.",
+                    "Mối quan hệ giữa các sổ.",
+                    "Trình tự, phương pháp ghi chép các sổ.",
+                    "Tất cả đều đúng."
+                ],
+                correct: 3,
+                explanation: "Mỗi hình thức sổ kế toán đều quy định rõ ràng về hệ thống mẫu sổ, quan hệ đối chiếu và trình tự ghi sổ."
+            },
+            {
+                id: 180,
+                question: "Trong Hình thức Chứng từ ghi sổ, Sổ Cái được ghi từ: ",
+                options: [
+                    "Chứng từ ghi sổ.",
+                    "Chứng từ kế toán.",
+                    "Sổ Đăng ký chứng từ ghi sổ.",
+                    "Sổ Nhật ký chứng từ."
+                ],
+                correct: 0,
+                explanation: "Trong hình thức Chứng từ ghi sổ, Sổ Cái được ghi căn cứ trực tiếp vào các Chứng từ ghi sổ đã lập."
+            },
+            {
+                id: 181,
+                question: "Trong các hình thức sổ kế toán sau đây, hình thức nào chỉ có 1 quyển sổ tổng hợp duy nhất: ",
+                options: [
+                    "Hình thức Nhật ký chung.",
+                    "Hình thức Nhật ký - sổ cái.",
+                    "Hình thức Chứng từ ghi sổ.",
+                    "Hình thức Nhật ký chứng từ."
+                ],
+                correct: 2,
+                explanation: "Trong hình thức Chứng từ ghi sổ, hệ thống sổ tổng hợp chỉ sử dụng duy nhất một quyển sổ tổng hợp kết hợp là 'Sổ đăng ký chứng từ ghi sổ'"
+            },
+            {
+                id: 182,
+                question: "Bảng cân đối tài khoản được lập: ",
+                options: [
+                    "Trước khi khoá sổ kế toán.",
+                    "Sau khi khóa sổ kế toán.",
+                    "Cả a, b đều đúng.",
+                    "Cả a, b đều sai."
+                ],
+                correct: 1,
+                explanation: "Bảng cân đối tài khoản được lập sau khi đã khóa sổ kế toán các tài khoản tổng hợp kỳ kế toán đó."
+            },
+            {
+                id: 183,
+                question: "Theo quy định của Bộ Tài chính trong hình thức Chứng từ ghi sổ, Chứng từ ghi sổ được lập: ",
+                options: [
+                    "Định kỳ.",
+                    "Cuối kỳ.",
+                    "Hằng ngày.",
+                    "Tất cả các câu trên đều đúng."
+                ],
+                correct: 2,
+                explanation: "Trong hình thức kế toán Chứng từ ghi sổ, căn cứ vào các chứng từ kế toán cùng loại phát sinh trong ngày hoặc định kỳ, kế toán lập Chứng từ ghi sổ (hằng ngày) để tổng hợp số liệu trước khi ghi vào Sổ Đăng ký chứng từ ghi sổ và Sổ Cái."
+            },
+            {
+                id: 184,
+                question: "Sổ Nhật ký- Sổ cái là sổ được ghi: ",
+                options: [
+                    "Theo đối tượng.",
+                    "Theo trình tự thời gian.",
+                    "Kết hợp vừa theo thời gian vừa theo đối tượng.",
+                    "Không có đáp án nào đúng."
+                ],
+                correct: 2,
+                explanation: "Sổ Nhật ký - Sổ cái là sổ kết hợp cả việc ghi theo trình tự thời gian lẫn ghi theo hệ thống đối tượng tài khoản trên cùng một trang sổ."
+            },
+            {
+                id: 185,
+                question: "Trong hình thức Nhật ký chung, Sổ tổng hợp bao gồm: ",
+                options: [
+                    "Sổ Nhật ký đặc biệt.",
+                    "Sổ Nhật ký đặc biệt và Sổ Nhật ký chung.",
+                    "Sổ Cái.",
+                    "Sổ Nhật ký đặc biệt, sổ Nhật ký chung và sổ Cái."
+                ],
+                correct: 3,
+                explanation: "Trong hình thức Nhật ký chung, hệ thống sổ tổng hợp bao gồm Sổ Nhật ký chung (và các sổ nhật ký đặc biệt nếu có) cùng với Sổ Cái."
             }
 ];
