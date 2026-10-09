@@ -1,4 +1,3 @@
-// Full dataset of 115 questions with updated accurate answers and instant explanations
 const quizData = [
             {
                 id: 1,
