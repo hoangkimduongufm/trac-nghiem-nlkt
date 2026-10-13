@@ -4,6 +4,7 @@ let currentIndex = 0;
 let userAnswers = [];
 let correctCount = 0;
 let isExamMode = false;
+let isReviewingExam = false;
 let timerInterval = null;
 let timeLeft = 60 * 60;
 const EXAM_PRIORITY_IDS = [125, 105, 104, 103, 102, 101, 100, 96, 95, 93, 92];
@@ -53,12 +54,14 @@ function startStandardMode(isRandom = false) {
     if (timerInterval) clearInterval(timerInterval);
     timerInterval = null;
     isExamMode = false;
+    isReviewingExam = false;
     prepareQuizData(isRandom, null);
     setupUIMode();
 }
 
 // Chế độ thi thử 60 phút - 60 câu ngẫu nhiên (chỉ random câu hỏi, giữ nguyên đáp án)
 function startExamMode() {
+    isReviewingExam = false;
     isExamMode = true;
     timeLeft = 60 * 60;
     prepareQuizData(true, 60, EXAM_PRIORITY_IDS, 5);
@@ -124,6 +127,7 @@ function renderQuestion() {
     activeQuizData.forEach((q, questionIndex) => {
         const selectedOpt = userAnswers[questionIndex];
         const hasAnswered = selectedOpt !== null;
+        const shouldRevealAnswer = !isExamMode && (hasAnswered || isReviewingExam);
         const card = document.createElement('section');
         card.className = 'quiz-question';
         card.id = `question-${questionIndex + 1}`;
@@ -135,11 +139,11 @@ function renderQuestion() {
         number.textContent = `Câu hỏi ${questionIndex + 1}`;
         topBar.appendChild(number);
 
-        if (!isExamMode && hasAnswered) {
+        if (shouldRevealAnswer) {
             const status = document.createElement('span');
             const isCorrect = selectedOpt === q.correct;
-            status.className = `quiz-answer-status ${isCorrect ? 'is-correct' : 'is-wrong'}`;
-            status.textContent = isCorrect ? 'Đúng' : 'Sai';
+            status.className = `quiz-answer-status ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
+            status.textContent = !hasAnswered ? 'Chưa trả lời' : isCorrect ? 'Đúng' : 'Sai';
             topBar.appendChild(status);
         }
         card.appendChild(topBar);
@@ -155,7 +159,7 @@ function renderQuestion() {
             option.type = 'button';
             option.className = 'quiz-option';
             option.setAttribute('aria-pressed', String(selectedOpt === optionIndex));
-            if (!isExamMode && hasAnswered) {
+            if (shouldRevealAnswer) {
                 if (optionIndex === q.correct) option.classList.add('is-correct');
                 else if (selectedOpt === optionIndex) option.classList.add('is-wrong');
                 option.disabled = true;
@@ -174,14 +178,14 @@ function renderQuestion() {
         });
         card.appendChild(options);
 
-        if (!isExamMode && hasAnswered) {
+        if (shouldRevealAnswer) {
             const isCorrect = selectedOpt === q.correct;
             const explanation = document.createElement('div');
-            explanation.className = `quiz-explanation ${isCorrect ? 'is-correct' : 'is-wrong'}`;
+            explanation.className = `quiz-explanation ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
             const answer = document.createElement('strong');
-            answer.textContent = isCorrect
-                ? 'Chính xác! '
-                : `Đáp án đúng: ${optionLetters[q.correct]?.toUpperCase() || ''}. ${q.options[q.correct]} `;
+            answer.textContent = hasAnswered && isCorrect
+                ? `Chính xác! Đáp án đúng: ${optionLetters[q.correct]?.toUpperCase() || ''}. ${q.options[q.correct]}`
+                : `Đáp án đúng: ${optionLetters[q.correct]?.toUpperCase() || ''}. ${q.options[q.correct]}`;
             const detail = document.createElement('p');
             detail.textContent = q.explanation;
             explanation.append(answer, detail);
@@ -226,6 +230,7 @@ function closeResults() {
     // Khi đang ở chế độ thi thử mà bấm "Xem lại chi tiết"
     if (isExamMode) {
         isExamMode = false; // Thoát chế độ thi nghiêm ngặt
+        isReviewingExam = true;
         document.getElementById('timer-box').classList.add('hidden'); // Ẩn đồng hồ
         document.getElementById('submit-button').classList.add('hidden');
         document.getElementById('submit-button-bottom').classList.add('hidden');
@@ -234,9 +239,15 @@ function closeResults() {
     }
 }
 
+function startNewExam() {
+    document.getElementById('results-modal').classList.add('hidden');
+    startExamMode();
+}
+
 function resetQuiz() {
     if (timerInterval) clearInterval(timerInterval);
     isExamMode = false;
+    isReviewingExam = false;
     timeLeft = 60 * 60;
     prepareQuizData(false, null);
     setupUIMode();
