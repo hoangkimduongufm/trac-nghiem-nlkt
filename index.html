@@ -1,83 +1,97 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <!-- Thông tin trang và các tài nguyên được sử dụng -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trắc nghiệm Nguyên Lý Kế Toán</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#14233b">
+    <meta name="description" content="Ôn tập và thi thử Nguyên lý Kế toán chương 1 đến 7.">
+    <title>Trắc nghiệm Nguyên lý Kế toán</title>
+    <!-- Font chữ, stylesheet và mã ứng dụng -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Đặt defer ở đây -->
     <script src="questions.js" defer></script>
     <script src="script.js" defer></script>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8">
-    <div id="app" class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 my-6">
-        
-        <!-- Header Section -->
-        <div class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 md:p-8">
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Trắc nghiệm Nguyên Lý Kế toán (Chương 1 - 7)</h1>
-            <p class="text-indigo-100 mt-2 text-sm md:text-base">Bộ 185 câu hỏi ôn tập đầy đủ, hiện đáp án và phản hồi tức thì khi chọn.</p>
-            <div id="quiz-meta" class="flex flex-wrap gap-4 mt-4 text-xs md:text-sm font-medium bg-indigo-700/50 p-3 rounded-xl backdrop-blur-sm">
+<body>
+    <!-- Khung chính của ứng dụng trắc nghiệm -->
+    <main class="quiz-shell" id="app">
+        <!-- Tiêu đề trang, đồng hồ thi và thống kê kết quả -->
+        <header class="quiz-header">
+            <div class="header-row">
+                <div class="header-copy">
+                    <p class="eyebrow">Ngân hàng câu hỏi · Chương 1–7</p>
+                    <h1>Trắc nghiệm Nguyên lý Kế toán</h1>
+                    <p class="header-description">Ôn tập 185 câu hỏi hoặc làm bài thi thử 60 câu trong 60 phút.</p>
+                </div>
+                <!-- Đồng hồ chỉ hiện trong chế độ thi thử -->
+                <div id="timer-box" class="timer hidden" role="timer" aria-live="polite">
+                    <span aria-hidden="true">⏱</span>
+                    <span id="time-remaining">60:00</span>
+                </div>
+            </div>
+
+            <!-- Tổng số câu, số câu đã làm và điểm hiện tại -->
+            <div class="quiz-stats" id="quiz-meta" aria-live="polite">
                 <span id="meta-total">Tổng số câu: 185</span>
                 <span id="meta-answered">Đã trả lời: 0/185</span>
                 <span id="meta-score">Số câu đúng: 0</span>
             </div>
-        </div>
+        </header>
 
-        <!-- Toolbar / Navigation bar -->
-        <div class="bg-slate-100 p-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <label for="jump-select" class="text-sm font-semibold text-slate-600">Đến câu:</label>
-                <select id="jump-select" onchange="jumpToQuestion(this.value)" class="bg-white border border-slate-300 text-slate-700 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    <!-- Options populated via JS -->
-                </select>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="submitQuiz()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition shadow-sm">
-                    Xem tổng kết & Kết quả
-                </button>
-                <button onclick="resetQuiz()" class="bg-rose-500 hover:bg-rose-600 text-white text-sm font-semibold px-4 py-2 rounded-xl transition shadow-sm">
-                    Làm lại từ đầu
-                </button>
-            </div>
-        </div>
+        <!-- Chọn chế độ, nộp bài hoặc bắt đầu lại -->
+        <nav class="mode-bar" id="mode-selection" aria-label="Chọn chế độ làm bài">
+            <p class="mode-bar-title">
+                <svg class="mode-bar-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z" />
+                    <path d="M4 5.5v16M8 7h8M8 11h8" />
+                </svg>
+                <span>Chọn chế độ làm bài</span>
+            </p>
+            <button class="button mode-button mode-button--review" type="button" onclick="startStandardMode(false)">Ôn thứ tự</button>
+            <button class="button mode-button mode-button--shuffle" type="button" onclick="startStandardMode(true)">Ôn ngẫu nhiên</button>
+            <button class="button mode-button mode-button--exam" type="button" onclick="startExamMode()">Thi thử 60 câu</button>
+            <button class="button mode-button mode-button--reset" type="button" onclick="resetQuiz()">Làm lại</button>
+            <button id="submit-button" class="button mode-button mode-button--submit hidden" type="button" onclick="submitQuiz()">Nộp bài</button>
+        </nav>
 
-        <!-- Quiz Main Content Area -->
-        <div class="p-6 md:p-8 min-h-[400px]" id="question-container">
-            <!-- Dynamic Question rendered here -->
+        <div id="question-tools" class="question-tools hidden" aria-label="Điều hướng câu hỏi">
+            <label class="question-select-label" for="question-select">Chọn câu muốn ôn tập</label>
+            <select id="question-select" onchange="jumpToQuestion(this.value)" aria-label="Chọn câu hỏi"></select>
         </div>
+        <!-- JavaScript hiển thị danh sách câu hỏi tại đây -->
+        <section class="question-list" id="question-container" aria-label="Danh sách câu hỏi">
+            <p class="loading-message">Đang tải câu hỏi…</p>
+        </section>
+        <!-- Nút nộp bài ở cuối danh sách câu hỏi, chỉ dùng trong thi thử -->
+        <div class="bottom-submit-row">
+            <button id="submit-button-bottom" class="button bottom-submit hidden" type="button" onclick="submitQuiz()">Nộp bài</button>
+        </div>
+    </main>
 
-        <!-- Footer Pagination Controls -->
-        <div class="bg-slate-50 p-4 border-t border-slate-200 flex items-center justify-between">
-            <button id="btn-prev" onclick="prevQuestion()" class="bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold px-5 py-2 rounded-xl transition shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">
-                ← Câu trước
-            </button>
-            <span id="page-indicator" class="text-sm font-medium text-slate-600">Câu 1 / 115</span>
-            <button id="btn-next" onclick="nextQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2 rounded-xl transition shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">
-                Câu tiếp →
-            </button>
-        </div>
-    </div>
+    <!-- Hộp thoại tổng kết sau khi nộp bài -->
+    <button class="floating-top-button" type="button" onclick="scrollToTop()" aria-label="Cuộn về đầu trang" title="Về đầu trang">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m5 12 7-7 7 7M12 5v14" />
+        </svg>
+        <span>Đầu trang</span>
+    </button>
+    <div class="modal-overlay hidden" id="results-modal" role="dialog" aria-modal="true" aria-labelledby="results-title">
+        <section class="results-card">
 
-    <!-- Results Modal / View -->
-    <div id="results-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 text-center animate-scaleIn">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                🏆
+            <button class="modal-close" type="button" onclick="closeResults()" aria-label="Đóng kết quả">×</button>
+            <div class="results-icon" aria-hidden="true">✓</div>
+            <h2 id="results-title">Kết quả bài làm</h2>
+            <p class="results-text" id="result-text"></p>
+            <div class="results-actions">
+                <button class="button button--primary" type="button" onclick="closeResults()">Xem lại bài làm</button>
+                <button class="button button--secondary" type="button" onclick="resetQuiz(); closeResults();">Làm lại từ đầu</button>
             </div>
-            <h2 class="text-2xl font-bold text-slate-800">Tổng kết quá trình ôn tập</h2>
-            <p id="result-text" class="text-slate-600 mt-2 text-lg font-medium"></p>
-            <div class="mt-6 flex flex-col gap-3">
-                <button onclick="closeResults()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-sm">
-                    Tiếp tục ôn tập
-                </button>
-                <button onclick="resetQuiz(); closeResults();" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-3 rounded-xl transition">
-                    Làm bài mới từ đầu
-                </button>
-            </div>
-        </div>
+        </section>
     </div>
 </body>
 </html>
+
+
