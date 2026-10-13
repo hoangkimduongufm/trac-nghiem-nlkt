@@ -184,32 +184,31 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     stroke-width: 1.8;
 }
 .question-tools {
-    position: fixed;
-    left: clamp(12px, 3vw, 28px);
-    right: clamp(132px, 16vw, 190px);
-    bottom: calc(16px + env(safe-area-inset-bottom));
-    z-index: 40;
+    position: static;
+    width: max-content;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border: 1px solid #dce4ef;
-    border-radius: 12px;
-    padding: 9px 12px;
-    background: rgba(255, 255, 255, .97);
-    box-shadow: 0 8px 24px rgba(19, 35, 59, .16);
-    backdrop-filter: blur(10px);
+    gap: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
 }
-.question-select-label { color: #56667d; font-size: .8rem; font-weight: 600; }
+.question-select-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 #question-select {
-    min-width: 110px;
-    min-height: 38px;
+    width: 104px;
+    min-width: 104px;
+    min-height: 44px;
     border: 1px solid #d7e0ec;
-    border-radius: 9px;
-    padding: 0 34px 0 11px;
-    color: #243653;
+    border-radius: 999px;
+    padding: 0 28px 0 13px;
+    color: #35445a;
     background: #fff;
     font: inherit;
     font-size: .82rem;
+    box-shadow: 0 8px 24px rgba(19, 35, 59, .16);
+    cursor: pointer;
 }
 .top-button {
     display: inline-flex;
@@ -245,17 +244,22 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     .mode-bar-title { margin-bottom: 1px; font-size: .82rem; }
     .button { min-height: 39px; border-radius: 9px; }
     .mode-button { padding: 8px 6px; font-size: .72rem; }
-    .question-tools { left: 12px; right: 126px; bottom: calc(12px + env(safe-area-inset-bottom)); display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; padding: 8px; }
+    .question-tools { position: static; width: max-content; display: flex; }
     .question-select-label { grid-column: 1 / -1; font-size: .72rem; }
-    #question-select { width: 100%; min-width: 0; min-height: 36px; font-size: .78rem; }
-    .top-button { min-height: 36px; padding: 0 9px; font-size: .74rem; }
-    .question-list { padding: 10px 14px; }
-    .quiz-question { padding: 18px 0 21px; scroll-margin-top: 90px; }
-    .quiz-question h2 { margin: 11px 0 14px; font-size: .94rem; line-height: 1.55; }
-    .quiz-option { min-height: 44px; gap: 9px; padding: 7px 9px; }
-    .quiz-option-letter { width: 27px; height: 27px; flex-basis: 27px; }
-    .quiz-option-text { font-size: .78rem; line-height: 1.45; }
-    .quiz-explanation { padding: 11px 12px; font-size: .79rem; }
+    #question-select {
+    width: 96px;
+    min-width: 96px;
+    min-height: 42px;
+    border: 1px solid #d7e0ec;
+    border-radius: 999px;
+    padding: 0 26px 0 11px;
+    color: #35445a;
+    background: #fff;
+    font: inherit;
+    font-size: .76rem;
+    box-shadow: 0 8px 24px rgba(19, 35, 59, .16);
+    cursor: pointer;
+}
 }
 
 /* Floating control remains visible while the page scrolls. */
@@ -263,7 +267,7 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     position: fixed;
     right: clamp(14px, 3vw, 28px);
     bottom: calc(16px + env(safe-area-inset-bottom));
-    z-index: 40;
+    z-index: 60;
     display: inline-flex;
     min-height: 44px;
     align-items: center;
@@ -325,3 +329,102 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .quiz-answer-status.is-unanswered { color: #52647d; background: #eef2f7; }
 .quiz-explanation.is-unanswered { border-color: #dce4ef; color: #34445b; background: #f7f9fc; }
 
+/* Force the back-to-top control above the fixed question picker. */
+
+@media (max-width: 600px) {
+    
+}
+/* Keep the question picker and back-to-top button in one fixed control group. */
+.floating-controls {
+    position: fixed;
+    right: 20px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+.floating-controls .floating-top-button {
+    position: static;
+    right: auto;
+    bottom: auto;
+    z-index: auto;
+    min-width: 132px;
+}
+@media (max-width: 600px) {
+    .floating-controls {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+    .floating-controls .floating-top-button { min-width: 120px; }
+}
+/* Keep the floating picker card and back-to-top button the same width. */
+.floating-controls {
+    --floating-control-width: 160px;
+}
+.floating-controls .question-tools {
+    display: flex;
+    width: var(--floating-control-width);
+    min-width: var(--floating-control-width);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+    border: 1px solid #dce4ef;
+    border-radius: 13px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(19, 35, 59, .16);
+}
+.floating-controls .question-select-label {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    color: #56667d;
+    font-size: .76rem;
+    font-weight: 650;
+    white-space: normal;
+}
+.floating-controls #question-select {
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+    border-radius: 9px;
+    padding: 0 28px 0 10px;
+    font-size: .8rem;
+    box-shadow: none;
+}
+.floating-controls .floating-top-button {
+    width: var(--floating-control-width);
+    min-width: var(--floating-control-width);
+    justify-content: center;
+}
+@media (max-width: 600px) {
+    .floating-controls { --floating-control-width: min(160px, calc(100vw - 24px)); }
+}
+.floating-controls .timer {
+    width: var(--floating-control-width);
+    min-height: 48px;
+    flex: 0 0 auto;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #dce4ef;
+    border-radius: 12px;
+    padding: 7px 10px;
+    color: #243653;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(19, 35, 59, .16);
+    backdrop-filter: none;
+}
+.floating-controls .timer-label {
+    color: #56667d;
+    font-size: .7rem;
+    font-weight: 600;
+}
+.floating-controls #time-remaining {
+    color: #17243b;
+    font-size: .92rem;
+    font-weight: 750;
+}
