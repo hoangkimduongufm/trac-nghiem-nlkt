@@ -317,3 +317,6 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     .bottom-submit-row { padding: 12px 14px 18px; }
     .bottom-submit { width: 100%; }
 }
+
+.quiz-answer-status.is-unanswered { color: #52647d; background: #eef2f7; }
+.quiz-explanation.is-unanswered { border-color: #dce4ef; color: #34445b; background: #f7f9fc; }
