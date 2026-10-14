@@ -1,256 +1,391 @@
 // File: script.js
+
+const QUESTION_PRIORITY_IDS = [125, 105, 104, 103, 102, 101, 100, 96, 95, 93, 92];
+const RENDER_SLICE_MS = 8;
+const OPTION_LETTERS = ['a', 'b', 'c', 'd'];
+
+const ui = {
+    timerBox: document.getElementById('timer-box'),
+    timeRemaining: document.getElementById('time-remaining'),
+    submitButtons: [
+        document.getElementById('submit-button'),
+        document.getElementById('submit-button-bottom')
+    ],
+    questionTools: document.getElementById('question-tools'),
+    questionSelect: document.getElementById('question-select'),
+    questionContainer: document.getElementById('question-container'),
+    metaTotal: document.getElementById('meta-total'),
+    metaAnswered: document.getElementById('meta-answered'),
+    metaScore: document.getElementById('meta-score'),
+    resultsModal: document.getElementById('results-modal'),
+    resultText: document.getElementById('result-text')
+};
+
 let activeQuizData = [];
-let currentIndex = 0;
 let userAnswers = [];
+let answeredCount = 0;
 let correctCount = 0;
 let isExamMode = false;
 let isReviewingExam = false;
-let timerInterval = null;
+let timerTimeout = null;
+let timerDeadline = 0;
 let timeLeft = 60 * 60;
-const EXAM_PRIORITY_IDS = [125, 105, 104, 103, 102, 101, 100, 96, 95, 93, 92];
+let renderGeneration = 0;
+let pendingRenderFrame = 0;
 
-// Hàm xáo trộn mảng (Fisher-Yates Shuffle) dùng cho câu hỏi
-function shuffleArray(array) {
-    let arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+const questionBank = typeof quizData !== 'undefined' && Array.isArray(quizData)
+    ? quizData
+    : [];
+
+// Delegate option clicks to the question list instead of allocating one listener per option.
+ui.questionContainer?.addEventListener('click', event => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const option = target.closest('.quiz-option');
+    if (!option || option.disabled || !ui.questionContainer.contains(option)) return;
+
+    const card = option.closest('.quiz-question');
+    if (!card) return;
+
+    const questionIndex = Number.parseInt(card.dataset.questionIndex, 10);
+    const optionIndex = Number.parseInt(option.dataset.optionIndex, 10);
+    if (Number.isInteger(questionIndex) && Number.isInteger(optionIndex)) {
+        selectAnswer(questionIndex, optionIndex);
     }
-    return arr;
+});
+
+// Shuffle a copy so the source question bank remains unchanged.
+function shuffleArray(items) {
+    const shuffled = items.slice();
+
+    for (let index = shuffled.length - 1; index > 0; index--) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const item = shuffled[index];
+        shuffled[index] = shuffled[swapIndex];
+        shuffled[swapIndex] = item;
+    }
+
+    return shuffled;
 }
 
-// Chuẩn bị dữ liệu: Chỉ random thứ tự câu hỏi (hoặc cắt gọn cho thi thử), giữ nguyên vị trí đáp án gốc
+// Reuse the immutable question objects; only the order changes between attempts.
 function prepareQuizData(isRandom = false, subsetCount = null, priorityIds = [], priorityCount = 0) {
-    let rawData = [...quizData];
+    let questions = isRandom ? shuffleArray(questionBank) : questionBank.slice();
 
-    if (subsetCount && subsetCount < rawData.length) {
-        if (priorityIds.length && priorityCount > 0) {
+    if (subsetCount && subsetCount < questions.length) {
+        if (priorityIds.length > 0 && priorityCount > 0) {
             const prioritySet = new Set(priorityIds);
-            const priorityPool = rawData.filter(question => prioritySet.has(question.id));
+            const priorityPool = questionBank.filter(question => prioritySet.has(question.id));
+            const otherPool = questionBank.filter(question => !prioritySet.has(question.id));
             const selectedPriority = shuffleArray(priorityPool).slice(0, priorityCount);
-            const otherQuestions = rawData.filter(question => !prioritySet.has(question.id));
-            const selectedOthers = shuffleArray(otherQuestions).slice(0, subsetCount - selectedPriority.length);
-            rawData = shuffleArray([...selectedPriority, ...selectedOthers]);
+            const selectedOthers = shuffleArray(otherPool).slice(0, subsetCount - selectedPriority.length);
+            questions = shuffleArray(selectedPriority.concat(selectedOthers));
         } else {
-            rawData = shuffleArray(rawData).slice(0, subsetCount);
+            questions = questions.slice(0, subsetCount);
         }
-    } else if (isRandom) {
-        rawData = shuffleArray(rawData);
     }
 
-    activeQuizData = rawData.map(question => ({
-        id: question.id,
-        question: question.question,
-        options: [...question.options],
-        correct: question.correct,
-        explanation: question.explanation
-    }));
-
+    activeQuizData = questions;
     userAnswers = new Array(activeQuizData.length).fill(null);
-    currentIndex = 0;
+    answeredCount = 0;
     correctCount = 0;
 }
+
 function startStandardMode(isRandom = false) {
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = null;
+    stopTimer();
     isExamMode = false;
     isReviewingExam = false;
-    prepareQuizData(isRandom, null);
+    prepareQuizData(isRandom);
     setupUIMode();
 }
 
-// Chế độ thi thử 60 phút - 60 câu ngẫu nhiên (chỉ random câu hỏi, giữ nguyên đáp án)
+// Practice exam: 60 random questions, including 5 from the priority ID group.
 function startExamMode() {
+    stopTimer();
     isReviewingExam = false;
     isExamMode = true;
     timeLeft = 60 * 60;
-    prepareQuizData(true, 60, EXAM_PRIORITY_IDS, 5);
+    prepareQuizData(true, 60, QUESTION_PRIORITY_IDS, 5);
     setupUIMode();
     startTimer();
 }
 
 function setupUIMode() {
-    document.getElementById('timer-box').classList.toggle('hidden', !isExamMode);
-    document.getElementById('submit-button').classList.toggle('hidden', !isExamMode);
-    document.getElementById('submit-button-bottom').classList.toggle('hidden', !isExamMode);
-    document.getElementById('question-tools').classList.toggle('hidden', isExamMode);
+    ui.timerBox?.classList.toggle('hidden', !isExamMode);
+    ui.submitButtons.forEach(button => button?.classList.toggle('hidden', !isExamMode));
+    ui.questionTools?.classList.toggle('hidden', isExamMode);
+
     populateQuestionSelect();
     renderQuestion();
     updateMeta();
 }
 
 function populateQuestionSelect() {
-    const select = document.getElementById('question-select');
-    select.replaceChildren();
+    if (!ui.questionSelect) return;
+
+    const options = document.createDocumentFragment();
     activeQuizData.forEach((question, index) => {
         const option = document.createElement('option');
         option.value = String(index);
         option.textContent = `Câu ${index + 1}`;
-        select.appendChild(option);
+        options.appendChild(option);
     });
-    select.value = '0';
+
+    ui.questionSelect.replaceChildren(options);
+    ui.questionSelect.value = activeQuizData.length > 0 ? '0' : '';
 }
 
-function jumpToQuestion(index) {
-    const questionIndex = Number.parseInt(index, 10);
-    const question = document.getElementById(`question-${questionIndex + 1}`);
-    if (!question) return;
-    question.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function jumpToQuestion(value) {
+    const questionIndex = Number.parseInt(value, 10);
+    if (!Number.isInteger(questionIndex) || questionIndex < 0 || questionIndex >= activeQuizData.length) return;
+
+    const generation = renderGeneration;
+    const scrollWhenReady = () => {
+        if (generation !== renderGeneration) return;
+
+        const question = document.getElementById(`question-${questionIndex + 1}`);
+        if (question) {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            question.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+            return;
+        }
+
+        window.requestAnimationFrame(scrollWhenReady);
+    };
+
+    scrollWhenReady();
 }
 
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+}
+
+function stopTimer() {
+    if (timerTimeout !== null) {
+        window.clearTimeout(timerTimeout);
+        timerTimeout = null;
+    }
 }
 
 function startTimer() {
-    if (timerInterval) clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            alert('10 điểm rồi nộp bài đi!');
+    stopTimer();
+    timerDeadline = Date.now() + timeLeft * 1000;
+
+    const updateTimer = () => {
+        if (!isExamMode) return;
+
+        timeLeft = Math.max(0, Math.ceil((timerDeadline - Date.now()) / 1000));
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        if (ui.timeRemaining) {
+            ui.timeRemaining.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        if (timeLeft === 0) {
+            stopTimer();
             submitQuiz();
             return;
         }
-        timeLeft--;
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        document.getElementById('time-remaining').innerText = 
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
+
+        timerTimeout = window.setTimeout(updateTimer, 1000);
+    };
+
+    updateTimer();
 }
 
-function renderQuestion() {
-    const container = document.getElementById('question-container');
-    container.replaceChildren();
-    const optionLetters = ['a', 'b', 'c', 'd'];
+function createQuestionCard(questionIndex) {
+    const question = activeQuizData[questionIndex];
+    const selectedOption = userAnswers[questionIndex];
+    const hasAnswered = selectedOption !== null;
+    const shouldRevealAnswer = !isExamMode && (hasAnswered || isReviewingExam);
+    const card = document.createElement('section');
+    card.className = 'quiz-question';
+    card.id = `question-${questionIndex + 1}`;
+    card.dataset.questionIndex = String(questionIndex);
 
-    activeQuizData.forEach((q, questionIndex) => {
-        const selectedOpt = userAnswers[questionIndex];
-        const hasAnswered = selectedOpt !== null;
-        const shouldRevealAnswer = !isExamMode && (hasAnswered || isReviewingExam);
-        const card = document.createElement('section');
-        card.className = 'quiz-question';
-        card.id = `question-${questionIndex + 1}`;
+    const heading = document.createElement('div');
+    heading.className = 'quiz-question-heading';
 
-        const topBar = document.createElement('div');
-        topBar.className = 'quiz-question-heading';
-        const number = document.createElement('span');
-        number.className = 'quiz-question-number';
-        number.textContent = `Câu hỏi ${questionIndex + 1}`;
-        topBar.appendChild(number);
+    const number = document.createElement('span');
+    number.className = 'quiz-question-number';
+    number.textContent = `Câu hỏi ${questionIndex + 1}`;
+    heading.appendChild(number);
 
-        if (shouldRevealAnswer) {
-            const status = document.createElement('span');
-            const isCorrect = selectedOpt === q.correct;
-            status.className = `quiz-answer-status ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
-            status.textContent = !hasAnswered ? 'Chưa trả lời' : isCorrect ? 'Đúng' : 'Sai';
-            topBar.appendChild(status);
-        }
-        card.appendChild(topBar);
-
-        const title = document.createElement('h2');
-        title.textContent = q.question;
-        card.appendChild(title);
-
-        const options = document.createElement('div');
-        options.className = 'quiz-options';
-        q.options.forEach((optionText, optionIndex) => {
-            const option = document.createElement('button');
-            option.type = 'button';
-            option.className = 'quiz-option';
-            option.setAttribute('aria-pressed', String(selectedOpt === optionIndex));
-            if (shouldRevealAnswer) {
-                if (optionIndex === q.correct) option.classList.add('is-correct');
-                else if (selectedOpt === optionIndex) option.classList.add('is-wrong');
-                option.disabled = true;
-            } else if (selectedOpt === optionIndex) {
-                option.classList.add('is-selected');
-            }
-            const letter = document.createElement('span');
-            letter.className = 'quiz-option-letter';
-            letter.textContent = optionLetters[optionIndex] || String(optionIndex + 1);
-            const text = document.createElement('span');
-            text.className = 'quiz-option-text';
-            text.textContent = optionText;
-            option.append(letter, text);
-            option.addEventListener('click', () => selectAnswer(questionIndex, optionIndex));
-            options.appendChild(option);
-        });
-        card.appendChild(options);
-
-        if (shouldRevealAnswer) {
-            const isCorrect = selectedOpt === q.correct;
-            const explanation = document.createElement('div');
-            explanation.className = `quiz-explanation ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
-            const answer = document.createElement('strong');
-            answer.textContent = hasAnswered && isCorrect
-                ? `Chính xác! Đáp án đúng: ${optionLetters[q.correct]?.toUpperCase() || ''}. ${q.options[q.correct]}`
-                : `Đáp án đúng: ${optionLetters[q.correct]?.toUpperCase() || ''}. ${q.options[q.correct]}`;
-            const detail = document.createElement('p');
-            detail.textContent = q.explanation;
-            explanation.append(answer, detail);
-            card.appendChild(explanation);
-        }
-        container.appendChild(card);
-    });
-}
-function selectAnswer(questionIndex, optionIndex) {
-    const card = document.getElementById(`question-${questionIndex + 1}`);
-    const previousTop = card?.getBoundingClientRect().top ?? 0;
-    userAnswers[questionIndex] = optionIndex;
-    correctCount = userAnswers.reduce((count, answer, index) =>
-        count + (answer !== null && answer === activeQuizData[index].correct ? 1 : 0), 0);
-    updateMeta();
-    renderQuestion();
-    const updatedCard = document.getElementById(`question-${questionIndex + 1}`);
-    if (updatedCard && previousTop) {
-        window.scrollBy(0, updatedCard.getBoundingClientRect().top - previousTop);
+    if (shouldRevealAnswer) {
+        const status = document.createElement('span');
+        const isCorrect = selectedOption === question.correct;
+        status.className = `quiz-answer-status ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
+        status.textContent = !hasAnswered ? 'Chưa trả lời' : isCorrect ? 'Đúng' : 'Sai';
+        heading.appendChild(status);
     }
+    card.appendChild(heading);
+
+    const title = document.createElement('h2');
+    title.textContent = question.question;
+    card.appendChild(title);
+
+    const options = document.createElement('div');
+    options.className = 'quiz-options';
+
+    question.options.forEach((optionText, optionIndex) => {
+        const option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'quiz-option';
+        option.dataset.optionIndex = String(optionIndex);
+        option.setAttribute('aria-pressed', String(selectedOption === optionIndex));
+
+        if (shouldRevealAnswer) {
+            if (optionIndex === question.correct) option.classList.add('is-correct');
+            else if (selectedOption === optionIndex) option.classList.add('is-wrong');
+            option.disabled = true;
+        } else if (selectedOption === optionIndex) {
+            option.classList.add('is-selected');
+        }
+
+        const letter = document.createElement('span');
+        letter.className = 'quiz-option-letter';
+        letter.textContent = OPTION_LETTERS[optionIndex] || String(optionIndex + 1);
+
+        const text = document.createElement('span');
+        text.className = 'quiz-option-text';
+        text.textContent = optionText;
+
+        option.append(letter, text);
+        options.appendChild(option);
+    });
+    card.appendChild(options);
+
+    if (shouldRevealAnswer) {
+        const isCorrect = selectedOption === question.correct;
+        const explanation = document.createElement('div');
+        explanation.className = `quiz-explanation ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
+
+        const answer = document.createElement('strong');
+        const correctAnswer = `Đáp án đúng: ${OPTION_LETTERS[question.correct]?.toUpperCase() || ''}. ${question.options[question.correct]}`;
+        answer.textContent = hasAnswered && isCorrect ? `Chính xác! ${correctAnswer}` : correctAnswer;
+
+        const detail = document.createElement('p');
+        detail.textContent = question.explanation;
+        explanation.append(answer, detail);
+        card.appendChild(explanation);
+    }
+
+    return card;
 }
+
+// Render a small time-bounded batch each frame so scrolling and input stay responsive.
+function renderQuestion() {
+    const container = ui.questionContainer;
+    if (!container) return;
+
+    if (pendingRenderFrame) {
+        window.cancelAnimationFrame(pendingRenderFrame);
+        pendingRenderFrame = 0;
+    }
+
+    const generation = ++renderGeneration;
+    const questions = activeQuizData;
+    container.replaceChildren();
+
+    if (questions.length === 0) {
+        const message = document.createElement('p');
+        message.className = 'loading-message';
+        message.textContent = 'Không tải được câu hỏi. Hãy kiểm tra file questions.js.';
+        container.appendChild(message);
+        return;
+    }
+
+    let nextQuestionIndex = 0;
+    const renderNextChunk = () => {
+        pendingRenderFrame = 0;
+        if (generation !== renderGeneration || questions !== activeQuizData) return;
+
+        const fragment = document.createDocumentFragment();
+        const sliceStartedAt = performance.now();
+
+        do {
+            fragment.appendChild(createQuestionCard(nextQuestionIndex));
+            nextQuestionIndex++;
+        } while (
+            nextQuestionIndex < questions.length &&
+            performance.now() - sliceStartedAt < RENDER_SLICE_MS
+        );
+
+        container.appendChild(fragment);
+
+        if (nextQuestionIndex < questions.length) {
+            pendingRenderFrame = window.requestAnimationFrame(renderNextChunk);
+        }
+    };
+
+    pendingRenderFrame = window.requestAnimationFrame(renderNextChunk);
+}
+
+function selectAnswer(questionIndex, optionIndex) {
+    const question = activeQuizData[questionIndex];
+    if (!question || optionIndex < 0 || optionIndex >= question.options.length) return;
+
+    const previousAnswer = userAnswers[questionIndex];
+    if (previousAnswer === optionIndex) return;
+
+    if (previousAnswer === null) answeredCount++;
+    if (previousAnswer === question.correct) correctCount--;
+    if (optionIndex === question.correct) correctCount++;
+    userAnswers[questionIndex] = optionIndex;
+
+    updateMeta();
+
+    const currentCard = document.getElementById(`question-${questionIndex + 1}`);
+    if (currentCard) currentCard.replaceWith(createQuestionCard(questionIndex));
+}
+
 function updateMeta() {
-    const answeredCount = userAnswers.filter(a => a !== null).length;
-    document.getElementById('meta-total').innerText = `Tổng số câu: ${activeQuizData.length}`;
-    document.getElementById('meta-answered').innerText = `Đã trả lời: ${answeredCount}/${activeQuizData.length}`;
-    document.getElementById('meta-score').innerText = `Số câu đúng: ${correctCount}`;
+    if (ui.metaTotal) ui.metaTotal.textContent = `Tổng số câu: ${activeQuizData.length}`;
+    if (ui.metaAnswered) ui.metaAnswered.textContent = `Đã trả lời: ${answeredCount}/${activeQuizData.length}`;
+    if (ui.metaScore) ui.metaScore.textContent = `Số câu đúng: ${correctCount}`;
 }
 
 function submitQuiz() {
-    if (timerInterval) clearInterval(timerInterval);
-    const answeredCount = userAnswers.filter(a => a !== null).length;
-    const modal = document.getElementById('results-modal');
-    const resultText = document.getElementById('result-text');
-    
-    resultText.innerHTML = `Đã trả lời: <strong class="text-slate-900">${answeredCount} / ${activeQuizData.length}</strong> câu.<br>Số câu đúng: <strong class="text-emerald-600">${correctCount} câu</strong><br>Tỷ lệ chính xác: <strong class="text-blue-600">${((correctCount / activeQuizData.length) * 100).toFixed(1)}%</strong>`;
-    modal.classList.remove('hidden');
+    stopTimer();
+    if (!ui.resultsModal || !ui.resultText) return;
+
+    const percentage = activeQuizData.length > 0
+        ? ((correctCount / activeQuizData.length) * 100).toFixed(1)
+        : '0.0';
+
+    ui.resultText.innerHTML = `Đã trả lời: <strong class="text-slate-900">${answeredCount} / ${activeQuizData.length}</strong> câu.<br>Số câu đúng: <strong class="text-emerald-600">${correctCount} câu</strong><br>Tỷ lệ chính xác: <strong class="text-blue-600">${percentage}%</strong>`;
+    ui.resultsModal.classList.remove('hidden');
 }
 
 function closeResults() {
-    document.getElementById('results-modal').classList.add('hidden');
-    
-    // Khi đang ở chế độ thi thử mà bấm "Xem lại chi tiết"
-    if (isExamMode) {
-        isExamMode = false; // Thoát chế độ thi nghiêm ngặt
-        isReviewingExam = true;
-        document.getElementById('timer-box').classList.add('hidden'); // Ẩn đồng hồ
-        document.getElementById('submit-button').classList.add('hidden');
-        document.getElementById('submit-button-bottom').classList.add('hidden');
-        document.getElementById('question-tools').classList.remove('hidden');
-        renderQuestion(); // Render lại để hiển thị đáp án đã chọn, đáp án đúng và giải thích
-    }
+    ui.resultsModal?.classList.add('hidden');
+
+    if (!isExamMode) return;
+
+    isExamMode = false;
+    isReviewingExam = true;
+    ui.timerBox?.classList.add('hidden');
+    ui.submitButtons.forEach(button => button?.classList.add('hidden'));
+    ui.questionTools?.classList.remove('hidden');
+    populateQuestionSelect();
+    renderQuestion();
 }
 
 function startNewExam() {
-    document.getElementById('results-modal').classList.add('hidden');
+    ui.resultsModal?.classList.add('hidden');
     startExamMode();
 }
 
 function resetQuiz() {
-    if (timerInterval) clearInterval(timerInterval);
+    stopTimer();
     isExamMode = false;
     isReviewingExam = false;
     timeLeft = 60 * 60;
-    prepareQuizData(false, null);
+    prepareQuizData(false);
     setupUIMode();
 }
-// Tự động mở phần ôn tập theo thứ tự ID khi tải trang.
+
+// Start with the complete question bank in its original order.
 startStandardMode(false);

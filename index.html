@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261013-8">
+    <link rel="stylesheet" href="style.css?v=20261014-1">
     <script src="questions.js" defer></script>
     <script src="script.js" defer></script>
 </head>
@@ -26,7 +26,6 @@
                     <h1>Trắc nghiệm Nguyên lý Kế toán</h1>
                     <p class="header-description">Ôn tập 185 câu hỏi hoặc làm bài thi thử 60 câu trong 60 phút.</p>
                 </div>
-
             </div>
 
             <!-- Tổng số câu, số câu đã làm và điểm hiện tại -->
@@ -64,23 +63,26 @@
 
     <!-- Hộp thoại tổng kết sau khi nộp bài -->
     <div class="floating-controls">
-                <!-- Đồng hồ chỉ hiện trong chế độ thi thử -->
-                <div id="timer-box" class="timer hidden" role="timer" aria-live="polite">
-                    <span class="timer-icon" aria-hidden="true">⏱</span>
-                    <span class="timer-label">Thời gian còn lại</span>
-                    <span id="time-remaining">60:00</span>
-                </div>
+        <!-- Đồng hồ chỉ hiện trong chế độ thi thử -->
+        <div id="timer-box" class="timer hidden" role="timer">
+            <span class="timer-icon" aria-hidden="true">⏱</span>
+            <span class="timer-label">Thời gian còn lại</span>
+            <span id="time-remaining">60:00</span>
+        </div>
+
         <div id="question-tools" class="question-tools hidden" aria-label="Điều hướng câu hỏi">
             <label class="question-select-label" for="question-select">Question:</label>
             <select id="question-select" onchange="jumpToQuestion(this.value)" aria-label="Chọn câu hỏi"></select>
         </div>
+
         <button id="back-to-top" class="floating-top-button" type="button" onclick="scrollToTop()" aria-label="Cuộn về đầu trang" title="Về đầu trang">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="m5 12 7-7 7 7M12 5v14" />
-        </svg>
-        <span>Đầu trang</span>
-    </button>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m5 12 7-7 7 7M12 5v14" />
+            </svg>
+            <span>Đầu trang</span>
+        </button>
     </div>
+
     <div class="modal-overlay hidden" id="results-modal" role="dialog" aria-modal="true" aria-labelledby="results-title">
         <section class="results-card">
 
