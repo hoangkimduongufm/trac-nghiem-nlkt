@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     /* Preserve this Vietnamese-capable font stack during future styling changes. */
     color-scheme: light;
     font-family: Inter, "Segoe UI", sans-serif;
@@ -157,6 +157,9 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .result-analysis-section .is-stable { color: #526178; }
 .result-analysis-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
 .result-analysis-list li { border: 1px solid #e8edf4; border-radius: 9px; padding: 8px 10px; color: #526178; background: #f8fafc; font-size: .78rem; line-height: 1.5; }
+.chapter-review-item { display: grid; gap: 3px; }
+.chapter-review-item strong { color: #263a56; font-size: .8rem; }
+.chapter-review-item span { color: #526178; font-size: .76rem; }
 .results-actions { display: grid; gap: 9px; margin-top: 22px; }
 .button--primary { color: #fff; background: var(--blue); }
 .button--secondary { color: #35445a; background: #edf1f6; }
@@ -454,4 +457,5 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     font-size: .92rem;
     font-weight: 750;
 }
+
 
