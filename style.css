@@ -157,6 +157,7 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .result-analysis-section .is-stable { color: #526178; }
 .result-analysis-list { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
 .result-analysis-list li { border: 1px solid #e8edf4; border-radius: 9px; padding: 8px 10px; color: #526178; background: #f8fafc; font-size: .78rem; line-height: 1.5; }
+.study-recommendation-loading { color: #68778e; font-size: .8rem; }
 .chapter-review-item { display: grid; gap: 3px; }
 .chapter-review-item strong { color: #263a56; font-size: .8rem; }
 .chapter-review-item span { color: #526178; font-size: .76rem; }
