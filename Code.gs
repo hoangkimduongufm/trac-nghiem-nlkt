@@ -1,8 +1,10 @@
-﻿const SPREADSHEET_ID = '1P2yiwlF4J7eX3R6OK_SLu2-uU4C9nKWrGQMaso-vivA';
+const SPREADSHEET_ID = '1P2yiwlF4J7eX3R6OK_SLu2-uU4C9nKWrGQMaso-vivA';
 const ATTEMPTS_SHEET_NAME = 'ExamAttempts';
 const QUESTION_STATS_SHEET_NAME = 'QuestionStats';
 const MAX_ATTEMPTS_PER_REQUEST = 10;
 const MAX_QUESTIONS_PER_ATTEMPT = 185;
+const HISTORY_CACHE_TTL_SECONDS = 60;
+const HISTORY_CACHE_PREFIX = 'nlkt-history-v1:';
 
 function doGet(event) {
   const params = event && event.parameter ? event.parameter : {};
@@ -41,8 +43,10 @@ function doPost(event) {
       'learner_id', 'question_id', 'wrong_count', 'attempt_count', 'last_wrong_at'
     ]);
 
-    const results = attempts.map(attempt => saveAttempt_(attemptsSheet, statsSheet, attempt));
-    return jsonResponse_({ ok: true, saved: results.length, attempts: results });
+    const batch = saveAttemptsBatch_(attemptsSheet, statsSheet, attempts);
+    batch.changedLearnerIds.forEach(invalidateHistoryCache_);
+    const savedCount = batch.results.filter(result => !result.duplicate).length;
+    return jsonResponse_({ ok: true, saved: savedCount, attempts: batch.results });
   } catch (error) {
     return jsonResponse_({ ok: false, error: String(error.message || error) });
   } finally {
@@ -60,7 +64,63 @@ function getSheet_(spreadsheet, name, headers) {
   return sheet;
 }
 
-function saveAttempt_(sheet, statsSheet, attempt) {
+function saveAttemptsBatch_(sheet, statsSheet, attempts) {
+  const lastRow = sheet.getLastRow();
+  const existingRows = lastRow > 1
+    ? sheet.getRange(2, 1, lastRow - 1, 3).getValues()
+    : [];
+  const existingIds = new Set();
+  const attemptNumbers = new Map();
+  existingRows.forEach(row => {
+    existingIds.add(String(row[0]));
+    const learnerId = String(row[1]);
+    const attemptNumber = Number(row[2]) || 0;
+    attemptNumbers.set(learnerId, Math.max(attemptNumbers.get(learnerId) || 0, attemptNumber));
+  });
+
+  const results = [];
+  const rowsToAppend = [];
+  const statsUpdates = [];
+  const changedLearnerIds = new Set();
+  const seenIds = new Set();
+
+  attempts.forEach(attempt => {
+    const attemptId = String(attempt?.sessionId || '');
+    if (!/^[\w-]{1,80}$/.test(attemptId)) throw new Error('Mã lượt thi không hợp lệ.');
+    if (!/^nlkt-[\w-]{16,80}$/.test(String(attempt?.learnerId || ''))) throw new Error('Mã người thi không hợp lệ.');
+    if (attempt.mode !== 'mock_exam') throw new Error('Chỉ chấp nhận lượt thi thử.');
+
+    if (existingIds.has(attemptId) || seenIds.has(attemptId)) {
+      results.push({ attempt_id: attemptId, duplicate: true });
+      return;
+    }
+
+    const learnerId = String(attempt?.learnerId || '');
+    const attemptNumber = (attemptNumbers.get(learnerId) || 0) + 1;
+    const prepared = prepareAttempt_(attempt, attemptNumber);
+    rowsToAppend.push(prepared.row);
+    statsUpdates.push({ learnerId, answers: prepared.answers, submittedAt: prepared.submittedAt });
+    attemptNumbers.set(learnerId, attemptNumber);
+    existingIds.add(attemptId);
+    seenIds.add(attemptId);
+    changedLearnerIds.add(learnerId);
+    results.push({
+      attempt_id: attemptId,
+      attempt_number: attemptNumber,
+      score: prepared.correct,
+      accuracy: prepared.row[11]
+    });
+  });
+
+  if (rowsToAppend.length) {
+    sheet.getRange(lastRow + 1, 1, rowsToAppend.length, 13).setValues(rowsToAppend);
+    updateQuestionStatsBatch_(statsSheet, statsUpdates);
+  }
+
+  return { results, changedLearnerIds: [...changedLearnerIds] };
+}
+
+function prepareAttempt_(attempt, attemptNumber) {
   if (!attempt || !/^[\w-]{1,80}$/.test(String(attempt.sessionId || ''))) throw new Error('Mã lượt thi không hợp lệ.');
   if (!/^nlkt-[\w-]{16,80}$/.test(String(attempt.learnerId || ''))) throw new Error('Mã người thi không hợp lệ.');
   if (attempt.mode !== 'mock_exam') throw new Error('Chỉ chấp nhận lượt thi thử.');
@@ -71,10 +131,7 @@ function saveAttempt_(sheet, statsSheet, attempt) {
     throw new Error('Số câu hỏi không hợp lệ.');
   }
 
-  const learnerId = String(attempt.learnerId);
   const attemptId = String(attempt.sessionId);
-  const existing = findRow_(sheet, 1, attemptId);
-  if (existing) return { attempt_id: attemptId, duplicate: true };
 
   let answered = 0;
   let correct = 0;
@@ -104,16 +161,13 @@ function saveAttempt_(sheet, statsSheet, attempt) {
     return [questionId, selected, expected, chapter];
   });
 
-  const attemptNumber = nextAttemptNumber_(sheet, learnerId);
   const submittedAt = new Date();
   const row = [
-    attemptId, learnerId, attemptNumber, submittedAt, correct, total, correct,
+    attemptId, String(attempt.learnerId), attemptNumber, submittedAt, correct, total, correct,
     Math.max(0, Number(attempt.durationSeconds) || 0), JSON.stringify(chapterScores),
     wrongIds.join(','), answered, Number(((correct / total) * 100).toFixed(1)), JSON.stringify(normalizedAnswers)
   ];
-  sheet.appendRow(row);
-  updateQuestionStats_(statsSheet, learnerId, normalizedAnswers, submittedAt);
-  return { attempt_id: attemptId, attempt_number: attemptNumber, score: correct, accuracy: row[11] };
+  return { row, answers: normalizedAnswers, submittedAt, correct };
 }
 
 function chapterForQuestion_(id) {
@@ -126,65 +180,175 @@ function chapterForQuestion_(id) {
   return 7;
 }
 
-function updateQuestionStats_(sheet, learnerId, answers, submittedAt) {
-  const rows = sheet.getDataRange().getValues();
+function updateQuestionStatsBatch_(sheet, updates) {
+  if (!updates.length) return;
+  const lastRow = sheet.getLastRow();
+  const rows = lastRow > 1 ? sheet.getRange(2, 1, lastRow - 1, 5).getValues() : [];
   const rowMap = new Map();
-  for (let index = 1; index < rows.length; index++) rowMap.set(`${rows[index][0]}:${rows[index][1]}`, index + 1);
+  rows.forEach((row, index) => rowMap.set(`${row[0]}:${row[1]}`, index));
 
-  answers.forEach(([questionId, selected, expected]) => {
-    const key = `${learnerId}:${questionId}`;
-    const rowNumber = rowMap.get(key);
-    const isWrong = selected !== expected;
-    if (rowNumber) {
-      const values = sheet.getRange(rowNumber, 3, 1, 3).getValues()[0];
-      sheet.getRange(rowNumber, 3, 1, 3).setValues([[
-        (Number(values[0]) || 0) + (isWrong ? 1 : 0),
-        (Number(values[1]) || 0) + 1,
-        isWrong ? submittedAt : values[2]
-      ]]);
-    } else {
-      sheet.appendRow([learnerId, questionId, isWrong ? 1 : 0, 1, isWrong ? submittedAt : '']);
-      rowMap.set(key, sheet.getLastRow());
-    }
+  const changedRows = new Map();
+  const newRows = [];
+  updates.forEach(({ learnerId, answers, submittedAt }) => {
+    answers.forEach(([questionId, selected, expected]) => {
+      const key = `${learnerId}:${questionId}`;
+      const isWrong = selected !== expected;
+      const existingIndex = rowMap.get(key);
+      if (existingIndex !== undefined) {
+        const isNewRow = existingIndex >= rows.length;
+        const newRowIndex = existingIndex - rows.length;
+        const values = isNewRow
+          ? newRows[newRowIndex].slice(2, 5)
+          : changedRows.get(existingIndex) || rows[existingIndex].slice(2, 5);
+        values[0] = (Number(values[0]) || 0) + (isWrong ? 1 : 0);
+        values[1] = (Number(values[1]) || 0) + 1;
+        if (isWrong) values[2] = submittedAt;
+        if (isNewRow) newRows[newRowIndex] = [learnerId, questionId, ...values];
+        else changedRows.set(existingIndex, values);
+        return;
+      }
+
+      const newIndex = rows.length + newRows.length;
+      newRows.push([learnerId, questionId, isWrong ? 1 : 0, 1, isWrong ? submittedAt : '']);
+      rowMap.set(key, newIndex);
+    });
   });
+
+  const changedIndexes = [...changedRows.keys()].sort((a, b) => a - b);
+  let groupStart = 0;
+  while (groupStart < changedIndexes.length) {
+    let groupEnd = groupStart;
+    while (groupEnd + 1 < changedIndexes.length && changedIndexes[groupEnd + 1] === changedIndexes[groupEnd] + 1) {
+      groupEnd++;
+    }
+    const startIndex = changedIndexes[groupStart];
+    const groupValues = changedIndexes.slice(groupStart, groupEnd + 1).map(index => changedRows.get(index));
+    sheet.getRange(startIndex + 2, 3, groupValues.length, 3).setValues(groupValues);
+    groupStart = groupEnd + 1;
+  }
+
+  if (newRows.length) {
+    sheet.getRange(lastRow + 1, 1, newRows.length, 5).setValues(newRows);
+  }
 }
 
 function getHistoryResponse_(params) {
   const learnerId = String(params.learner_id || '');
   if (!/^nlkt-[\w-]{16,80}$/.test(learnerId)) return jsonResponse_({ ok: false, error: 'Mã người thi không hợp lệ.' });
   const requestedIds = new Set(String(params.attempt_ids || '').split(',').filter(id => /^[\w-]{1,80}$/.test(id)));
+  const shouldCache = requestedIds.size === 0;
+  const dataKey = historyCacheKey_(learnerId);
+  const versionKey = `${dataKey}:version`;
+  let cache = null;
+  let initialVersion = '';
+
+  if (shouldCache) {
+    try {
+      cache = CacheService.getScriptCache();
+      initialVersion = cache.get(versionKey) || '0';
+      const cached = cache.get(dataKey);
+      if (cached) {
+        const entry = JSON.parse(cached);
+        if (entry.version === initialVersion && entry.data?.ok) {
+          return historyResponse_(entry.data, params.callback);
+        }
+      }
+    } catch (error) {
+      cache = null;
+    }
+  }
 
   const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = spreadsheet.getSheetByName(ATTEMPTS_SHEET_NAME);
   const attempts = [];
-  if (sheet && sheet.getLastRow() > 1) {
-    const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 13).getValues();
-    rows.forEach(row => {
-      if (String(row[1]) !== learnerId || (requestedIds.size && !requestedIds.has(String(row[0])))) return;
-      attempts.push({
-        attempt_id: String(row[0]), attempt_number: Number(row[2]),
-        submitted_at: new Date(row[3]).toISOString(), score: Number(row[4]),
-        total_questions: Number(row[5]), correct_count: Number(row[6]),
-        duration_seconds: Number(row[7]), chapter_scores: parseJson_(row[8], {}),
-        wrong_question_ids: String(row[9] || '').split(',').filter(Boolean).map(Number),
-        answered_count: Number(row[10]), accuracy_percent: Number(row[11])
-      });
-    });
-  }
+  const rows = sheet ? readAttemptRows_(sheet, learnerId, requestedIds) : [];
+  rows.forEach(row => attempts.push({
+    attempt_id: String(row[0]), attempt_number: Number(row[2]),
+    submitted_at: new Date(row[3]).toISOString(), score: Number(row[4]),
+    total_questions: Number(row[5]), correct_count: Number(row[6]),
+    duration_seconds: Number(row[7]), chapter_scores: parseJson_(row[8], {}),
+    wrong_question_ids: String(row[9] || '').split(',').filter(Boolean).map(Number),
+    answered_count: Number(row[10]), accuracy_percent: Number(row[11])
+  }));
   attempts.sort((a, b) => a.attempt_number - b.attempt_number);
   const statsSheet = spreadsheet.getSheetByName(QUESTION_STATS_SHEET_NAME);
   const data = {
     ok: true,
     attempts: requestedIds.size ? attempts : attempts.slice(-30),
-    question_stats: getQuestionStatsForLearner_(statsSheet, learnerId)
+    question_stats: requestedIds.size ? [] : getQuestionStatsForLearner_(statsSheet, learnerId)
   };
-  const callback = String(params.callback || '');
+  if (cache) {
+    try {
+      if ((cache.get(versionKey) || '0') === initialVersion) {
+        cache.put(dataKey, JSON.stringify({ version: initialVersion, data }), HISTORY_CACHE_TTL_SECONDS);
+      }
+    } catch (error) {
+      // The cache is optional; the sheet response remains authoritative.
+    }
+  }
+  return historyResponse_(data, params.callback);
+}
+
+function historyResponse_(data, callback) {
+  callback = String(callback || '');
   if (callback) {
     if (!/^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*)*$/.test(callback)) return jsonResponse_({ ok: false, error: 'Callback không hợp lệ.' });
     return ContentService.createTextOutput(`${callback}(${JSON.stringify(data)});`)
       .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
   return jsonResponse_(data);
+}
+
+function historyCacheKey_(learnerId) {
+  return `${HISTORY_CACHE_PREFIX}${learnerId}`;
+}
+
+function invalidateHistoryCache_(learnerId) {
+  try {
+    const cache = CacheService.getScriptCache();
+    const key = historyCacheKey_(learnerId);
+    cache.put(`${key}:version`, String(Date.now()), HISTORY_CACHE_TTL_SECONDS);
+    cache.remove(key);
+  } catch (error) {
+    // Cache invalidation must never make a successfully saved attempt look like a failed write.
+  }
+}
+
+function readAttemptRows_(sheet, learnerId, requestedIds) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return [];
+
+  if (!requestedIds.size) {
+    return sheet.getRange(2, 1, lastRow - 1, 13).getValues()
+      .filter(row => String(row[1]) === learnerId);
+  }
+
+  // Confirmation requests usually contain one or a few attempt IDs. Scan the two key columns,
+  // then read full records only for matching rows instead of transferring the whole history.
+  const keys = sheet.getRange(2, 1, lastRow - 1, 2).getValues();
+  const rowIndexes = [];
+  keys.forEach((row, index) => {
+    if (String(row[1]) === learnerId && requestedIds.has(String(row[0]))) rowIndexes.push(index);
+  });
+  if (!rowIndexes.length) return [];
+
+  const rows = [];
+  let groupStart = rowIndexes[0];
+  let groupEnd = groupStart;
+  const readGroup = (start, end) => {
+    rows.push(...sheet.getRange(start + 2, 1, end - start + 1, 13).getValues());
+  };
+  for (let index = 1; index < rowIndexes.length; index++) {
+    const rowIndex = rowIndexes[index];
+    if (rowIndex === groupEnd + 1) {
+      groupEnd = rowIndex;
+      continue;
+    }
+    readGroup(groupStart, groupEnd);
+    groupStart = groupEnd = rowIndex;
+  }
+  readGroup(groupStart, groupEnd);
+  return rows;
 }
 
 function getQuestionStatsForLearner_(sheet, learnerId) {
@@ -198,25 +362,6 @@ function getQuestionStatsForLearner_(sheet, learnerId) {
       attempt_count: Number(row[3]) || 0
     }));
 }
-function nextAttemptNumber_(sheet, learnerId) {
-  if (sheet.getLastRow() < 2) return 1;
-  const ids = sheet.getRange(2, 2, sheet.getLastRow() - 1, 1).getValues();
-  return ids.reduce((count, row) => count + (String(row[0]) === learnerId ? 1 : 0), 0) + 1;
-}
-
-function findRow_(sheet, column, value) {
-  if (sheet.getLastRow() < 2) return null;
-  const match = sheet.getRange(2, column, sheet.getLastRow() - 1, 1)
-    .createTextFinder(value).matchEntireCell(true).findNext();
-  return match ? match.getRow() : null;
-}
-
-function validDate_(value) {
-  const date = new Date(value);
-  if (!value || Number.isNaN(date.getTime())) throw new Error('Thời điểm lượt thi không hợp lệ.');
-  return date;
-}
-
 function parseJson_(value, fallback) {
   try { return JSON.parse(value); } catch (error) { return fallback; }
 }
@@ -225,6 +370,7 @@ function jsonResponse_(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
 
 
 
