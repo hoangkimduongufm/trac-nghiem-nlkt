@@ -458,9 +458,7 @@ function renderAttemptAnalysis(history, currentAttemptId, localAttempt = null, h
         });
     }
 
-    const recommendation = addAnalysisSection(ui.resultAnalysis, 'Gợi ý ôn tập');
-    const chapterList = document.createElement('ul');
-    chapterList.className = 'result-analysis-list';
+    const chapterSuggestions = [];
     Object.entries(CHAPTER_NAMES).forEach(([chapterId, chapterName]) => {
         const repeatedQuestionNumbers = questionBank
             .filter(question => Number(question.chapter?.id) === Number(chapterId))
@@ -470,16 +468,34 @@ function renderAttemptAnalysis(history, currentAttemptId, localAttempt = null, h
             .sort((first, second) => first - second);
         if (!repeatedQuestionNumbers.length) return;
 
-        const item = document.createElement('li');
-        item.className = 'chapter-review-item';
-        const title = document.createElement('strong');
-        title.textContent = `Chương ${chapterId} · ${chapterName}`;
-        const detail = document.createElement('span');
-        detail.textContent = `Ôn kỹ câu sai lặp lại: ${repeatedQuestionNumbers.join(', ')}`;
-        item.append(title, detail);
-        chapterList.appendChild(item);
+        chapterSuggestions.push({ chapterId, chapterName, questionNumbers: repeatedQuestionNumbers });
     });
-    if (chapterList.childElementCount) recommendation.appendChild(chapterList);
+
+    if (historyPending || chapterSuggestions.length) {
+        const recommendation = addAnalysisSection(ui.resultAnalysis, 'Gợi ý ôn tập');
+        if (historyPending) {
+            const loading = document.createElement('p');
+            loading.className = 'study-recommendation-loading';
+            loading.textContent = 'Đang đồng bộ lịch sử để tạo gợi ý ôn tập…';
+            recommendation.appendChild(loading);
+        }
+
+        if (chapterSuggestions.length) {
+            const chapterList = document.createElement('ul');
+            chapterList.className = 'result-analysis-list';
+            chapterSuggestions.forEach(({ chapterId, chapterName, questionNumbers }) => {
+                const item = document.createElement('li');
+                item.className = 'chapter-review-item';
+                const title = document.createElement('strong');
+                title.textContent = `Chương ${chapterId} · ${chapterName}`;
+                const detail = document.createElement('span');
+                detail.textContent = `Ôn kỹ câu sai lặp lại: ${questionNumbers.join(', ')}`;
+                item.append(title, detail);
+                chapterList.appendChild(item);
+            });
+            recommendation.appendChild(chapterList);
+        }
+    }
 }
 function startSession(mode) {
     sessionId = window.crypto?.randomUUID?.()
