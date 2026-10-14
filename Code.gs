@@ -4,7 +4,7 @@ const QUESTION_STATS_SHEET_NAME = 'QuestionStats';
 const MAX_ATTEMPTS_PER_REQUEST = 10;
 const MAX_QUESTIONS_PER_ATTEMPT = 185;
 const HISTORY_CACHE_TTL_SECONDS = 60;
-const HISTORY_CACHE_PREFIX = 'nlkt-history-v1:';
+const HISTORY_CACHE_PREFIX = 'nlkt-history-v2:';
 
 function doGet(event) {
   const params = event && event.parameter ? event.parameter : {};
@@ -275,7 +275,8 @@ function getHistoryResponse_(params) {
   const data = {
     ok: true,
     attempts: requestedIds.size ? attempts : attempts.slice(-30),
-    question_stats: requestedIds.size ? [] : getQuestionStatsForLearner_(statsSheet, learnerId)
+    question_stats: requestedIds.size ? [] : getQuestionStatsForLearner_(statsSheet, learnerId),
+    wrong_answer_stats: requestedIds.size ? [] : getWrongAnswerStats_(rows)
   };
   if (cache) {
     try {
@@ -287,6 +288,26 @@ function getHistoryResponse_(params) {
     }
   }
   return historyResponse_(data, params.callback);
+}
+
+function getWrongAnswerStats_(attemptRows) {
+  const wrongCounts = new Map();
+  attemptRows.forEach(row => {
+    const answers = parseJson_(row[12], []);
+    if (!Array.isArray(answers)) return;
+
+    answers.forEach(answer => {
+      if (!Array.isArray(answer) || answer.length < 3) return;
+      const questionId = Number(answer[0]);
+      const selected = Number(answer[1]);
+      const expected = Number(answer[2]);
+      if (Number.isInteger(questionId) && selected >= 0 && selected !== expected) {
+        wrongCounts.set(questionId, (wrongCounts.get(questionId) || 0) + 1);
+      }
+    });
+  });
+
+  return [...wrongCounts.entries()].map(([question_id, wrong_count]) => ({ question_id, wrong_count }));
 }
 
 function historyResponse_(data, callback) {
