@@ -1,4 +1,4 @@
-﻿// File: script.js
+// File: script.js
 
 const QUESTION_PRIORITY_IDS = [125, 105, 104, 103, 102, 101, 100, 96, 95, 93, 92];
 const RENDER_SLICE_MS = 8;
@@ -198,6 +198,7 @@ const CHAPTER_NAMES = {
     7: 'Sổ kế toán và hình thức kế toán'
 };
 const questionById = new Map(questionBank.map(question => [Number(question.id), question]));
+const questionOrderById = new Map(questionBank.map((question, index) => [Number(question.id), index + 1]));
 
 function showAttemptHistory() {
     if (!ui.historyModal || !ui.historyContent) return;
@@ -401,7 +402,7 @@ function addAnalysisSection(container, title) {
     return section;
 }
 
-function renderAttemptAnalysis(history, currentAttemptId, localAttempt = null, historyPending = false, questionStats = []) {
+function renderAttemptAnalysis(history, currentAttemptId, localAttempt = null, historyPending = false, wrongAnswerStats = null) {
     if (!ui.resultAnalysis) return;
     ui.resultAnalysis.replaceChildren();
 
@@ -439,108 +440,46 @@ function renderAttemptAnalysis(history, currentAttemptId, localAttempt = null, h
     }
     comparison.appendChild(comparisonText);
 
-    const chapterSection = addAnalysisSection(ui.resultAnalysis, 'Kết quả theo chương');
-    const chapterList = document.createElement('ul');
-    chapterList.className = 'result-analysis-list';
-    const currentChapters = summarizeAttemptChapters(current);
-    const previousChapters = previous ? summarizeAttemptChapters(previous) : {};
-
-    Object.keys(CHAPTER_NAMES).forEach(chapterKey => {
-        const result = currentChapters[chapterKey];
-        if (!result) return;
-        const total = Number(result.total) || 0;
-        const correct = Number(result.correct) || 0;
-        const percent = total ? correct / total * 100 : 0;
-        const prior = previousChapters[chapterKey];
-        const priorTotal = Number(prior?.total) || 0;
-        const priorPercent = priorTotal ? (Number(prior.correct) || 0) / priorTotal * 100 : null;
-        const changeLabel = priorPercent === null
-            ? ''
-            : ` · ${percent - priorPercent > 0 ? '+' : ''}${(percent - priorPercent).toFixed(1)} điểm % so với lượt trước`;
-        const item = document.createElement('li');
-        item.textContent = `Chương ${chapterKey} · ${CHAPTER_NAMES[chapterKey]}: ${correct}/${total} câu (${percent.toFixed(1)}%)${changeLabel}`;
-        chapterList.appendChild(item);
-    });
-    chapterSection.appendChild(chapterList);
-
     const wrongCounts = new Map();
-    sortedHistory.forEach(attempt => {
-        (attempt.wrong_question_ids || []).forEach(id => {
-            const questionId = Number(id);
-            wrongCounts.set(questionId, (wrongCounts.get(questionId) || 0) + 1);
-        });
-    });
-    const isCurrentSaved = sortedHistory.some(item => item.attempt_id === currentId);
-    if (!isCurrentSaved) {
-        const localWrongIds = current.wrong_question_ids || (current.answers || [])
-            .filter(answer => Number(answer.selectedIndex) !== Number(answer.correctIndex))
-            .map(answer => answer.questionId);
-        localWrongIds.forEach(id => {
-            const questionId = Number(id);
-            wrongCounts.set(questionId, (wrongCounts.get(questionId) || 0) + 1);
-        });
-    }
-
-    if (questionStats.length) {
-        wrongCounts.clear();
-        questionStats.forEach(item => {
+    if (Array.isArray(wrongAnswerStats)) {
+        wrongAnswerStats.forEach(item => {
             const questionId = Number(item.question_id);
             const count = Number(item.wrong_count) || 0;
             if (questionId && count > 0) wrongCounts.set(questionId, count);
         });
-    }
-
-    const chapterTotals = new Map();
-    const historyForAnalysis = [...sortedHistory];
-    if (!isCurrentSaved) historyForAnalysis.push(current);
-    historyForAnalysis.forEach(attempt => {
-        const chapterSummary = summarizeAttemptChapters(attempt);
-        Object.entries(chapterSummary).forEach(([chapterId, result]) => {
-            const aggregate = chapterTotals.get(chapterId) || { total: 0, correct: 0 };
-            aggregate.total += Number(result.total) || 0;
-            aggregate.correct += Number(result.correct) || 0;
-            chapterTotals.set(chapterId, aggregate);
+    } else {
+        // Before the first server sync, count only explicitly selected wrong answers from this attempt.
+        (current.answers || []).forEach(answer => {
+            const questionId = Number(answer.questionId);
+            const selected = Number(answer.selectedIndex);
+            if (questionId && selected >= 0 && selected !== Number(answer.correctIndex)) {
+                wrongCounts.set(questionId, (wrongCounts.get(questionId) || 0) + 1);
+            }
         });
-    });
+    }
+
     const recommendation = addAnalysisSection(ui.resultAnalysis, 'Gợi ý ôn tập');
-    const weakChapters = [...chapterTotals.entries()]
-        .map(([chapterId, result]) => ({
-            chapterId,
-            ...result,
-            accuracy: result.total ? result.correct / result.total * 100 : 100
-        }))
-        .filter(result => result.correct < result.total)
-        .sort((first, second) => first.accuracy - second.accuracy)
-        .slice(0, 2);
+    const chapterList = document.createElement('ul');
+    chapterList.className = 'result-analysis-list';
+    Object.entries(CHAPTER_NAMES).forEach(([chapterId, chapterName]) => {
+        const repeatedQuestionNumbers = questionBank
+            .filter(question => Number(question.chapter?.id) === Number(chapterId))
+            .filter(question => (wrongCounts.get(Number(question.id)) || 0) >= 3)
+            .map(question => questionOrderById.get(Number(question.id)))
+            .filter(Number.isInteger)
+            .sort((first, second) => first - second);
+        if (!repeatedQuestionNumbers.length) return;
 
-    if (weakChapters.length) {
-        const priority = document.createElement('p');
-        priority.textContent = `Phần cần ưu tiên: ${weakChapters
-            .map(item => `Chương ${item.chapterId} (${item.total - item.correct}/${item.total} câu sai, ${item.accuracy.toFixed(1)}% đúng)`)
-            .join('; ')}.`;
-        recommendation.appendChild(priority);
-    }
-
-    const recommendations = [...wrongCounts.entries()]
-        .sort((first, second) => second[1] - first[1] || first[0] - second[0])
-        .slice(0, 5);
-    if (!recommendations.length) {
-        const message = document.createElement('p');
-        message.textContent = 'Bạn chưa có câu sai hoặc bỏ trống trong lịch sử thi thử.';
-        recommendation.appendChild(message);
-        return;
-    }
-
-    const recommendationList = document.createElement('ul');
-    recommendationList.className = 'result-analysis-list';
-    recommendations.forEach(([questionId, wrongCount]) => {
         const item = document.createElement('li');
-        const question = questionById.get(questionId);
-        const title = question?.question || 'Không tìm thấy nội dung câu hỏi.';
-        item.textContent = `Câu ID ${questionId} · sai/bỏ trống ${wrongCount} lượt: ${title.slice(0, 150)}${title.length > 150 ? '…' : ''}`;
-        recommendationList.appendChild(item);
+        item.className = 'chapter-review-item';
+        const title = document.createElement('strong');
+        title.textContent = `Chương ${chapterId} · ${chapterName}`;
+        const detail = document.createElement('span');
+        detail.textContent = `Ôn kỹ câu sai lặp lại: ${repeatedQuestionNumbers.join(', ')}`;
+        item.append(title, detail);
+        chapterList.appendChild(item);
     });
-    recommendation.appendChild(recommendationList);
+    if (chapterList.childElementCount) recommendation.appendChild(chapterList);
 }
 function startSession(mode) {
     sessionId = window.crypto?.randomUUID?.()
@@ -633,7 +572,7 @@ function syncPendingAttempts() {
                         lastSubmittedAttempt.sessionId,
                         lastSubmittedAttempt,
                         false,
-                        historyData.question_stats || []
+                        historyData.wrong_answer_stats
                     );
                 } catch {
                     // Giữ phân tích tại chỗ nếu lượt đã lưu nhưng chưa tải được lịch sử.
@@ -973,6 +912,7 @@ function resetQuiz() {
 // Start with the complete question bank in its original order.
 startStandardMode(false);
 scheduleAttemptSync();
+
 
 
 
