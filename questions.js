@@ -1,6 +1,7 @@
-const quizData = [
+﻿const quizData = [
             {
                 id: 1,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào sau đây không đúng về các loại hạch toán?",
                 options: [
                     "Đối tượng nghiên cứu của hạch toán nghiệp vụ là các nghiệp vụ kinh tế, kỹ thuật cụ thể.",
@@ -13,6 +14,7 @@ const quizData = [
             },
             {
                 id: 2,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Các bước tuần tự cần thực hiện để có được thông tin cung cấp cho các đối tượng sử dụng thông tin thường bao gồm:",
                 options: [
                     "Quan sát – Đo lường – Tính toán – Ghi chép",
@@ -25,6 +27,7 @@ const quizData = [
             },
             {
                 id: 3,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Ba loại thước đo chủ yếu được sử dụng để đo lường mức độ hao phí của các đối tượng khi tham gia vào các quá trình kinh tế bao gồm:",
                 options: [
                     "Hiện vật, Giá trị, Thời gian lao động",
@@ -37,6 +40,7 @@ const quizData = [
             },
             {
                 id: 4,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào dưới đây không đúng về kế toán:",
                 options: [
                     "Kế toán tổng hợp cung cấp thông tin tổng quát về các đối tượng kế toán",
@@ -49,6 +53,7 @@ const quizData = [
             },
             {
                 id: 5,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Các đặc điểm nào sau đây không được dùng để mô tả tài sản",
                 options: [
                     "Có thể thu được lợi ích kinh tế trong tương lai",
@@ -61,6 +66,7 @@ const quizData = [
             },
             {
                 id: 6,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Hai chức năng chủ yếu của kế toán là:",
                 options: [
                     "Đánh giá và thanh tra",
@@ -73,6 +79,7 @@ const quizData = [
             },
             {
                 id: 7,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Các đặc điểm nào dưới đây không được dùng để mô tả nợ phải trả",
                 options: [
                     "Là nghĩa vụ hiện tại của doanh nghiệp",
@@ -85,6 +92,7 @@ const quizData = [
             },
             {
                 id: 8,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào dưới đây không đúng về vốn chủ sở hữu",
                 options: [
                     "Là số vốn của chủ sở hữu mà doanh nghiệp không phải cam kết thanh toán",
@@ -97,6 +105,7 @@ const quizData = [
             },
             {
                 id: 9,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào dưới đây không đúng về doanh thu",
                 options: [
                     "Là tổng giá trị các lợi ích kinh tế doanh nghiệp thu được trong tương lai",
@@ -109,6 +118,7 @@ const quizData = [
             },
             {
                 id: 10,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào dưới đây không đúng về chi phí",
                 options: [
                     "Là tổng giá trị các khoản làm giảm lợi ích kinh tế trong kỳ kế toán",
@@ -121,6 +131,7 @@ const quizData = [
             },
             {
                 id: 11,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu công ty Hải My có tổng tài sản 500 triệu đồng, tổng vốn chủ sở hữu 300 triệu đồng thì tổng nợ phải trả của công ty Hải My sẽ là:",
                 options: [
                     "200 triệu đồng",
@@ -133,6 +144,7 @@ const quizData = [
             },
             {
                 id: 12,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Trong năm N, tại công ty Hồng Hà, nếu tổng tài sản tăng lên 500 triệu đồng và tổng nợ phải trả tăng lên 300 triệu đồng thì tổng vốn chủ sở hữu:",
                 options: [
                     "Tăng lên 200 triệu",
@@ -145,6 +157,7 @@ const quizData = [
             },
             {
                 id: 13,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào dưới đây mô tả không đúng về Luật kế toán?",
                 options: [
                     "Luật kế toán là văn bản pháp lý cao nhất về kế toán hiện nay.",
@@ -157,6 +170,7 @@ const quizData = [
             },
             {
                 id: 14,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào sau đây mô tả không đúng về Chuẩn mực kế toán?",
                 options: [
                     "Chuẩn mực kế toán gồm các quy định cụ thể về chứng từ kế toán, tài khoản kế toán và sổ kế toán.",
@@ -169,6 +183,7 @@ const quizData = [
             },
             {
                 id: 15,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào sau đây mô tả không đúng về chế độ kế toán?",
                 options: [
                     "Chế độ kế toán quy định và hướng dẫn các vấn đề cụ thể về nghiệp vụ kế toán, phương pháp kế toán, chứng từ kế toán, tài khoản kế toán, sổ kế toán, báo cáo kế toán.",
@@ -181,6 +196,7 @@ const quizData = [
             },
             {
                 id: 16,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “Kế toán DNTN Tân Phong ghi nhận số tiền chi dùng cá nhân của chủ doanh nghiệp vào chi phí của doanh nghiệp” thì khái niệm kế toán bị vi phạm là:",
                 options: [
                     "Khái niệm kỳ kế toán",
@@ -193,6 +209,7 @@ const quizData = [
             },
             {
                 id: 17,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Mục tiêu chủ yếu của nguyên tắc phù hợp là:",
                 options: [
                     "Cung cấp thông tin kịp thời đến các đối tượng sử dụng thông tin ở bên ngoài doanh nghiệp.",
@@ -205,6 +222,7 @@ const quizData = [
             },
             {
                 id: 18,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “Công ty Tuấn Minh phản ánh máy móc thiết bị theo giá thị trường trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc giá gốc.",
@@ -217,6 +235,7 @@ const quizData = [
             },
             {
                 id: 19,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “Tháng 1, Công ty Thịnh Khang chuyển khoản 60 triệu đồng trả tiền thuê văn phòng 6 tháng đầu năm và ghi nhận toàn bộ số tiền này vào chi phí tháng 1” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc giá gốc",
@@ -229,6 +248,7 @@ const quizData = [
             },
             {
                 id: 20,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Если “Công ty Thùy Dương bị kiện đòi bồi thường 5 tỷ đồng, do tòa chưa ra công bố chính thức, không thể xác định chắc chắn số tiền phải bồi thường nên kế toán không khai báo thông tin này trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc trọng yếu",
@@ -241,6 +261,7 @@ const quizData = [
             },
             {
                 id: 21,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “Công ty Nghĩa Phát ghi nhận doanh thu cho số tiền khách hàng ứng trước (hàng sẽ giao vào tháng sau)” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc hoạt động liên tục",
@@ -253,6 +274,7 @@ const quizData = [
             },
             {
                 id: 22,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “Trong quý 1 năm N, Công ty Sen Việt tính giá xuất kho hàng tồn kho theo phương pháp nhập trước – xuất trước. Sang quý 2 năm N, công ty chuyển sang tính giá xuất kho theo phương pháp bình quân gia quyền liên hoàn” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc giá gốc",
@@ -265,6 +287,7 @@ const quizData = [
             },
             {
                 id: 23,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu Công ty TNHH Thuận Thành đang làm thủ tục phá sản, dự kiến sang đầu năm sau sẽ ngừng hoạt động thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc giá gốc",
@@ -277,6 +300,7 @@ const quizData = [
             },
             {
                 id: 24,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Theo nguyên tắc cơ sở dồn tích, tài sản được ghi nhận vào sổ kế toán tại thời điểm doanh nghiệp:",
                 options: [
                     "Ký hợp đồng mua tài sản.",
@@ -289,6 +313,7 @@ const quizData = [
             },
             {
                 id: 25,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Theo nguyên tắc hoạt động liên tục, báo cáo tài chính được lập trên cơ sở:",
                 options: [
                     "Đang hoạt động liên tục trong hiện tại.",
@@ -301,6 +326,7 @@ const quizData = [
             },
             {
                 id: 26,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nguyên tắc thận trọng yêu cầu:",
                 options: [
                     "Phải lập dự phòng khi vốn chủ sở hữu bị giảm giá trị.",
@@ -313,6 +339,7 @@ const quizData = [
             },
             {
                 id: 27,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Trong các phát biểu sau, phát biểu nào mô tả về yêu cầu đầy đủ được quy định trong VAS số 01 – Chuẩn mực chung:",
                 options: [
                     "Các thông tin và số liệu kế toán trình bày trong báo cáo tài chính phải rõ ràng, dễ hiểu đối với người sử dụng.",
@@ -325,6 +352,7 @@ const quizData = [
             },
             {
                 id: 28,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Phát biểu nào sau đây mô tả đúng về môi trường kế toán?",
                 options: [
                     "Môi trường kế toán bao gồm môi trường kinh tế, môi trường chính trị, môi trường xã hội và môi trường pháp lý.",
@@ -337,6 +365,7 @@ const quizData = [
             },
             {
                 id: 29,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Nếu “một nhà xưởng được mua với giá là 3 tỷ đồng, giá bán ước tính sẽ thu được là 5 tỷ đồng, trừ chi phí liên quan số tiền thuần thu được là 4,5 tỷ đồng” thì kế toán sẽ phản ánh nhà xưởng này trên báo cáo tài chính với giá trị là:",
                 options: [
                     "3 tỷ đồng",
@@ -349,6 +378,7 @@ const quizData = [
             },
             {
                 id: 30,
+                chapter: { id: 1, title: 'Tổng quan về kế toán' },
                 question: "Ngày 1/6, công ty bán chưa thu tiền một lô hàng. Ngày 10/6, sau khi khách hàng thanh toán hoàn bộ, công ty mới tiến hành hạch toán doanh thu vào sổ kế toán. Nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Thận trọng",
@@ -361,6 +391,7 @@ const quizData = [
             },
             {
                 id: 31,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Kết quả của phương pháp Tổng hợp và cân đối kế toán biểu hiện dưới hình thức:",
                 options: [
                     "Báo cáo tài chính",
@@ -373,6 +404,7 @@ const quizData = [
             },
             {
                 id: 32,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Bản chất của phương pháp Tổng hợp và cân đối kế toán là",
                 options: [
                     "Phản ánh tổng quát tình hình tài sản và nguồn vốn",
@@ -385,6 +417,7 @@ const quizData = [
             },
             {
                 id: 33,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Biểu báo cáo nào sau đây không thuộc báo cáo tài chính",
                 options: [
                     "Bảng cân đối số phát sinh và Tổng hợp chi tiết",
@@ -397,6 +430,7 @@ const quizData = [
             },
             {
                 id: 34,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Báo cáo tài chính cung cấp thông tin kế toán cho các đối tượng",
                 options: [
                     "Bên trong doanh nghiệp",
@@ -409,6 +443,7 @@ const quizData = [
             },
             {
                 id: 35,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Cơ sở số liệu khi lập báo cáo tài chính chủ yếu từ:",
                 options: [
                     "Bảng cân đối số phát sinh và Sổ Cái",
@@ -421,6 +456,7 @@ const quizData = [
             },
             {
                 id: 36,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Bảng cân đối kế toán phản ánh tình hình:",
                 options: [
                     "Doanh thu, chi phí và lợi nhuận trong một thời kỳ",
@@ -433,6 +469,7 @@ const quizData = [
             },
             {
                 id: 37,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Phương trình cân đối nào sau đây không thuộc Bảng cân đối kế toán",
                 options: [
                     "Tài sản ngắn hạn + tài sản dài hạn = Tổng nguồn vốn",
@@ -445,6 +482,7 @@ const quizData = [
             },
             {
                 id: 38,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây không làm thay đổi tổng giá trị tài sản",
                 options: [
                     "Mua tài sản cố định hữu hình bằng tiền gởi ngân hàng",
@@ -457,6 +495,7 @@ const quizData = [
             },
             {
                 id: 39,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây sẽ làm thay đổi tổng giá trị tài sản",
                 options: [
                     "Chủ sở hữu góp vốn bằng tài sản cố định hữu hình",
@@ -469,6 +508,7 @@ const quizData = [
             },
             {
                 id: 40,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây thuộc mối quan hệ Tài sản tăng – Nguồn vốn tăng",
                 options: [
                     "Kiểm kê phát hiện thiếu tài sản cố định hữu hình chưa rõ nguyên nhân",
@@ -481,6 +521,7 @@ const quizData = [
             },
             {
                 id: 41,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây thuộc mối quan hệ Tài sản giảm – Nguồn vốn giảm",
                 options: [
                     "Kiểm kê phát hiện thiếu tài sản cố định hữu hình chưa rõ nguyên nhân",
@@ -493,6 +534,7 @@ const quizData = [
             },
             {
                 id: 42,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây làm thay đổi tỷ trọng các khoản mục (hoặc bên Tài sản, hoặc bên Nguồn vốn) của Bảng cân đối kế toán:",
                 options: [
                     "Thu nợ người mua (khách hàng trả nợ) bằng tiền mặt và tiền gởi ngân hàng",
@@ -505,6 +547,7 @@ const quizData = [
             },
             {
                 id: 43,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Nghiệp vụ kinh tế nào sau đây chỉ làm thay đổi tỷ trọng các khoản mục (hoặc bên Tài sản, hoặc bên Nguồn vốn) của Bảng cân đối kế toán:",
                 options: [
                     "Tài sản tăng – tài sản giảm và tài sản tăng – nguồn vốn tăng",
@@ -517,6 +560,7 @@ const quizData = [
             },
             {
                 id: 44,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Số tiền lỗ từ hoạt động kinh doanh được phản ánh trên Bảng cân đối kế toán:",
                 options: [
                     "Ghi số dương mục Phải thu khác",
@@ -529,6 +573,7 @@ const quizData = [
             },
             {
                 id: 45,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Biểu báo cáo kết quả kinh doanh phản ánh tình hình:",
                 options: [
                     "Doanh thu, chi phí và lợi nhuận trong một thời kỳ",
@@ -541,6 +586,7 @@ const quizData = [
             },
             {
                 id: 46,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Phương trình cân đối nào sau đây thuộc Báo cáo kết quả kinh doanh",
                 options: [
                     "Tài sản ngắn hạn + tài sản dài hạn = Tổng nguồn vốn",
@@ -553,6 +599,7 @@ const quizData = [
             },
             {
                 id: 47,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Doanh thu thuần trên Báo cáo kết quả kinh doanh phản ánh",
                 options: [
                     "Thu nhượng bán tài sản cố định",
@@ -565,6 +612,7 @@ const quizData = [
             },
             {
                 id: 48,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Lợi nhuận gộp (lãi gộp) trên Báo cáo kết quả kinh doanh phản ánh:",
                 options: [
                     "Doanh thu thuần – giá vốn hàng bán",
@@ -577,6 +625,7 @@ const quizData = [
             },
             {
                 id: 49,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Lợi nhuận từ hoạt động tài chính là kết quả của đẳng thức:",
                 options: [
                     "Lợi nhuận gộp – chi phí tài chính",
@@ -589,6 +638,7 @@ const quizData = [
             },
             {
                 id: 50,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Lợi nhuận thuần từ hoạt động kinh doanh trên Báo cáo kết quả kinh doanh gồm:",
                 options: [
                     "(Lợi nhuận gộp + lợi nhuận khác) – (chi phí bán hàng + chi phí quản lý doanh nghiệp)",
@@ -601,6 +651,7 @@ const quizData = [
             },
             {
                 id: 51,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Đẳng thức lợi nhuận khác trên Báo cáo kết quả kinh doanh",
                 options: [
                     "Lợi nhuận gộp – chi phí tài chính",
@@ -613,6 +664,7 @@ const quizData = [
             },
             {
                 id: 52,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Đẳng thức Tổng lợi nhuận kế toán trước thuế trên Báo cáo kết quả kinh doanh",
                 options: [
                     "Lợi nhuận thuần từ hoạt động kinh doanh + lợi nhuận khác",
@@ -625,6 +677,7 @@ const quizData = [
             },
             {
                 id: 53,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Đẳng thức đúng nhất của lợi nhuận sau thuế chưa phân phối là",
                 options: [
                     "Tổng lợi nhuận kế toán trước thuế + chi phí thuế thu nhập doanh nghiệp",
@@ -637,6 +690,7 @@ const quizData = [
             },
             {
                 id: 54,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Cơ sở xác định chi phí thuế thu nhập hiện hành dựa trên:",
                 options: [
                     "Lợi nhuận thuần từ hoạt động kinh doanh và thuế suất thuế thu nhập doanh nghiệp hiện hành",
@@ -649,6 +703,7 @@ const quizData = [
             },
             {
                 id: 55,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Biểu Lưu chuyển tiền tệ phản ánh tình hình:",
                 options: [
                     "Doanh thu, chi phí và lợi nhuận trong một thời kỳ",
@@ -661,6 +716,7 @@ const quizData = [
             },
             {
                 id: 56,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Phương trình cân đối nào sau đây thuộc Biểu Lưu chuyển tiền tệ",
                 options: [
                     "Tài sản ngắn hạn + tài sản dài hạn = Tổng nguồn vốn",
@@ -673,6 +729,7 @@ const quizData = [
             },
             {
                 id: 57,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản kế toán là những trang sổ được dùng để:",
                 options: [
                     "Phản ánh tình hình hiện có và biến động của tài sản",
@@ -685,6 +742,7 @@ const quizData = [
             },
             {
                 id: 58,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản Tài sản có nguyên tắc ghi chép thông thường là:",
                 options: [
                     "Dư bên Nợ, phát sinh tăng bên Nợ, phát sinh giảm bên có",
@@ -697,6 +755,7 @@ const quizData = [
             },
             {
                 id: 59,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản Nợ phải trả có nguyên tắc ghi chép thông thường là:",
                 options: [
                     "Dư bên Nợ, phát sinh tăng bên Nợ, phát sinh giảm bên có",
@@ -709,6 +768,7 @@ const quizData = [
             },
             {
                 id: 60,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản Vốn chủ sở hữu có nguyên tắc ghi chép thông thường là:",
                 options: [
                     "Dư bên Nợ, phát sinh tăng bên Nợ, phát sinh giảm bên có",
@@ -721,6 +781,7 @@ const quizData = [
             },
             {
                 id: 61,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Đối tượng kế toán nào sau đây chỉ có số dư ghi bên Nợ",
                 options: [
                     "Người mua trả trước tiền",
@@ -733,6 +794,7 @@ const quizData = [
             },
             {
                 id: 62,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Đối tượng kế toán nào sau đây chỉ có số dư ghi bên Có",
                 options: [
                     "Người mua trả trước tiền",
@@ -745,6 +807,7 @@ const quizData = [
             },
             {
                 id: 63,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản 214 “ Hao mòn TSCĐ” là tài khoản:",
                 options: [
                     "Điều chỉnh giảm tài sản",
@@ -757,6 +820,7 @@ const quizData = [
             },
             {
                 id: 64,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản nào sau đây là tài khoản doanh thu",
                 options: [
                     "TK Doanh thu nhận trước",
@@ -769,6 +833,7 @@ const quizData = [
             },
             {
                 id: 65,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản 421 “Lợi nhuận sau thuế chưa phân phối” thuộc loại tài khoản:",
                 options: [
                     "Tài sản",
@@ -781,6 +846,7 @@ const quizData = [
             },
             {
                 id: 66,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Trong các tài khoản sau tài khoản nào chỉ có số dư bên Có:",
                 options: [
                     "Tài sản cố định hữu hình",
@@ -793,6 +859,7 @@ const quizData = [
             },
             {
                 id: 67,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Nếu một tài khoản phản ánh tài sản cần có tài khoản điều chỉnh giảm, thì tài khoản điều chỉnh của nó phải có kết cấu:",
                 options: [
                     "Ngược lại với tài khoản nó cần điều chỉnh.",
@@ -805,6 +872,7 @@ const quizData = [
             },
             {
                 id: 68,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Thuế GTGT phải nộp thuộc:",
                 options: [
                     "Nợ phải trả của doanh nghiệp.",
@@ -817,6 +885,7 @@ const quizData = [
             },
             {
                 id: 69,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tổng phát sinh Nợ = Tổng phát sinh Có là do",
                 options: [
                     "Quan hệ giữa tài khoản và nguồn vốn",
@@ -829,6 +898,7 @@ const quizData = [
             },
             {
                 id: 70,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản “Chi phí nguyên vật liệu trực tiếp” thuộc",
                 options: [
                     "Tài khoản tập hợp - phân phối",
@@ -841,6 +911,7 @@ const quizData = [
             },
             {
                 id: 71,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Số dư bên Có của TK 131 “Phải thu của khách hàng”",
                 options: [
                     "Phản ánh khoản phải thu của khách hàng",
@@ -853,6 +924,7 @@ const quizData = [
             },
             {
                 id: 72,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Số dư bên Nợ của TK 331 “Phải trả cho người bán”",
                 options: [
                     "Phản ánh khoản phải trả cho người bán",
@@ -865,6 +937,7 @@ const quizData = [
             },
             {
                 id: 73,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản 131 “Phải thu của khách hàng” có số dư Có, khi lập bảng cân đối kế toán sẽ được ghi nhận:",
                 options: [
                     "Bên Tài sản ghi Dương",
@@ -877,6 +950,7 @@ const quizData = [
             },
             {
                 id: 74,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản 331 “Phải trả người bán” có số dư Nợ, khi lập bảng cân đối kế toán sẽ được ghi nhận:",
                 options: [
                     "Bên Tài sản ghi Dương",
@@ -889,6 +963,7 @@ const quizData = [
             },
             {
                 id: 75,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Để định khoản các nghiệp vụ kinh tế phát sinh, kế toán cần căn cứ vào:",
                 options: [
                     "Bảng cân đối kế toán",
@@ -901,6 +976,7 @@ const quizData = [
             },
             {
                 id: 76,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Định khoản giản đơn là loại định khoản có liên quan đến",
                 options: [
                     "Một tài khoản",
@@ -913,6 +989,7 @@ const quizData = [
             },
             {
                 id: 77,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Định khoản phức tạp là loại định khoản có liên quan đến",
                 options: [
                     "Hai tài khoản trở lên",
@@ -925,6 +1002,7 @@ const quizData = [
             },
             {
                 id: 78,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Bảng tổng hợp chi tiết tài khoản",
                 options: [
                     "Dùng để tổng hợp số liệu các chứng từ gốc",
@@ -937,6 +1015,7 @@ const quizData = [
             },
             {
                 id: 79,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản 229 “Dự phòng tổn thất tài sản” là:",
                 options: [
                     "Tài khoản tài sản",
@@ -949,6 +1028,7 @@ const quizData = [
             },
             {
                 id: 80,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Số đầu tiên của số hiệu tài khoản thể hiện:",
                 options: [
                     "Số thứ tự của tài khoản trong nhóm.",
@@ -961,6 +1041,7 @@ const quizData = [
             },
             {
                 id: 81,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Các tài khoản thuộc tài khoản trung gian là:",
                 options: [
                     "Doanh thu, chi phí, tài sản, nợ phải trả.",
@@ -973,6 +1054,7 @@ const quizData = [
             },
             {
                 id: 82,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Các tài khoản được phân loại theo công dụng và kết cấu gồm",
                 options: [
                     "Tài sản và nguồn vốn.",
@@ -985,6 +1067,7 @@ const quizData = [
             },
             {
                 id: 83,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Các tài khoản được phân loại theo nội dung kinh tế gồm:",
                 options: [
                     "Tài sản và nguồn vốn.",
@@ -997,6 +1080,7 @@ const quizData = [
             },
             {
                 id: 84,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản nào sau đây không phải là tài khoản trung gian:",
                 options: [
                     "Chi phí quản lý doanh nghiệp.",
@@ -1009,6 +1093,7 @@ const quizData = [
             },
             {
                 id: 85,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Vị trí thứ hai của số hiệu tài khoản thể hiện:",
                 options: [
                     "Loại tài khoản.",
@@ -1021,6 +1106,7 @@ const quizData = [
             },
             {
                 id: 86,
+                chapter: { id: 3, title: 'Tài khoản và ghi sổ kép' },
                 question: "Tài khoản nào sau đây không thuộc loại tài khoản điều chỉnh giảm:",
                 options: [
                     "TK 511.",
@@ -1033,6 +1119,7 @@ const quizData = [
             },
             {
                 id: 87,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và nộp thuế giá trị gia tăng (GTGT) theo phương pháp khấu trừ, khi mua nguyên vật liệu nhập kho thì giá trị ghi sổ của số nguyên vật liệu này là:",
                 options: [
                     "Giá mua chưa thuế GTGT",
@@ -1045,6 +1132,7 @@ const quizData = [
             },
             {
                 id: 88,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Nguyên giá TSCĐ chỉ thay đổi khi:",
                 options: [
                     "Đánh giá lại theo quy định của cơ quan có thẩm quyền.",
@@ -1057,6 +1145,7 @@ const quizData = [
             },
             {
                 id: 89,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Chiết khấu thương mại doanh nghiệp được hưởng khi mua hàng được ghi nhận:",
                 options: [
                     "Giảm giá trị tài sản mua",
@@ -1069,6 +1158,7 @@ const quizData = [
             },
             {
                 id: 90,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Giá trị thuần có thể thực hiện được của hàng tồn kho là:",
                 options: [
                     "Giá bán hàng tồn kho trừ (-) Giá mua của chúng.",
@@ -1081,6 +1171,7 @@ const quizData = [
             },
             {
                 id: 91,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Chiết khấu thanh toán được hưởng khi mua hàng được ghi:",
                 options: [
                     "Tăng giá trị tài sản mua",
@@ -1093,6 +1184,7 @@ const quizData = [
             },
             {
                 id: 92,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và tính thuế GTGT theo phương pháp khấu trừ, mua 50 máy tính để bán, giá mua 5.000.000 đồng/cái, thuế GTGT 10%, giá bán ước tính 6.500.000 đồng/cái, thuế GTGT 10%. Chiết khấu thương mại được hưởng 2%. Giá thực tế của lô máy tính này là:",
                 options: [
                     "250.000.000 đồng",
@@ -1105,6 +1197,7 @@ const quizData = [
             },
             {
                 id: 93,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và tính thuế GTGT theo phương pháp trực tiếp, nhập khẩu một lô vật liệu với giá nhập khẩu là 200.000.000 đồng, thuế suất thuế nhập khẩu 10%, thuế suất thuế GTGT 10%, Chi phí bốc xếp, vận chuyển lô vật liệu trên về kho (đã bao gồm thuế GTGT 10%) là 4.950.000. Giá thực tế nhập kho của lô vật liệu trên là:",
                 options: [
                     "224.500.000 đồng",
@@ -1117,6 +1210,7 @@ const quizData = [
             },
             {
                 id: 94,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và tính thuế GTGT theo phương pháp khấu trừ, nhập khẩu một lô vật liệu với giá nhập khẩu 500.000.000 đồng, thuế suất thuế nhập khẩu 10%, thuế suất thuế GTGT 0%,. Chi phí bốc xếp, vận chuyển lô vật liệu trên về kho (đã bao gồm thuế GTGT 10%) là 5.720.000. Trị giá nhập kho của lô vật liệu trên là:",
                 options: [
                     "500.000.000 đồng",
@@ -1129,6 +1223,7 @@ const quizData = [
             },
             {
                 id: 95,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp tính thuế GTGT theo phương pháp trực tiếp, nhập khẩu một lô nguyên vật liệu, số lượng 2.000 kg VL, đơn giá nhập khẩu 100.000 đ/kg. thuế nhập khẩu 10%, thuế GTGT 10%. Chi phí vận chuyển gồm thuế GTGT 10% là 9.900.000 đ. Giá thực tế vật liệu nhập kho, và đơn giá nhập kho lần lượt là:",
                 options: [
                     "231.900.000 đồng và 115.950 đồng/kg.",
@@ -1141,6 +1236,7 @@ const quizData = [
             },
             {
                 id: 96,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và tính thuế GTGT theo phương pháp trực tiếp, mua 5.000m vải dùng để cho sản xuất áo sơ mi, giá mua chưa thuế 30.000đ/m, thuế GTGT 10%. Do hàng giao bị lỗi nên doanh nghiệp quyết định trả lại cho người bán 500m vải. Chi phí vận chuyển vật liệu (bao gồm 10% thuế GTGT): 1.650.000đ. Giá thực tế nhập kho và đơn giá nhập kho của vật liệu lần lượt là:",
                 options: [
                     "150.000.000 đồng và 33.333 đồng/m",
@@ -1153,6 +1249,7 @@ const quizData = [
             },
             {
                 id: 97,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Trong thời gian giá cả hàng hóa ngoài thị trường đang biến động giảm, phương pháp tính giá hàng tồn kho nào cho giá trị hàng tồn kho cuối kỳ thấp nhất.",
                 options: [
                     "Nhập trước, xuất trước",
@@ -1165,6 +1262,7 @@ const quizData = [
             },
             {
                 id: 98,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Trong giai đoạn lạm phát, giá cả hàng hóa ngoài thị trường biến động tăng, phương pháp nào cho ra kết quả lợi nhuận cao nhất:",
                 options: [
                     "Thực tế đích danh",
@@ -1177,6 +1275,7 @@ const quizData = [
             },
             {
                 id: 99,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Thuế bảo vệ môi trường phải nộp được ghi:",
                 options: [
                     "Tăng chi phí quản lý doanh nghiệp",
@@ -1189,6 +1288,7 @@ const quizData = [
             },
             {
                 id: 100,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai và tính thuế GTGT theo phương pháp khấu trừ, mua 5.000kg vật liệu, giá mua chưa thuế 25.000đ/kg, thuế GTGT 10%, do thanh toán trước hạn nên được hưởng chiết khấu thanh toán: 3.000.000đ. Chi phí vận chuyển vật liệu về kho (bao gồm thuế GTGT 10%): 2.310.000đ. Giá thực tế nhập kho vật liệu là:",
                 options: [
                     "124.100.000 đồng",
@@ -1201,6 +1301,7 @@ const quizData = [
             },
             {
                 id: 101,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai thường xuyên, có tài liệu liên quan đến vật liệu:\n-Tồn đầu tháng: 2.000kg (Giá 25.000đ/kg);\n-Nhập lần 1 (3000 kg - 25.400đ/kg, chi phí vận chuyển 200 đ/kg);\n-Xuất lần 1(4000 kg);\n-Nhập lần 2 ( 5.000kg - 25.200đ/kg, chi phí vận chuyển 400 đ/kg, được giảm giá 100đ/kg);\n-Xuất lần 2: 2.000kg.\nTrị giá vật liệu xuất kho trong tháng theo phương pháp bình quân gia quyền cuối kỳ:",
                 options: [
                     "152.580.000 đồng",
@@ -1213,6 +1314,7 @@ const quizData = [
             },
             {
                 id: 102,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question:"Doanh nghiệp kê khai thường xuyên, có tài liệu liên quan đến vật liệu:\n-Tồn đầu tháng: 2.000kg  (giá 20.000 đ/kg);\n-Nhập lần 1: 3.000kg (Giá 22.000đ/kg, chi phí vận chuyển 500 đ/kg.);\n-Xuất lần 1: 4.000kg;\n-Nhập lần 2: 5.000kg (Giá 22.500đ/kg, chi phí vận chuyển 400 đ/kg, được giảm giá 100đ/kg.);\n-Xuất lần 2: 2.000kg.;\nTrị giá vật liệu xuất kho theo phương pháp nhập trước - xuất trước lần lượt là:",
                 options: [
                     "85.000.000 đồng và 45.300.000 đồng",
@@ -1225,6 +1327,7 @@ const quizData = [
             },
             {
                 id: 103,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp kê khai thường xuyên, có tài liệu liên quan đến vật liệu: \n-Tồn đầu tháng: 2.000kg  (Giá 20.000 đ/kg);\n-Nhập lần 1: 3.000kg  (Giá 22.000đ/kg, chi phí vận chuyển 500 đ/kg.;\n-Xuất lần 1: 4.000kg.;\n-Nhập lần 2: 5.000kg (Giá 22.500đ/kg, chi phí vận chuyển 400 đ/kg, được giảm giá 100đ/kg.);\n-Xuất lần 2: 2.000kg.;\nTrị giá vật liệu xuất kho theo phương pháp thực tế đích danh, cho biết:\n+ Xuất lần 1: 1.500 kg thuộc tồn đầu kỳ, số còn lại thuộc nhập lần 1;\n+ Xuất lần 2: 500 kg thuộc tồn đầu kỳ, 500 kg thuộc nhập lần 1, số còn lại thuộc lô nhập lần 2",
                 options: [
                     "85.000.000 đồng và 43.400.000 đồng",
@@ -1237,6 +1340,7 @@ const quizData = [
             },
             {
                 id: 104,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Công ty XYZ cấp một TSCĐ cho công ty con A. Nguyên giá trên sổ XYZ là 570.000.000đ, giá trị hao mòn lũy kế: 120.000.000đ. Công ty A sẽ ghi nhận nguyên giá của TSCĐ này là:",
                 options: [
                     "620.000.000",
@@ -1249,6 +1353,7 @@ const quizData = [
             },
             {
                 id: 105,
+                chapter: { id: 4, title: 'Tính giá các đối tượng kế toán' },
                 question: "Doanh nghiệp mua 10.000kg vật liệu với giá mua chưa thuế 15.000đ/kg, thuế GTGT 10%, được giảm giá 500 đ/kg (chưa thuế GTGT). Chi phí vận chuyển chi hộ người bán gồm thuế GTGT 10%: 1.100.000đ. Trị giá nhập kho lô vật liệu theo phương pháp khấu trừ là:",
                 options: [
                     "145.000.000",
@@ -1261,6 +1366,7 @@ const quizData = [
             },
             {
                 id: 106,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Phát biểu nào sau đây đúng về vai trò của kế toán quản trị trong doanh nghiệp?",
                 options: [
                     "Cung cấp thông tin chi tiết phục vụ cho việc lập kế hoạch, ra quyết định và kiểm soát nội bộ.",
@@ -1273,6 +1379,7 @@ const quizData = [
             },
             {
                 id: 107,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Trong phương pháp ghi sổ kép, mối quan hệ đối ứng tài khoản phản ánh:",
                 options: [
                     "Sự vận động kinh tế khách quan giữa các đối tượng kế toán có liên quan với nhau trong mỗi nghiệp vụ.",
@@ -1285,6 +1392,7 @@ const quizData = [
             },
             {
                 id: 108,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: " Chi phí khấu hao tài sản cố định phục vụ kinh doanh trong kỳ nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ?",
                 options: [
                     "Luồng tiền thu vào từ hoạt động kinh doanh",
@@ -1297,6 +1405,7 @@ const quizData = [
             },
             {
                 id: 109,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Số tiền chia cổ tức từ lợi nhuận sau thuế chưa phân phối nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ ",
                 options: [
                     "Luồng tiền chi ra từ hoạt động kinh doanh",
@@ -1309,6 +1418,7 @@ const quizData = [
             },
             {
                 id: 110,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Số tiền lãi được chia từ công ty liên doanh nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ ",
                 options: [
                     "Luồng tiền chi ra từ hoạt động kinh doanh",
@@ -1321,6 +1431,7 @@ const quizData = [
             },
              {
                 id: 111,
+                chapter: { id: 2, title: 'Phương pháp tổng hợp – cân đối kế toán' },
                 question: "Số tiền vay vốn để hoạt động sản xuất kinh doanh phát sinh trong năm nằm trong khoản mục nào của Biểu Lưu chuyển tiền tệ",
                 options: [
                     "Luồng tiền chi ra từ hoạt động kinh doanh",
@@ -1333,6 +1444,7 @@ const quizData = [
             },
             {
                 id: 112,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nguyên vật liệu có đặc điểm là:",
                 options: [
                     "Đối tượng lao động",
@@ -1346,6 +1458,7 @@ const quizData = [
 
             {
                 id: 113,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nguyên vật liệu xuất kho phục vụ quản lý phân xưởng sản xuất phẩm được ghi nhận vào:",
                 options: [
                     "Chi phí nguyên vật liệu trực tiếp.",
@@ -1359,6 +1472,7 @@ const quizData = [
 
             {
                 id: 114,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nghiệp vụ: “Nhượng bán một TSCĐ hữu hình có nguyên giá 100tr, đã hao mòn 60%, thu bằng tiền gửi ngân hàng 44tr đã gồm thuế GTGT 10%”, doanh nghiệp nộp thuế theo phương pháp khấu trừ, kế toán định khoản:",
                 options: [
                     "Nợ TK 811: 40tr; Nợ TK 214: 60tr; Có TK 211: 100tr",
@@ -1372,6 +1486,7 @@ const quizData = [
 
             {
                 id: 115,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nguyên vật liệu (xăng, dầu) xuất kho sử dụng cho máy sản xuất sản phẩm được ghi nhận vào: ",
                 options: [
                     "Chi phí nguyên vật liệu trực tiếp.",
@@ -1385,6 +1500,7 @@ const quizData = [
             
             {
                 id: 116,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí vận chuyển vật liệu mua về nhập kho, được hạch toán vào: ",
                 options: [
                     "TK 152.",
@@ -1397,6 +1513,7 @@ const quizData = [
             },
             {
                 id: 117,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Khi xuất nguyên vật liệu dùng cho sản xuất sản phẩm, giá trị xuất kho của nguyên vật liệu được hạch toán: ",
                 options: [
                     "Nợ TK 621/Có TK 152.",
@@ -1409,6 +1526,7 @@ const quizData = [
             },
             {
                 id: 118,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Tiền lương phải trả cho công nhân trực tiếp sản xuất sản phẩm, được hạch toán: ",
                 options: [
                     "Nợ TK 622/Có TK 334.",
@@ -1421,6 +1539,7 @@ const quizData = [
             },
             {
                 id: 119,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Tiền lương phải trả cho nhân viên phục vụ phân xưởng sản xuất, được hạch toán: ",
                 options: [
                     "Nợ TK 622/Có TK 334.",
@@ -1433,6 +1552,7 @@ const quizData = [
             },
             {
                 id: 120,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí sản xuất là: ",
                 options: [
                     "Toàn bộ các khoản hao phí vật chất mà doanh nghiệp bỏ ra để thực hiện quá trình sản xuất kinh doanh của doanh nghiệp.",
@@ -1445,6 +1565,7 @@ const quizData = [
             },
             {
                 id: 121,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Giá thành sản phẩm là: ",
                 options: [
                     "Chi phí sản xuất gắn liền với một kỳ kế toán.",
@@ -1457,6 +1578,7 @@ const quizData = [
             },
             {
                 id: 122,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí nguyên vật liệu trực tiếp là: ",
                 options: [
                     "Các khoản chi phí về nguyên liệu, vật liệu chính, vật liệu phụ được sử dụng cho quá trình sản xuất ở phân xưởng.",
@@ -1469,6 +1591,7 @@ const quizData = [
             },
             {
                 id: 123,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí nhân công trực tiếp là: ",
                 options: [
                     "Tiền lương phải trả cho công nhân trực tiếp sản xuất sản phẩm.",
@@ -1481,6 +1604,7 @@ const quizData = [
             },
             {
                 id: 124,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí sản xuất chung là: ",
                 options: [
                     "Chi phí quản lý, điều hành doanh nghiệp.",
@@ -1493,6 +1617,7 @@ const quizData = [
             },
             {
                 id: 125,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Chi phí sản xuất dở dang đầu kỳ là 1.000.000đ; Chi phí phát sinh trong kỳ gồm: Chi phí nguyên vật liệu trực tiếp 25.000.000đ, chi phí tiền lương công nhân trực tiếp sản xuất 10.000.000đ, các khoản trích theo lương của công nhân trực tiếp sản xuất được tính vào chi phí 2.400.000đ, Chi phí sản xuất chung 7.000.000đ, Chi phí bán hàng phát sinh 12.000.000đ, chi phí quản lý doanh nghiệp 20.000.000đ; Chi phí sản xuất dở dang cuối kỳ 5.500.000đ. Vậy giá thành sản xuất của sản phẩm là: ",
                 options: [
                     "45.400.000đ.",
@@ -1505,6 +1630,7 @@ const quizData = [
             },
             {
                 id: 126,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Doanh thu bán hàng là: ",
                 options: [
                     "Số tiền khách hàng trả cho doanh nghiệp.",
@@ -1517,6 +1643,7 @@ const quizData = [
             },
             {
                 id: 127,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Trường hợp doanh nghiệp kê khai và tính thuế giá trị gia tăng theo phương pháp khấu trừ, doanh thu bán hàng được ghi nhận là: ",
                 options: [
                     "Giá trị xuất kho của hàng hóa.",
@@ -1529,6 +1656,7 @@ const quizData = [
             },
             {
                 id: 128,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Giá vốn hàng bán là: ",
                 options: [
                     "Chi phí sản sản xuất sản phẩm phát sinh trong kỳ.",
@@ -1541,6 +1669,7 @@ const quizData = [
             },
             {
                 id: 129,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Mua nguyên vật liệu sử dụng ngay cho quản lý phân xưởng được ghi nhận vào: ",
                 options: [
                     "TK 152.",
@@ -1554,6 +1683,7 @@ const quizData = [
 
             {
                 id: 130,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nội dung không được tính vào giá thành sản phẩm: ",
                 options: [
                     "Tiền lương của quản đốc phân xưởng.",
@@ -1566,6 +1696,7 @@ const quizData = [
             },
             {
                 id: 131,
+                chapter: { id: 5, title: 'Kế toán quá trình kinh doanh cơ bản' },
                 question: "Nhập lại kho thành phẩm chưa bán được ghi: ",
                 options: [
                     "Nợ TK 157/ Có TK 155.",
@@ -1578,6 +1709,7 @@ const quizData = [
             },
             {
                 id: 132,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Trích khấu hao máy móc thiết bị phục vụ cho sản xuất sản phẩm ghi: ",
                 options: [
                     "Nợ TK 621/ Có TK 214.",
@@ -1591,6 +1723,7 @@ const quizData = [
 
             {
                 id: 133,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Những yếu tố cơ bản của một chứng từ kế toán là: ",
                 options: [
                     "Tên chứng từ, số hiệu của chứng từ, nội dung nghiệp vụ phát sinh",
@@ -1603,6 +1736,7 @@ const quizData = [
             },
             {
                 id: 134,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Chứng từ kế toán: ",
                 options: [
                     "Chỉ được phép lập một lần cho mỗi nghiệp vụ phát sinh",
@@ -1615,6 +1749,7 @@ const quizData = [
             },
             {
                 id: 135,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Trình tự luân chuyển chứng từ bao gồm các bước: ",
                 options: [
                     "Lập hoặc nhận chứng từ; Kiểm tra phê duyệt nội dung; Sử dụng; bảo quản và lưu trữ.",
@@ -1627,6 +1762,7 @@ const quizData = [
             },
             {
                 id: 136,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Để sao chụp nghiệp vụ thu tiền, kế toán cần sử dụng: ",
                 options: [
                     "Phiếu thu",
@@ -1639,6 +1775,7 @@ const quizData = [
             },
             {
                 id: 137,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Chứng từ gốc nào sau đây chứng minh được tiền của doanh nghiệp chi ra để mua hàng hoá, dịch vụ: ",
                 options: [
                     "Hoá đơn GTGT",
@@ -1651,6 +1788,7 @@ const quizData = [
             },
             {
                 id: 138,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Theo quy định hiện hành của Bộ Tài chính Việt Nam hiện hành, Chứng từ kế toán ở một doanh nghiệp bao gồm: ",
                 options: [
                     "Chứng từ về tiền lương, chứng từ về tiền, chứng từ về hàng tồn kho",
@@ -1663,6 +1801,7 @@ const quizData = [
             },
             {
                 id: 139,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Theo công dụng, chứng từ kế toán được chia thành các loại: ",
                 options: [
                     "Chứng từ mệnh lệnh, chứng từ chấp hành",
@@ -1675,6 +1814,7 @@ const quizData = [
             },
             {
                 id: 140,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Theo địa điểm lập, chứng từ kế toán được chia thành các loại: ",
                 options: [
                     "Chứng từ gốc, chứng từ bên trong",
@@ -1687,6 +1827,7 @@ const quizData = [
             },
             {
                 id: 141,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Đơn vị sản xuất kinh doanh mặt hàng chịu thuế GTGT theo phương pháp khấu trừ, khi bán hàng sẽ lập chứng từ: ",
                 options: [
                     "Hoá đơn GTGT",
@@ -1699,6 +1840,7 @@ const quizData = [
             },
             {
                 id: 142,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Khi bán thành phẩm, hàng hoá, giá ghi trên phiếu xuất kho là: ",
                 options: [
                     "Giá bán",
@@ -1711,6 +1853,7 @@ const quizData = [
             },
             {
                 id: 143,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Chứng từ kế toán: ",
                 options: [
                     "Chỉ được lập nhiều lần cho một nghiệp vụ phát sinh",
@@ -1723,6 +1866,7 @@ const quizData = [
             },
             {
                 id: 144,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Hoá đơn khống là: ",
                 options: [
                     "Hoá đơn được ký trước khi hoàn thành nghiệp vụ",
@@ -1735,6 +1879,7 @@ const quizData = [
             },
             {
                 id: 145,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Doanh nghiệp sản xuất kinh doanh loại hàng chịu thuế GTGT theo phương pháp khấu trừ, khi mua hàng trường hợp nào sẽ được khấu trừ thuế GTGT đầu vào: ",
                 options: [
                     "Nhận được Hoá đơn GTGT",
@@ -1747,6 +1892,7 @@ const quizData = [
             },
             {
                 id: 146,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Để sao chụp nghiệp vụ xuất kho, kế toán có thể sử dụng: ",
                 options: [
                     "Phiếu xuất kho",
@@ -1759,6 +1905,7 @@ const quizData = [
             },
             {
                 id: 147,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Để sao chụp nghiệp vụ giao nhận TSCĐ, kế toán sử dụng: ",
                 options: [
                     "Biên bản bàn giao TSCĐ",
@@ -1771,6 +1918,7 @@ const quizData = [
             },
             {
                 id: 148,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Để sao chụp thời gian lao động của người lao động, kế toán sử dụng: ",
                 options: [
                     "Bảng chấm công",
@@ -1783,6 +1931,7 @@ const quizData = [
             },
             {
                 id: 149,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Để ghi chép số lượng sản phẩm do mỗi công nhân sản xuất ra, kế toán có thể sử dụng: ",
                 options: [
                     "Hợp đồng giao khoán",
@@ -1795,6 +1944,7 @@ const quizData = [
             },
             {
                 id: 150,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Khi mua Hóa đơn lần đầu (đối với doanh nghiệp không tự in hóa đơn), doanh nghiệp xuất trình đầy đủ các giấy tờ: ",
                 options: [
                     "Giấy giới thiệu kèm công văn mua Hóa đơn",
@@ -1807,6 +1957,7 @@ const quizData = [
             },
             {
                 id: 151,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Tài khoản tổng hợp biểu hiện thực tế là: ",
                 options: [
                     "Sổ chi tiết",
@@ -1819,6 +1970,7 @@ const quizData = [
             },
             {
                 id: 152,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Tài khoản chi tiết biểu hiện trong thực tế là: ",
                 options: [
                     "Sổ chi tiết",
@@ -1831,6 +1983,7 @@ const quizData = [
             },
             {
                 id: 153,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Kế toán tổng hợp và kế toán chi tiết có mối quan hệ thể hiện: ",
                 options: [
                     "Được tiến hành đồng thời",
@@ -1843,6 +1996,7 @@ const quizData = [
             },
             {
                 id: 154,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Công dụng của “Bảng cân đối tài khoản”: ",
                 options: [
                     "Kiểm tra tính cân đối của tài sản và nguồn vốn",
@@ -1855,6 +2009,7 @@ const quizData = [
             },
             {
                 id: 155,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Công dụng của “Bảng tổng hợp chi tiết”: ",
                 options: [
                     "Kiểm tra việc ghi chép trên TK chi tiết",
@@ -1867,6 +2022,7 @@ const quizData = [
             },
             {
                 id: 156,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Chứng từ nào sau đây không thể làm căn cứ để ghi sổ: ",
                 options: [
                     "Hóa đơn bán hàng",
@@ -1879,6 +2035,7 @@ const quizData = [
             },
             {
                 id: 157,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Chứng từ nào sau đây không phải là chứng từ gốc: ",
                 options: [
                     "Hóa đơn bán hàng",
@@ -1891,6 +2048,7 @@ const quizData = [
             },
             {
                 id: 158,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Yếu tố nào sau đây dẫn tới chứng từ không đảm bảo về hình thức khi kiểm tra: ",
                 options: [
                     "Tẩy xóa",
@@ -1903,6 +2061,7 @@ const quizData = [
             },
             {
                 id: 159,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Khi kiểm tra nội dung chứng từ cần kiểm tra: ",
                 options: [
                     "Việc tính toán số liệu trên chứng từ",
@@ -1915,6 +2074,7 @@ const quizData = [
             },
             {
                 id: 160,
+                chapter: { id: 6, title: 'Chứng từ kế toán và kiểm kê' },
                 question: "Trong hóa đơn giá trị gia tăng, yếu tố nào là bắt buộc: ",
                 options: [
                     "Số lượng, thành tiền hàng mua",
@@ -1929,6 +2089,7 @@ const quizData = [
             // --- PHẦN SỔ KẾ TOÁN & HÌNH THỨC SỔ KẾ TOÁN ---
             {
                 id: 161,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Sổ kế toán là: ",
                 options: [
                     "Một tờ rời có chức năng ghi chép độc lập hoặc là quyển sổ gồm nhiều tờ sổ thực hiện chức năng ghi chép về những nội dung nhất định theo quy định của hệ thống kế toán.",
@@ -1941,6 +2102,7 @@ const quizData = [
             },
             {
                 id: 162,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Nếu phân loại sổ kế toán theo phương pháp ghi chép thì sổ kế toán được phân thành: ",
                 options: [
                     "Sổ kế toán tổng hợp, sổ kế toán chi tiết.",
@@ -1953,6 +2115,7 @@ const quizData = [
             },
             {
                 id: 163,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Theo mức độ khái quát của số liệu phản ánh trên sổ, sổ kế toán được chia thành các loại: ",
                 options: [
                     "Sổ ghi theo trình tự thời gian, sổ ghi theo loại đối tượng, sổ liên hợp.",
@@ -1965,6 +2128,7 @@ const quizData = [
             },
             {
                 id: 164,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Nếu dựa vào hình thức tổ chức sổ thì sổ kế toán được phân thành: ",
                 options: [
                     "Sổ tờ rời và sổ đóng thành quyển.",
@@ -1977,6 +2141,7 @@ const quizData = [
             },
             {
                 id: 165,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Sổ kết hợp: ",
                 options: [
                     "Là sổ kết hợp giữa ghi theo trình tự thời gian và ghi theo đối tượng.",
@@ -1989,6 +2154,7 @@ const quizData = [
             },
             {
                 id: 166,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Hiện nay theo quy định của Bộ Tài chính có mấy hình thức sổ kế toán: ",
                 options: [
                     "2",
@@ -2001,6 +2167,7 @@ const quizData = [
             },
             {
                 id: 167,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Theo quy định của chế độ kế toán Việt Nam hiện hành, có các hình thức sổ kế toán: ",
                 options: [
                     "Hình thức Nhật ký- sổ cái, Hình thức Nhật ký chung, Hình thức Nhật ký chứng từ.",
@@ -2013,6 +2180,7 @@ const quizData = [
             },
             {
                 id: 168,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Để phân biệt các hình thức sổ kế toán khác nhau, cần dựa vào: ",
                 options: [
                     "Số lượng và loại sổ kế toán cần dùng, cách thức thiết kế sổ.",
@@ -2025,6 +2193,7 @@ const quizData = [
             },
             {
                 id: 169,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Việc lựa chọn hình thức kế toán cho một đơn vị phụ thuộc vào: ",
                 options: [
                     "Quy mô của đơn vị.",
@@ -2037,6 +2206,7 @@ const quizData = [
             },
             {
                 id: 170,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Phát biểu nào sau đây sai về phương pháp ghi sổ kế toán: ",
                 options: [
                     "Mọi số liệu ghi trên sổ kế toán không bắt buộc phải có chứng từ kế toán hợp pháp, hợp lý chứng minh.",
@@ -2049,6 +2219,7 @@ const quizData = [
             },
             {
                 id: 171,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Thông tin, số liệu trên sổ kế toán không được: ",
                 options: [
                     "Ghi bằng bút chì.",
@@ -2061,6 +2232,7 @@ const quizData = [
             },
             {
                 id: 172,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Để sửa chữa sổ kế toán có thể sử dụng các phương pháp: ",
                 options: [
                     "Phương pháp ghi bổ sung, phương pháp ghi số âm.",
@@ -2073,6 +2245,7 @@ const quizData = [
             },
             {
                 id: 173,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Phương pháp cải chính là: ",
                 options: [
                     "Dùng để đính chính những sai sót bằng cách gạch một đường thẳng xóa bỏ chỗ ghi sai và ghi lại cho đúng bằng mực thường ở phía trên.",
@@ -2085,6 +2258,7 @@ const quizData = [
             },
             {
                 id: 174,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Khi sửa chữa sổ kế toán bằng máy tính thì thực hiện theo: ",
                 options: [
                     "Phương pháp ghi số âm và phương pháp cải chính.",
@@ -2097,6 +2271,7 @@ const quizData = [
             },
             {
                 id: 175,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Cuối kỳ, kế toán một doanh nghiệp phát hiện mình bỏ sót 1 chứng từ không ghi vào sổ. Để sửa chữa sổ kế toán trong trường hợp này, kế toán sẽ sử dụng phương pháp nào trong các phương pháp sau đây: ",
                 options: [
                     "Phương pháp cải chính.",
@@ -2109,6 +2284,7 @@ const quizData = [
             },
             {
                 id: 176,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Nếu phân loại sổ kế toán theo phương pháp ghi chép thì sổ nhật ký chung thuộc loại: ",
                 options: [
                     "Sổ ghi theo trình tự thời gian.",
@@ -2121,6 +2297,7 @@ const quizData = [
             },
             {
                 id: 177,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Nếu phân loại theo mức độ khái quát của số liệu phản ánh trên sổ thì sổ cái thuộc loại: ",
                 options: [
                     "Sổ kiểu 1 bên.",
@@ -2133,6 +2310,7 @@ const quizData = [
             },
             {
                 id: 178,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Sổ nhật ký chung nếu phân loại theo kiểu bố trí mẫu sổ thì thuộc loại: ",
                 options: [
                     "Sổ kiểu một bên.",
@@ -2145,6 +2323,7 @@ const quizData = [
             },
             {
                 id: 179,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Trong mỗi hình thức sổ kế toán có quy định cụ thể về: ",
                 options: [
                     "Số lượng, kết cấu, mẫu sổ.",
@@ -2157,6 +2336,7 @@ const quizData = [
             },
             {
                 id: 180,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Trong Hình thức Chứng từ ghi sổ, Sổ Cái được ghi từ: ",
                 options: [
                     "Chứng từ ghi sổ.",
@@ -2169,6 +2349,7 @@ const quizData = [
             },
             {
                 id: 181,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Trong các hình thức sổ kế toán sau đây, hình thức nào chỉ có 1 quyển sổ tổng hợp duy nhất: ",
                 options: [
                     "Hình thức Nhật ký chung.",
@@ -2181,6 +2362,7 @@ const quizData = [
             },
             {
                 id: 182,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Bảng cân đối tài khoản được lập: ",
                 options: [
                     "Trước khi khoá sổ kế toán.",
@@ -2193,6 +2375,7 @@ const quizData = [
             },
             {
                 id: 183,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Theo quy định của Bộ Tài chính trong hình thức Chứng từ ghi sổ, Chứng từ ghi sổ được lập: ",
                 options: [
                     "Định kỳ.",
@@ -2205,6 +2388,7 @@ const quizData = [
             },
             {
                 id: 184,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Sổ Nhật ký- Sổ cái là sổ được ghi: ",
                 options: [
                     "Theo đối tượng.",
@@ -2217,6 +2401,7 @@ const quizData = [
             },
             {
                 id: 185,
+                chapter: { id: 7, title: 'Sổ kế toán và hình thức kế toán' },
                 question: "Trong hình thức Nhật ký chung, Sổ tổng hợp bao gồm: ",
                 options: [
                     "Sổ Nhật ký đặc biệt.",
@@ -2228,3 +2413,7 @@ const quizData = [
                 explanation: "Trong hình thức Nhật ký chung, hệ thống sổ tổng hợp bao gồm Sổ Nhật ký chung (và các sổ nhật ký đặc biệt nếu có) cùng với Sổ Cái."
             }
 ];
+
+
+
+

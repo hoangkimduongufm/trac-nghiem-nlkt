@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <!-- Thông tin trang và các tài nguyên được sử dụng -->
@@ -11,9 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261014-1">
+    <link rel="stylesheet" href="style.css?v=20261014-9">
     <script src="questions.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20261014-9" defer></script>
 </head>
 <body>
     <!-- Khung chính của ứng dụng trắc nghiệm -->
@@ -26,6 +26,13 @@
                     <h1>Trắc nghiệm Nguyên lý Kế toán</h1>
                     <p class="header-description">Ôn tập 185 câu hỏi hoặc làm bài thi thử 60 câu trong 60 phút.</p>
                 </div>
+                <button class="history-button" type="button" onclick="showAttemptHistory()">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M3 12a9 9 0 1 0 2.64-6.36L3 8" />
+                        <path d="M3 3v5h5M12 7v5l3 2" />
+                    </svg>
+                    <span>Lịch sử thi thử</span>
+                </button>
             </div>
 
             <!-- Tổng số câu, số câu đã làm và điểm hiện tại -->
@@ -34,6 +41,7 @@
                 <span id="meta-answered">Đã trả lời: 0/185</span>
                 <span id="meta-score">Số câu đúng: 0</span>
             </div>
+            <p class="sync-status" id="sync-status" role="status" aria-live="polite"></p>
         </header>
 
         <!-- Chọn chế độ, nộp bài hoặc bắt đầu lại -->
@@ -89,14 +97,30 @@
             <button class="modal-close" type="button" onclick="closeResults()" aria-label="Đóng kết quả">×</button>
             <div class="results-icon" aria-hidden="true">✓</div>
             <h2 id="results-title">Kết quả bài làm</h2>
-            <p class="results-text" id="result-text"></p>
+            <div class="results-text" id="result-text"></div>
+            <div class="result-analysis" id="result-analysis" aria-live="polite"></div>
             <div class="results-actions">
                 <button class="button button--primary" type="button" onclick="closeResults()">Xem lại bài làm</button>
                 <button class="button button--secondary" type="button" onclick="startNewExam()">Làm lại từ đầu</button>
             </div>
         </section>
     </div>
+
+    <!-- Lịch sử các lượt thi thử và điểm theo chương -->
+    <div class="modal-overlay hidden" id="history-modal" role="dialog" aria-modal="true" aria-labelledby="history-title">
+        <section class="history-card">
+            <button class="modal-close" type="button" onclick="closeAttemptHistory()" aria-label="Đóng lịch sử">×</button>
+            <p class="history-eyebrow">THEO DÕI TIẾN ĐỘ</p>
+            <h2 id="history-title">Lịch sử thi thử</h2>
+            <div id="history-content" class="history-content" aria-live="polite">
+                <p class="history-message history-loading">Đang tải lịch sử thi thử<span class="loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></p>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
+
+
+
 
 
