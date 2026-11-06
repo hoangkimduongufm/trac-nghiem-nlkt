@@ -140,10 +140,10 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .quiz-option.is-wrong { border-color: #e58b97; color: #8e2e3c; background: #fff5f5; }
 .quiz-option.is-wrong .quiz-option-letter { color: #fff; background: #c64d5d; }
 .quiz-option:disabled { cursor: default; opacity: 1; }
-.quiz-explanation { margin-top: 13px; border: 1px solid; border-radius: 11px; padding: 13px 15px; font-size: .86rem; line-height: 1.6; }
+.quiz-explanation { max-width: 100%; min-width: 0; margin-top: 13px; overflow-wrap: anywhere; border: 1px solid; border-radius: 11px; padding: 13px 15px; font-size: .86rem; line-height: 1.6; white-space: pre-line; }
 .quiz-explanation.is-correct { border-color: #bce7d6; color: #145b46; background: #f0faf6; }
 .quiz-explanation.is-wrong { border-color: #f0c7cc; color: #812f3b; background: #fff5f5; }
-.quiz-explanation p { margin: 5px 0 0; }
+.quiz-explanation p { margin: 5px 0 0; overflow-wrap: anywhere; white-space: pre-line; }
 
 .modal-overlay { position: fixed; z-index: 50; inset: 0; display: flex; align-items: center; justify-content: center; padding: 18px; background: rgba(13, 25, 43, .58); backdrop-filter: blur(5px); }
 .results-card { position: relative; width: min(100%, 430px); border: 1px solid #e6ebf2; border-radius: 20px; padding: 34px; background: #fff; text-align: center; box-shadow: 0 28px 80px rgba(9, 20, 38, .24); }
@@ -221,7 +221,7 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .study-detail-options li.is-correct { border-color: #bce7d6; color: #145b46; background: #f0faf6; font-weight: 650; }
 .study-detail-answer { margin: 15px 0 0; border-radius: 9px; padding: 10px 12px; color: #145b46; background: #e7f7f0; font-weight: 700; }
 .study-detail-content h3 { margin: 18px 0 5px; color: var(--ink); font-size: .9rem; }
-.study-detail-explanation { margin: 0; white-space: pre-line; }
+.study-detail-explanation { margin: 0; overflow-wrap: anywhere; white-space: pre-line; }
 
 @media (max-width: 600px) {
     body { padding: 10px; }
