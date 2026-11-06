@@ -111,6 +111,7 @@ function prepareQuizData(isRandom = false, subsetCount = null, priorityIds = [],
     userAnswers = new Array(activeQuizData.length).fill(null);
     answeredCount = 0;
     correctCount = 0;
+    refreshStudyWrongCounts();
 }
 
 function setSyncStatus(message, state = '') {
@@ -201,6 +202,7 @@ const CHAPTER_NAMES = {
 };
 const questionById = new Map(questionBank.map(question => [Number(question.id), question]));
 const questionOrderById = new Map(questionBank.map((question, index) => [Number(question.id), index + 1]));
+const studyWrongCounts = new Map();
 
 function showAttemptHistory() {
     if (!ui.historyModal || !ui.historyContent) return;
@@ -275,11 +277,21 @@ function saveStudyAnswer(question, isCorrect) {
     record.answeredCount = (Number(record.answeredCount) || 0) + 1;
     record.updatedAt = Date.now();
     records[question.id] = record;
+    if (record.wrongCount > 0) studyWrongCounts.set(Number(question.id), record.wrongCount);
+    else studyWrongCounts.delete(Number(question.id));
     try {
         window.localStorage.setItem(STUDY_HISTORY_KEY, JSON.stringify(records));
     } catch {
         setSyncStatus('Trình duyệt không cho phép lưu lịch sử ôn tập.', 'error');
     }
+}
+
+function refreshStudyWrongCounts() {
+    studyWrongCounts.clear();
+    Object.entries(loadStudyHistory()).forEach(([id, record]) => {
+        const wrongCount = Math.max(0, Number(record?.wrongCount) || 0);
+        if (questionById.has(Number(id)) && wrongCount > 0) studyWrongCounts.set(Number(id), wrongCount);
+    });
 }
 
 function showStudyHistory() {
@@ -394,6 +406,13 @@ function closeAttemptHistory() {
 
 ui.historyModal?.addEventListener('click', event => {
     if (event.target === ui.historyModal) closeAttemptHistory();
+});
+document.addEventListener('pointerdown', event => {
+    if (event.target instanceof Element && event.target.closest('.wrong-count-bookmark')) return;
+    document.querySelectorAll('.wrong-count-bookmark.is-tooltip-open').forEach(bookmark => {
+        bookmark.classList.remove('is-tooltip-open');
+        bookmark.setAttribute('aria-expanded', 'false');
+    });
 });
 document.addEventListener('keydown', event => {
     if (event.key !== 'Escape') return;
@@ -909,15 +928,54 @@ function createQuestionCard(questionIndex) {
     const number = document.createElement('span');
     number.className = 'quiz-question-number';
     number.textContent = `Câu hỏi ${questionIndex + 1}`;
-    heading.appendChild(number);
+    const questionMeta = document.createElement('div');
+    questionMeta.className = 'quiz-question-meta';
+
+    const wrongCount = studyWrongCounts.get(Number(question.id)) || 0;
+    if (wrongCount > 0) {
+        const bookmark = document.createElement('button');
+        bookmark.type = 'button';
+        bookmark.className = 'wrong-count-bookmark';
+        bookmark.setAttribute('aria-expanded', 'false');
+        bookmark.setAttribute('aria-label', `#${wrongCount} lần sai. Đây là số lần làm sai, cần chú ý học kỹ.`);
+        const bookmarkIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        bookmarkIcon.setAttribute('viewBox', '0 0 32 40');
+        bookmarkIcon.setAttribute('aria-hidden', 'true');
+        const bookmarkShape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        bookmarkShape.setAttribute('d', 'M4 3H28V37L16 29L4 37Z');
+        bookmarkShape.setAttribute('fill', '#f51313ba');
+        bookmarkShape.setAttribute('stroke', 'none');
+        bookmarkIcon.appendChild(bookmarkShape);
+        const bookmarkCount = document.createElement('span');
+        bookmarkCount.className = 'wrong-count-bookmark-label';
+        bookmarkCount.textContent = `# ${wrongCount}`;
+        const bookmarkText = document.createElement('span');
+        bookmarkText.className = 'wrong-count-bookmark-text';
+        bookmarkText.textContent = 'False';
+        const tooltip = document.createElement('span');
+        tooltip.className = 'wrong-count-tooltip';
+        tooltip.textContent = 'Đây là số lần làm sai, cần chú ý học kỹ.';
+        bookmark.append(bookmarkIcon, bookmarkCount, bookmarkText, tooltip);
+        bookmark.addEventListener('click', () => {
+            const isOpen = bookmark.classList.toggle('is-tooltip-open');
+            bookmark.setAttribute('aria-expanded', String(isOpen));
+        });
+        bookmark.addEventListener('pointerleave', event => {
+            if (event.pointerType !== 'mouse' || bookmark.matches(':focus-visible')) return;
+            bookmark.classList.remove('is-tooltip-open');
+            bookmark.setAttribute('aria-expanded', 'false');
+        });
+        questionMeta.appendChild(bookmark);
+    }
 
     if (shouldRevealAnswer) {
         const status = document.createElement('span');
         const isCorrect = selectedOption === question.correct;
         status.className = `quiz-answer-status ${!hasAnswered ? 'is-unanswered' : isCorrect ? 'is-correct' : 'is-wrong'}`;
         status.textContent = !hasAnswered ? 'Chưa trả lời' : isCorrect ? 'Đúng' : 'Sai';
-        heading.appendChild(status);
+        questionMeta.appendChild(status);
     }
+    heading.append(number, questionMeta);
     card.appendChild(heading);
 
     const title = document.createElement('h2');
