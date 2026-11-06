@@ -249,7 +249,7 @@
             {
                 id: 20,
                 chapter: { id: 1, title: 'Tổng quan về kế toán' },
-                question: "Если “Công ty Thùy Dương bị kiện đòi bồi thường 5 tỷ đồng, do tòa chưa ra công bố chính thức, không thể xác định chắc chắn số tiền phải bồi thường nên kế toán không khai báo thông tin này trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
+                question: "Nếu “Công ty Thùy Dương bị kiện đòi bồi thường 5 tỷ đồng, do tòa chưa ra công bố chính thức, không thể xác định chắc chắn số tiền phải bồi thường nên kế toán không khai báo thông tin này trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc trọng yếu",
                     "Nguyên tắc giá gốc",
