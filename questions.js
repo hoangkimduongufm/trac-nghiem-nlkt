@@ -1,4 +1,4 @@
-﻿const quizData = [
+const quizData = [
             {
                 id: 1,
                 chapter: { id: 1, title: 'Tổng quan về kế toán' },
@@ -249,7 +249,7 @@
             {
                 id: 20,
                 chapter: { id: 1, title: 'Tổng quan về kế toán' },
-                question: "Nếu “Công ty Thùy Dương bị kiện đòi bồi thường 5 tỷ đồng, do tòa chưa ra công bố chính thức, không thể xác định chắc chắn số tiền phải bồi thường nên kế toán không khai báo thông tin này trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
+                question: "Если “Công ty Thùy Dương bị kiện đòi bồi thường 5 tỷ đồng, do tòa chưa ra công bố chính thức, không thể xác định chắc chắn số tiền phải bồi thường nên kế toán không khai báo thông tin này trên báo cáo tài chính” thì nguyên tắc kế toán bị vi phạm là:",
                 options: [
                     "Nguyên tắc trọng yếu",
                     "Nguyên tắc giá gốc",
@@ -1206,7 +1206,7 @@
                     "Các câu trên đều sai"
                 ],
                 correct: 3,
-                explanation: "Giá nhập khẩu: 200.000.000 đồng; Thuế nhập khẩu: 200.000.000 x 10%=20.000.000 đồng; Thuế GTGT=(200.000.000+20.000.000) x 10%=22.000.000 đồng; CPVC (đã GTGT)=4.950.000 đồng. Suy ra, NGUYÊN GIÁ=200.000.000+20.000.000+22.000.000+4.950.000=246.950.000. Tất cả đáp án trên đều sai"
+                explanation: "Giá nhập khẩu: 200.000.000 đồng;\nThuế nhập khẩu: 200.000.000 x 10%=20.000.000 đồng;\nThuế GTGT=(200.000.000+20.000.000) x 10%=22.000.000 đồng;\nCPVC (đã GTGT)=4.950.000 đồng.\nSuy ra, NGUYÊN GIÁ=200.000.000+20.000.000+22.000.000+4.950.000=246.950.000.\nTất cả đáp án trên đều sai"
             },
             {
                 id: 94,
@@ -1219,7 +1219,7 @@
                     "Các câu trên đều sai"
                 ],
                 correct: 3,
-                explanation: "Giá NK 500.000.000; Thuế NK=500.000.000 x 10%=50.000.000; CPVC=5.720.000/1.1=5.200.000; => Nguyên Giá = 500.000.000+50.000.000+5.200.000=555.200.000 đồng, do đó các phương án a, b, c đều sai."
+                explanation: "Giá NK 500.000.000;\nThuế NK=500.000.000 x 10%=50.000.000;\nCPVC=5.720.000/1.1=5.200.000;\n=> Nguyên Giá = 500.000.000+50.000.000+5.200.000=555.200.000 đồng, do đó các phương án a, b, c đều sai."
             },
             {
                 id: 95,
@@ -1232,7 +1232,7 @@
                     "Tất cả các câu đều sai."
                 ],
                 correct: 2,
-                explanation: "Tính toán chi tiết theo phương pháp trực tiếp: Trị giá = 200tr (giá) + 20tr (thuế NK) + 20tr (thuế GTGT hàng NK) + 9.9tr (chi phí vận chuyển gồm thuế) = 251.900.000đ; đơn giá = 251.900.000 / 2000 = 125.950 đ/kg."
+                explanation: "Tính toán chi tiết theo phương pháp trực tiếp: Trị giá = 200tr (giá) + 20tr (thuế NK) + 20tr (thuế GTGT hàng NK) + 9.9tr (chi phí vận chuyển gồm thuế) = 251.900.000đ;\nđơn giá = 251.900.000 / 2000 = 125.950 đ/kg."
             },
             {
                 id: 96,
@@ -1245,7 +1245,7 @@
                     "Các câu trên đều sai"
                 ],
                 correct: 1,
-                explanation: "Tính toán theo phương pháp trực tiếp (giá thanh toán gồm cả thuế): Trị giá thực tế nhập kho = (4500m x 30.000 x 1.1) + 1.650.000 = 150.150.000đ; đơn giá = 150.150.000 / 4500 = 33.367 đ/m."
+                explanation: "Tính toán theo phương pháp trực tiếp (giá thanh toán gồm cả thuế): Trị giá thực tế nhập kho = (4500m x 30.000 x 1.1) + 1.650.000 = 150.150.000đ;\nđơn giá = 150.150.000 / 4500 = 33.367 đ/m."
             },
             {
                 id: 97,
@@ -1323,7 +1323,7 @@
                     "Các câu trên đều sai"
                 ],
                 correct: 0,
-                explanation: "Lần 1 = (2000*20.000)+(2000*22.500)=85.000.000;lần 2 = (1000*22.500)+(1000*22.800)=45.300.000;Trị giá xuất kho lần 1 và lần 2 lần lượt là 85.000.000 đồng và 45.300.000 đồng."
+                explanation: "Lần 1 = (2000*20.000)+(2000*22.500)=85.000.000;\nlần 2 = (1000*22.500)+(1000*22.800)=45.300.000;\nTrị giá xuất kho lần 1 và lần 2 lần lượt là 85.000.000 đồng và 45.300.000 đồng."
             },
             {
                 id: 103,
@@ -1336,7 +1336,7 @@
                     "Các câu trên đều sai"
                 ],
                 correct: 2,
-                explanation: "Lần 1 = (1500*20.000)+(2500*22.500)= là 86.250.000 đồng; Lần 2 = (500*20.000)+(500*22.500)+(1000*22.800)=44.050.000 đồng."
+                explanation: "Lần 1 = (1500*20.000)+(2500*22.500)= là 86.250.000 đồng;\nLần 2 = (500*20.000)+(500*22.500)+(1000*22.800)=44.050.000 đồng."
             },
             {
                 id: 104,
@@ -2413,6 +2413,7 @@
                 explanation: "Trong hình thức Nhật ký chung, hệ thống sổ tổng hợp bao gồm Sổ Nhật ký chung (và các sổ nhật ký đặc biệt nếu có) cùng với Sổ Cái."
             }
 ];
+
 
 
 
