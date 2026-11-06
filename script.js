@@ -6,6 +6,7 @@ const OPTION_LETTERS = ['a', 'b', 'c', 'd'];
 const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyDNv4-5NA-WzEyJBA8l-LanRQRt9VsGddknPKMQBA8RIzxTUE9yd5wwAqgik5BT8oc/exec';
 const ATTEMPT_QUEUE_KEY = 'nlkt.pendingAttempts.v1';
 const LEARNER_ID_KEY = 'nlkt.learnerId.v1';
+const STUDY_HISTORY_KEY = 'nlkt.studyHistory.v1';
 
 const ui = {
     timerBox: document.getElementById('timer-box'),
@@ -51,6 +52,7 @@ let historyVisibleCount = 5;
 let historySavedAttempts = [];
 let historyPendingAttempts = [];
 let historyStatusMessage = '';
+let activeHistoryView = 'exam';
 
 const questionBank = typeof quizData !== 'undefined' && Array.isArray(quizData)
     ? quizData
@@ -202,7 +204,12 @@ const questionOrderById = new Map(questionBank.map((question, index) => [Number(
 
 function showAttemptHistory() {
     if (!ui.historyModal || !ui.historyContent) return;
+    activeHistoryView = 'exam';
     historyVisibleCount = 5;
+    const title = document.getElementById('history-title');
+    if (title) title.textContent = 'Lịch sử thi thử';
+    const eyebrow = ui.historyModal.querySelector('.history-eyebrow');
+    if (eyebrow) eyebrow.textContent = 'THEO DÕI TIẾN ĐỘ';
     ui.historyContent.replaceChildren();
     const loading = document.createElement('p');
     loading.className = 'history-message history-loading';
@@ -220,12 +227,14 @@ function showAttemptHistory() {
     ui.historyModal.classList.remove('hidden');
 
     getAttemptHistory().then(historyData => {
+        if (activeHistoryView !== 'exam') return;
         const pending = loadPendingAttempts().filter(attempt => attempt.learnerId === getLearnerId());
         historySavedAttempts = historyData.attempts || [];
         historyPendingAttempts = pending;
         historyStatusMessage = '';
         renderAttemptHistory();
     }).catch(() => {
+        if (activeHistoryView !== 'exam') return;
         const pending = loadPendingAttempts().filter(attempt => attempt.learnerId === getLearnerId());
         if (pending.length) {
             historySavedAttempts = [];
@@ -242,6 +251,143 @@ function showAttemptHistory() {
     });
 }
 
+function loadStudyHistory() {
+    try {
+        const records = JSON.parse(window.localStorage.getItem(STUDY_HISTORY_KEY) || '{}');
+        return records && typeof records === 'object' && !Array.isArray(records) ? records : {};
+    } catch {
+        return {};
+    }
+}
+
+function saveStudyAnswer(question, isCorrect) {
+    if (!question || !question.id) return;
+    const records = loadStudyHistory();
+    const record = records[question.id] || { wrongCount: 0, trend: 'stable', answeredCount: 0 };
+    const previousWrongCount = Math.max(0, Number(record.wrongCount) || 0);
+    if (isCorrect) {
+        record.wrongCount = Math.max(0, previousWrongCount - 1);
+        record.trend = record.wrongCount < previousWrongCount ? 'down' : 'stable';
+    } else {
+        record.wrongCount = previousWrongCount + 1;
+        record.trend = 'up';
+    }
+    record.answeredCount = (Number(record.answeredCount) || 0) + 1;
+    record.updatedAt = Date.now();
+    records[question.id] = record;
+    try {
+        window.localStorage.setItem(STUDY_HISTORY_KEY, JSON.stringify(records));
+    } catch {
+        setSyncStatus('Trình duyệt không cho phép lưu lịch sử ôn tập.', 'error');
+    }
+}
+
+function showStudyHistory() {
+    if (!ui.historyModal || !ui.historyContent) return;
+    activeHistoryView = 'study';
+    const title = document.getElementById('history-title');
+    if (title) title.textContent = 'Lịch sử ôn tập';
+    const eyebrow = ui.historyModal.querySelector('.history-eyebrow');
+    if (eyebrow) eyebrow.textContent = 'TIẾN ĐỘ ÔN TẬP';
+    const records = loadStudyHistory();
+    const entries = Object.entries(records)
+        .filter(([id, record]) => questionById.has(Number(id)) && record && Number(record.answeredCount) > 0 && Number(record.wrongCount) > 0)
+        .sort((first, second) => Number(second[1].updatedAt || 0) - Number(first[1].updatedAt || 0));
+    ui.historyContent.replaceChildren();
+    if (!entries.length) {
+        const empty = document.createElement('div');
+        empty.className = 'history-empty';
+        const heading = document.createElement('strong');
+        const hasReviewedQuestions = Object.values(records).some(record => Number(record?.answeredCount) > 0);
+        heading.textContent = hasReviewedQuestions ? 'Không còn câu sai trong lịch sử' : 'Bạn chưa có lịch sử ôn tập';
+        const detail = document.createElement('p');
+        detail.textContent = hasReviewedQuestions
+            ? 'Các câu đã được trả lời đúng và số lượt sai đã giảm về 0 sẽ không còn hiển thị tại đây.'
+            : 'Kết quả các câu trong chế độ ôn thứ tự, ôn ngẫu nhiên và ôn tập lại sẽ được ghi nhận tại đây.';
+        empty.append(heading, detail);
+        ui.historyContent.appendChild(empty);
+    } else {
+        const wrongTotal = entries.reduce((sum, [, record]) => sum + Math.max(0, Number(record.wrongCount) || 0), 0);
+        const summary = document.createElement('p');
+        summary.className = 'history-summary';
+        summary.textContent = `Đã ôn ${entries.length} câu · còn ${wrongTotal} lượt sai cần cải thiện.`;
+        ui.historyContent.appendChild(summary);
+        entries.forEach(([id, record]) => {
+            const question = questionById.get(Number(id));
+            const row = document.createElement('article');
+            row.className = 'study-history-row';
+            const info = document.createElement('div');
+            info.className = 'study-history-info';
+            const heading = document.createElement('strong');
+            heading.textContent = `Câu ${id}${question?.chapter?.title ? ` · ${question.chapter.title}` : ''}`;
+            const detail = document.createElement('span');
+            detail.textContent = question?.question || '';
+            info.append(heading, detail);
+            const wrongCount = Math.max(0, Number(record.wrongCount) || 0);
+            const count = document.createElement('span');
+            count.className = `study-history-count is-${record.trend === 'up' ? 'up' : record.trend === 'down' ? 'down' : 'stable'}`;
+            count.setAttribute('aria-label', `${wrongCount} lượt sai`);
+            count.textContent = `${record.trend === 'up' ? '↑' : record.trend === 'down' ? '↓' : '→'} ${wrongCount} lượt sai`;
+            const detailsButton = document.createElement('button');
+            detailsButton.type = 'button';
+            detailsButton.className = 'study-history-details-button';
+            detailsButton.textContent = 'Xem chi tiết';
+            detailsButton.addEventListener('click', () => showStudyQuestionDetails(question));
+            const actions = document.createElement('div');
+            actions.className = 'study-history-actions';
+            actions.append(count, detailsButton);
+            row.append(info, actions);
+            ui.historyContent.appendChild(row);
+        });
+    }
+    ui.historyModal.classList.remove('hidden');
+}
+
+function showStudyQuestionDetails(question) {
+    if (!question) return;
+    const modal = document.getElementById('study-detail-modal');
+    const content = document.getElementById('study-detail-content');
+    if (!modal || !content) return;
+    content.replaceChildren();
+
+    const heading = document.createElement('p');
+    heading.className = 'study-detail-question';
+    heading.textContent = question.question;
+    content.appendChild(heading);
+
+    const options = document.createElement('ul');
+    options.className = 'study-detail-options';
+    question.options.forEach((optionText, index) => {
+        const option = document.createElement('li');
+        option.textContent = `${OPTION_LETTERS[index]?.toUpperCase() || index + 1}. ${optionText}`;
+        if (index === question.correct) option.classList.add('is-correct');
+        options.appendChild(option);
+    });
+    content.appendChild(options);
+
+    const answer = document.createElement('p');
+    answer.className = 'study-detail-answer';
+    answer.textContent = `Đáp án đúng: ${OPTION_LETTERS[question.correct]?.toUpperCase() || ''}. ${question.options[question.correct]}`;
+    content.appendChild(answer);
+
+    const explanationTitle = document.createElement('h3');
+    explanationTitle.textContent = 'Giải thích';
+    const explanation = document.createElement('p');
+    explanation.className = 'study-detail-explanation';
+    explanation.textContent = question.explanation || 'Chưa có giải thích cho câu hỏi này.';
+    content.append(explanationTitle, explanation);
+    modal.classList.remove('hidden');
+    document.getElementById('study-detail-close')?.focus();
+}
+
+function closeStudyQuestionDetails() {
+    document.getElementById('study-detail-modal')?.classList.add('hidden');
+}
+
+document.getElementById('study-detail-modal')?.addEventListener('click', event => {
+    if (event.target.id === 'study-detail-modal') closeStudyQuestionDetails();
+});
+
 function closeAttemptHistory() {
     ui.historyModal?.classList.add('hidden');
 }
@@ -250,7 +396,12 @@ ui.historyModal?.addEventListener('click', event => {
     if (event.target === ui.historyModal) closeAttemptHistory();
 });
 document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeAttemptHistory();
+    if (event.key !== 'Escape') return;
+    if (!document.getElementById('study-detail-modal')?.classList.contains('hidden')) {
+        closeStudyQuestionDetails();
+        return;
+    }
+    closeAttemptHistory();
 });
 
 function showMoreAttemptHistory() {
@@ -308,10 +459,23 @@ function renderAttemptHistory() {
         const total = Number(attempt.total_questions ?? attempt.totalQuestions) || 0;
         const percent = Number(attempt.accuracy_percent ?? attempt.accuracy)
             || (total ? score / total * 100 : 0);
+        const points = total ? Math.min(10, Math.max(0, score / total * 10)) : 0;
+        const pointLabel = `${points.toLocaleString('vi-VN', {
+            minimumFractionDigits: Number.isInteger(points) ? 0 : 1,
+            maximumFractionDigits: 1
+        })} điểm`;
         const scoreBadge = document.createElement('span');
-        scoreBadge.className = 'history-score';
+        scoreBadge.className = `history-score ${points < 5
+            ? 'history-score--low'
+            : points < 8 ? 'history-score--medium' : 'history-score--high'}`;
         scoreBadge.textContent = `${score}/${total} câu · ${percent.toFixed(1)}%`;
-        header.append(heading, scoreBadge);
+        const scoreBlock = document.createElement('div');
+        scoreBlock.className = 'history-score-block';
+        const pointsLine = document.createElement('span');
+        pointsLine.className = 'history-points';
+        pointsLine.textContent = pointLabel;
+        scoreBlock.append(scoreBadge, pointsLine);
+        header.append(heading, scoreBlock);
         card.appendChild(header);
 
         const metaLine = document.createElement('p');
@@ -868,6 +1032,7 @@ function selectAnswer(questionIndex, optionIndex) {
     if (previousAnswer === question.correct) correctCount--;
     if (optionIndex === question.correct) correctCount++;
     userAnswers[questionIndex] = optionIndex;
+    if (!isExamMode) saveStudyAnswer(question, optionIndex === question.correct);
 
     updateMeta();
 
