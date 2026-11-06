@@ -42,6 +42,7 @@ button:focus-visible { outline: 3px solid rgba(59, 130, 246, .32); outline-offse
     background: linear-gradient(120deg, #14233b 0%, #1e3a63 55%, #24568a 100%);
 }
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.header-actions { display: grid; flex: 0 0 auto; gap: 8px; }
 .header-copy { min-width: 0; }
 .history-button { display: inline-flex; min-height: 42px; flex: 0 0 auto; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(255,255,255,.28); border-radius: 10px; padding: 0 13px; color: #fff; background: rgba(255,255,255,.12); font-size: .8rem; font-weight: 650; cursor: pointer; transition: background .16s ease, transform .16s ease; }
 .history-button:hover { transform: translateY(-1px); background: rgba(255,255,255,.2); }
@@ -193,6 +194,27 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
 .history-chapter-details { margin-top: 12px; border-top: 1px solid #e8edf4; padding-top: 10px; }
 .history-chapter-details summary { color: #68778e; font-size: .8rem; font-style: italic; font-weight: 400; text-transform: lowercase; cursor: pointer; }
 .history-chapter-details .history-chapter-grid { margin-top: 10px; }
+.study-history-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid #e5ebf3; border-radius: 12px; padding: 12px 14px; background: #fff; }
+.study-history-info { display: grid; min-width: 0; flex: 1 1 auto; gap: 5px; }
+.study-history-info strong { color: #263a56; font-size: .82rem; }
+.study-history-info span { display: block; min-width: 0; overflow: hidden; color: #68778e; font-size: .76rem; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
+.study-history-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; }
+.study-history-count { flex: 0 0 auto; border-radius: 999px; padding: 7px 10px; font-size: .82rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.study-history-count.is-up { color: #b9384c; background: #fff0f1; }
+.study-history-count.is-down { color: #087a58; background: #e7f7f0; }
+.study-history-count.is-stable { color: #526178; background: #eef2f7; }
+.study-history-details-button { min-height: 36px; border: 1px solid #d8e3f2; border-radius: 9px; padding: 0 10px; color: #285ba7; background: #f5f8fd; font-size: .74rem; font-weight: 650; cursor: pointer; }
+.study-history-details-button:hover { background: #eaf1fc; }
+.study-detail-card { position: relative; width: min(100%, 620px); max-height: min(90vh, 800px); overflow-y: auto; border: 1px solid #e6ebf2; border-radius: 20px; padding: 30px; background: #fff; box-shadow: 0 28px 80px rgba(9, 20, 38, .24); }
+.study-detail-card h2 { margin: 0; color: var(--ink); font-size: 1.3rem; }
+.study-detail-content { margin-top: 18px; color: #34445b; font-size: .86rem; line-height: 1.65; }
+.study-detail-question { margin: 0 0 14px; color: var(--ink); font-size: .98rem; font-weight: 650; white-space: pre-line; }
+.study-detail-options { display: grid; gap: 8px; margin: 0; padding-left: 24px; }
+.study-detail-options li { border: 1px solid #e5ebf3; border-radius: 9px; padding: 9px 11px; }
+.study-detail-options li.is-correct { border-color: #bce7d6; color: #145b46; background: #f0faf6; font-weight: 650; }
+.study-detail-answer { margin: 15px 0 0; border-radius: 9px; padding: 10px 12px; color: #145b46; background: #e7f7f0; font-weight: 700; }
+.study-detail-content h3 { margin: 18px 0 5px; color: var(--ink); font-size: .9rem; }
+.study-detail-explanation { margin: 0; white-space: pre-line; }
 
 @media (max-width: 600px) {
     body { padding: 10px; }
@@ -210,8 +232,11 @@ h1 { margin: 0; font-size: clamp(1.45rem, 3vw, 1.9rem); line-height: 1.25; lette
     .quiz-option-text { font-size: .82rem; }
     .results-card { padding: 28px 22px; }
     .history-card { padding: 26px 16px 18px; border-radius: 16px; }
+    .study-detail-card { padding: 26px 16px 18px; border-radius: 16px; }
     .history-attempt { padding: 11px; }
     .history-attempt-header { align-items: center; flex-direction: row; }
+    .study-history-row { align-items: flex-start; flex-direction: column; }
+    .study-history-actions { width: 100%; justify-content: space-between; }
 }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
